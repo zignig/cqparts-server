@@ -15,6 +15,10 @@ source.addEventListener('update',function(e){
 
 var container, controls , obj;
 var camera, scene, renderer, light;
+var meshlist = [];
+var raycaster ;
+var mouse = new THREE.Vector2(), INTERSECTED ; 
+
 init();
 animate();
 
@@ -27,8 +31,14 @@ function load(name){
     loader.load( 'model/'+name+'/out.gltf', function ( gltf ) {
 		scene.add( gltf.scene );
         obj = gltf.scene;
-	} );
-}
+		//grab all the meshes for selection
+        gltf.scene.traverse( function ( child ) {
+            if ( child.isMesh ) {
+                meshlist.push(child);
+            }
+            } );
+        } );
+    }
 
 function init() {
 	container = document.createElement( 'div' );
@@ -50,12 +60,23 @@ function init() {
 	light2 = new THREE.PointLight(0xf0f0f0,2,100);
 	light2.position.set( 50,50,50);
 	scene.add( light2 );
+    // renderer
 	renderer = new THREE.WebGLRenderer( { antialias: true } );
 	renderer.setPixelRatio( window.devicePixelRatio );
 	renderer.setSize( window.innerWidth, window.innerHeight );
 	renderer.gammaOutput = true;
+    // raycaster 
+    raycaster = new THREE.Raycaster();
+    // add to doc and bind events 
 	container.appendChild( renderer.domElement );
 	window.addEventListener( 'resize', onWindowResize, false );
+	document.addEventListener('mousemove',onDocumentMouseMove,false);
+}
+
+function onDocumentMouseMove( event ) {
+	event.preventDefault();
+	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 }
 
 function onWindowResize() {
@@ -67,5 +88,20 @@ function onWindowResize() {
 function animate() {
     requestAnimationFrame( animate );
     controls.update();
+	render();
+}
+
+function render(){
+	raycaster.setFromCamera(mouse,camera);
+	var intersects = raycaster.intersectObjects(meshlist);
+	if (intersects.length > 0){
+		console.log(intersects);
+		if ( INTERSECTED != intersects[0].object){
+			INTERSECTED = intersects[0].object;
+			INTERSECTED.material.emissive.setHex(0xff0000);
+		}
+	} else { 
+	
+	}
     renderer.render( scene, camera );
 }

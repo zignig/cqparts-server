@@ -65,18 +65,26 @@ function init() {
 	renderer.setPixelRatio( window.devicePixelRatio );
 	renderer.setSize( window.innerWidth, window.innerHeight );
 	renderer.gammaOutput = true;
-    // raycaster 
+    // raycaster
     raycaster = new THREE.Raycaster();
-    // add to doc and bind events 
+    // add to doc and bind events
 	container.appendChild( renderer.domElement );
 	window.addEventListener( 'resize', onWindowResize, false );
 	document.addEventListener('mousemove',onDocumentMouseMove,false);
+	document.addEventListener('click',onDocumentClick,false);
+}
+
+function onDocumentClick( event ) {
+    if ( INTERSECTED ) {
+        console.log(INTERSECTED);
+        INTERSECTED.visible = false;
+    };
 }
 
 function onDocumentMouseMove( event ) {
 	event.preventDefault();
 	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+	mouse.y = - ( event.clientY / window.innerHeight ) * 2 +1 ;
 }
 
 function onWindowResize() {
@@ -97,11 +105,14 @@ function render(){
 	if (intersects.length > 0){
         //console.log(intersects);
 		if ( INTERSECTED != intersects[0].object){
+            if (INTERSECTED) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHEX);
 			INTERSECTED = intersects[0].object;
+			INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
 			INTERSECTED.material.emissive.setHex(0xff0000);
 		}
 	} else {
-        
+        if ( INTERSECTED ) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
+        INTERSECTED = null;
 	}
     renderer.render( scene, camera );
 }

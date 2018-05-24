@@ -95,13 +95,13 @@ function render(){
 	raycaster.setFromCamera(mouse,camera);
 	var intersects = raycaster.intersectObjects(meshlist);
 	if (intersects.length > 0){
-		console.log(intersects);
+        //console.log(intersects);
 		if ( INTERSECTED != intersects[0].object){
 			INTERSECTED = intersects[0].object;
 			INTERSECTED.material.emissive.setHex(0xff0000);
 		}
-	} else { 
-	
+	} else {
+        
 	}
     renderer.render( scene, camera );
 }

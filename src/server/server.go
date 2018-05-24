@@ -11,10 +11,12 @@ import (
 	"strings"
 
 	"flag"
+
 	"github.com/gin-gonic/gin"
 )
 
 var incoming chan string
+var current string
 
 func main() {
 	fileToWatch := flag.String("file", "testing.py", "file to watch")
@@ -26,7 +28,14 @@ func main() {
 	}
 	r.SetHTMLTemplate(t)
 	r.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "index.tmpl", gin.H{})
+		fmt.Println(current)
+		val := gin.H{}
+		if current != "" {
+			val["current"] = current
+		} else {
+			val["awesome"] = "yay"
+		}
+		c.HTML(http.StatusOK, "index.tmpl", val)
 	})
 	//r.GET("/model")
 	r.GET("/static/*name", Static)
@@ -46,6 +55,7 @@ func main() {
 func notify(c *gin.Context) {
 	name, err := c.GetPostForm("name")
 	fmt.Println(name, err)
+	current = name
 	incoming <- name
 }
 

@@ -7,7 +7,12 @@
     <script src="/static/js/GLTFLoader.js"></script>
   </head>
   <body>
-      <div id=alert></div>
+    <div id=alert></div>
     <script src="/static/js/app.js"></script>
+    {{ if .current}}
+        <script>
+            load({{.current}});
+        </script>
+    {{end}}
   </body>
 </html>

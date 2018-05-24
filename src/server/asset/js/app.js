@@ -71,7 +71,7 @@ function init() {
 	container.appendChild( renderer.domElement );
 	window.addEventListener( 'resize', onWindowResize, false );
 	document.addEventListener('mousemove',onDocumentMouseMove,false);
-	document.addEventListener('click',onDocumentClick,false);
+	document.addEventListener('mousedown',onDocumentClick,false);
 }
 
 function onDocumentClick( event ) {
@@ -108,7 +108,7 @@ function render(){
             if (INTERSECTED) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHEX);
 			INTERSECTED = intersects[0].object;
 			INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
-			INTERSECTED.material.emissive.setHex(0xff0000);
+			INTERSECTED.material.emissive.setHex(0x333313);
 		}
 	} else {
         if ( INTERSECTED ) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);

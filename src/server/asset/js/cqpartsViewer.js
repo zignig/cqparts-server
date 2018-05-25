@@ -28,8 +28,8 @@ function load(name){
     }
 
 function init() {
-	container = document.createElement( 'div' );
-	document.body.appendChild( container );
+	container = document.getElementById('viewer');
+
 	camera = new THREE.PerspectiveCamera( 30, window.innerWidth / window.innerHeight, 0.0001, 20 );
 	camera.position.set( 0.2, 0.2, 0.2);
 	controls = new THREE.OrbitControls( camera );

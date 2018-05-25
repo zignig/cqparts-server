@@ -48,7 +48,7 @@ function init() {
 	light2.position.set( 50,50,50);
 	scene.add( light2 );
     // renderer
-	renderer = new THREE.WebGLRenderer( { antialias: true } );
+	renderer = new THREE.WebGLRenderer( { antialias: true, preserveDrawingBuffer: true } );
 	renderer.setPixelRatio( window.devicePixelRatio );
 	renderer.setSize( window.innerWidth, window.innerHeight );
 	renderer.gammaOutput = true;

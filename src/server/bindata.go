@@ -5,6 +5,7 @@
 // asset/js/OrbitControls.js
 // asset/js/app.js
 // asset/js/cqpartsViewer.js
+// asset/js/saver.js
 // asset/js/three.min.js
 // DO NOT EDIT!
 
@@ -122,6 +123,24 @@ func assetJsCqpartsviewerJs() (*asset, error) {
 	return a, err
 }
 
+// assetJsSaverJs reads file data from disk. It returns an error on failure.
+func assetJsSaverJs() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/js/saver.js"
+	name := "asset/js/saver.js"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
 // assetJsThreeMinJs reads file data from disk. It returns an error on failure.
 func assetJsThreeMinJs() (*asset, error) {
 	path := "/opt/cqparts-server/src/server/asset/js/three.min.js"
@@ -197,6 +216,7 @@ var _bindata = map[string]func() (*asset, error){
 	"asset/js/OrbitControls.js": assetJsOrbitcontrolsJs,
 	"asset/js/app.js": assetJsAppJs,
 	"asset/js/cqpartsViewer.js": assetJsCqpartsviewerJs,
+	"asset/js/saver.js": assetJsSaverJs,
 	"asset/js/three.min.js": assetJsThreeMinJs,
 }
 
@@ -249,6 +269,7 @@ var _bintree = &bintree{nil, map[string]*bintree{
 			"OrbitControls.js": &bintree{assetJsOrbitcontrolsJs, map[string]*bintree{}},
 			"app.js": &bintree{assetJsAppJs, map[string]*bintree{}},
 			"cqpartsViewer.js": &bintree{assetJsCqpartsviewerJs, map[string]*bintree{}},
+			"saver.js": &bintree{assetJsSaverJs, map[string]*bintree{}},
 			"three.min.js": &bintree{assetJsThreeMinJs, map[string]*bintree{}},
 		}},
 	}},

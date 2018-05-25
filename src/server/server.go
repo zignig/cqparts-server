@@ -41,7 +41,9 @@ func main() {
 	r.GET("/static/*name", Static)
 	r.StaticFS("/model", http.Dir("/tmp/cqpss"))
 	r.GET("/events", event)
+
 	r.POST("/notify", notify)
+	r.POST("/snapshot", snapshot)
 	// web server
 	incoming = make(chan string, 100)
 	go r.Run(":8080")
@@ -50,6 +52,10 @@ func main() {
 	go watch(*fileToWatch)
 	done := make(chan bool)
 	<-done
+}
+
+func snapshot(c *gin.Context) {
+	fmt.Println(c.Request)
 }
 
 func notify(c *gin.Context) {

@@ -50,7 +50,7 @@ function init() {
     // renderer
 	renderer = new THREE.WebGLRenderer( { antialias: true, preserveDrawingBuffer: true } );
 	renderer.setPixelRatio( window.devicePixelRatio );
-	renderer.setSize( window.innerWidth, window.innerHeight );
+    renderer.setSize( window.innerWidth, window.innerHeight );
 	renderer.gammaOutput = true;
     // raycaster
     raycaster = new THREE.Raycaster();

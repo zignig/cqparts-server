@@ -57,8 +57,24 @@ function init() {
     // add to doc and bind events
 	container.appendChild( renderer.domElement );
 	window.addEventListener( 'resize', onWindowResize, false );
-	document.addEventListener('mousemove',onDocumentMouseMove,false);
-	document.addEventListener('mousedown',onDocumentClick,false);
+	container.addEventListener('mousemove',onDocumentMouseMove,false);
+	container.addEventListener('mousedown',onDocumentClick,false);
+	document.addEventListener('keydown',onKey,false);
+}
+
+function onKey( event ) {
+    if (event.code == "KeyA"){
+        console.log(event);
+        for ( var i in meshlist){
+            meshlist[i].visible = true;
+        }
+    };
+    console.log(event);
+    if (event.code == "Space"){
+        if ( INTERSECTED ) {
+            INTERSECTED.visible = false;
+        };
+    };
 }
 
 function onDocumentClick( event ) {

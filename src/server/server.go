@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"html/template"
 	"io"
+	"io/ioutil"
 	"net/http"
 	"strconv"
 	"strings"
@@ -55,7 +56,8 @@ func main() {
 }
 
 func snapshot(c *gin.Context) {
-	fmt.Println(c.Request)
+	data, _ := ioutil.ReadAll(c.Request.Body)
+	fmt.Println(data)
 }
 
 func notify(c *gin.Context) {

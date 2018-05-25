@@ -19,7 +19,7 @@ var incoming chan string
 var current string
 
 func main() {
-	fileToWatch := flag.String("file", "testing.py", "file to watch")
+	fileToWatch := flag.String("d", "./", "folder to watch")
 	flag.Parse()
 	r := gin.Default()
 	t, err := loadTemplate()

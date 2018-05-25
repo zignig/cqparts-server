@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
+	"strings"
 
 	"github.com/fsnotify/fsnotify"
 )
@@ -13,7 +15,18 @@ func watch(name string) {
 		fmt.Println(err)
 		return
 	}
-	watcher.Add(name)
+	filelist, err := ioutil.ReadDir(name)
+	if err != nil {
+		fmt.Println("LIST FAIL")
+		return
+	}
+	for _, f := range filelist {
+		n := f.Name()
+		if strings.HasSuffix(n, ".py") {
+			fmt.Println(n)
+			watcher.Add(name + n)
+		}
+	}
 	go func() {
 		for {
 			select {
@@ -21,7 +34,7 @@ func watch(name string) {
 				fmt.Println("event", event)
 				if event.Op&fsnotify.Remove == fsnotify.Remove {
 					fmt.Println("removed file add again: ", event.Name)
-					watcher.Add(name)
+					watcher.Add(event.Name)
 					files <- event.Name
 				}
 			case err := <-watcher.Errors:

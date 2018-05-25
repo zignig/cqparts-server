@@ -64,7 +64,7 @@ function init() {
 function onDocumentClick( event ) {
     if ( INTERSECTED ) {
         console.log(INTERSECTED);
-        INTERSECTED.visible = false;
+        //INTERSECTED.visible = false;
     };
 }
 

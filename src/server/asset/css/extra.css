@@ -2,6 +2,7 @@
       width:  1024px;
       height: 768px;
       margin: 0px;
+      margin: 0 auto;
       border: 1px solid gray;
       overflow: hidden; /*  Disable scrollbars */
       display: block;  /* No floating content on sides */

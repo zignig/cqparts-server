@@ -49,7 +49,6 @@ function init() {
 	light2.position.set( 50,50,50);
 	scene.add( light2 );
     // renderer
-
 	renderer = new THREE.WebGLRenderer( { canvas: canvas, antialias: true, preserveDrawingBuffer: true } );
     canvas.width = canvas.clientWidth;
     canvas.height = canvas.clientHeight;
@@ -112,7 +111,6 @@ function render(){
 	raycaster.setFromCamera(mouse,camera);
 	var intersects = raycaster.intersectObjects(meshlist);
 	if (intersects.length > 0){
-        //console.log(intersects);
 		if ( INTERSECTED != intersects[0].object){
             if (INTERSECTED) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHEX);
 			INTERSECTED = intersects[0].object;

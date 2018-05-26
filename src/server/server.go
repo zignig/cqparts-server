@@ -20,6 +20,7 @@ var incoming chan string
 var current string
 
 func main() {
+	current = "Case"
 	fileToWatch := flag.String("d", "./", "folder to watch")
 	flag.Parse()
 	r := gin.Default()

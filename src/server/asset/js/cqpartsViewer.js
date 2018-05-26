@@ -28,9 +28,10 @@ function load(name){
     }
 
 function init() {
-	container = document.getElementById('viewer');
+	outer = document.getElementById('outer');
+	canvas = document.getElementById('viewer');
 
-	camera = new THREE.PerspectiveCamera( 30, window.innerWidth / window.innerHeight, 0.0001, 20 );
+	camera = new THREE.PerspectiveCamera( 75, canvas.clientWidth/ canvas.clientHeight, 0.001, 1000);
 	camera.position.set( 0.2, 0.2, 0.2);
 	controls = new THREE.OrbitControls( camera );
     //controls.autoRotate = true;
@@ -48,18 +49,22 @@ function init() {
 	light2.position.set( 50,50,50);
 	scene.add( light2 );
     // renderer
-	renderer = new THREE.WebGLRenderer( { antialias: true, preserveDrawingBuffer: true } );
+
+	renderer = new THREE.WebGLRenderer( { canvas: canvas, antialias: true, preserveDrawingBuffer: true } );
+    canvas.width = canvas.clientWidth;
+    canvas.height = canvas.clientHeight;
 	renderer.setPixelRatio( window.devicePixelRatio );
-    renderer.setSize( window.innerWidth, window.innerHeight );
+    renderer.setViewport(0,0,canvas.clientWidth,canvas.clientHeight);
 	renderer.gammaOutput = true;
     // raycaster
     raycaster = new THREE.Raycaster();
     // add to doc and bind events
-	container.appendChild( renderer.domElement );
-	window.addEventListener( 'resize', onWindowResize, false );
-	container.addEventListener('mousemove',onDocumentMouseMove,false);
-	container.addEventListener('mousedown',onDocumentClick,false);
-	document.addEventListener('keydown',onKey,false);
+    canvas.addEventListener( 'resize', onWindowResize, false );
+    canvas.addEventListener('mousemove',onDocumentMouseMove,false);
+    canvas.addEventListener('mousedown',onDocumentClick,false);
+    document.addEventListener('keydown',onKey,false);
+    // final resize
+    onWindowResize();
 }
 
 function onKey( event ) {
@@ -86,14 +91,15 @@ function onDocumentClick( event ) {
 
 function onDocumentMouseMove( event ) {
 	event.preventDefault();
-	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-	mouse.y = - ( event.clientY / window.innerHeight ) * 2 +1 ;
+    var rect = renderer.domElement.getBoundingClientRect();
+    mouse.x = ( ( event.clientX - rect.left ) / (rect.right - rect.left)) * 2 - 1;
+    mouse.y = - ( ( event.clientY - rect.top ) / (rect.bottom - rect.top)) * 2 + 1;
 }
 
 function onWindowResize() {
-    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.aspect = outer.clientWidth/outer.clientHeight;
     camera.updateProjectionMatrix();
-    renderer.setSize( window.innerWidth, window.innerHeight );
+    renderer.setSize( outer.clientWidth,outer.clientHeight);
 }
 
 function animate() {
@@ -111,7 +117,7 @@ function render(){
             if (INTERSECTED) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHEX);
 			INTERSECTED = intersects[0].object;
 			INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
-			INTERSECTED.material.emissive.setHex(0x333313);
+			INTERSECTED.material.emissive.setHex(0xFF0000);
 		}
 	} else {
         if ( INTERSECTED ) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);

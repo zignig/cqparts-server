@@ -33,7 +33,7 @@ function init() {
 
 	camera = new THREE.PerspectiveCamera( 30, canvas.clientWidth/ canvas.clientHeight, 0.001, 1000);
 	camera.position.set( 0.2, 0.2, 0.2);
-	controls = new THREE.OrbitControls( camera );
+	controls = new THREE.OrbitControls( camera , canvas );
     //controls.autoRotate = true;
     controls.autoRotateSpeed = 2;
 	controls.target.set(0,0,0);

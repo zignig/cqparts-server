@@ -9,18 +9,13 @@
     <script src="/static/js/GLTFLoader.js"></script>
   </head>
   <body>
-    <div id="layout" class="content pure-g">
     <div id="nav" class="pure-u">
       {{ template "menu.tmpl" }}
     </div>
-    <div id="main" class="pure-u-1">
-        <div id="outer">
-            <canvas class="threejs" id="viewer"></canvas>
-        </div>
-            <div id=alert></div>
-        </div>
+    <div id="outer">
+        <canvas class="threejs" id="viewer"></canvas>
     </div>
-      {{ template "buttons.tmpl" }}
+	<div id=alert></div>
     <script src="/static/js/app.js"></script>
     <script src="/static/js/cqpartsViewer.js"></script>
     <script src="/static/js/saver.js"></script>

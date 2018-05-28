@@ -32,7 +32,7 @@ func watch(name string) {
 			select {
 			case event := <-watcher.Events:
 				fmt.Println("event", event)
-				if event.Op&fsnotify.Remove == fsnotify.Remove {
+				if (event.Op&fsnotify.Remove == fsnotify.Remove) || (event.Op&fsnotify.Write == fsnotify.Write) {
 					fmt.Println("removed file add again: ", event.Name)
 					watcher.Add(event.Name)
 					files <- event.Name

@@ -12,3 +12,14 @@ source.addEventListener('update',function(e){
     load(data.Name);
     //d1.insertAdjacentHTML('beforeend',AlertBox(data));
 });
+
+function ActivateAutorotate(){
+    but = document.getElementById("autorotate");
+    if (controls.autoRotate == true){
+        but.classList.remove("button-success");
+        controls.autoRotate = false;
+    } else {
+        but.classList.add("button-success");
+        controls.autoRotate = true;
+    }
+}

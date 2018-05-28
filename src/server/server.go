@@ -30,14 +30,18 @@ func main() {
 	}
 	r.SetHTMLTemplate(t)
 	r.GET("/", func(c *gin.Context) {
-		fmt.Println(current)
 		val := gin.H{}
 		if current != "" {
 			val["current"] = current
-		} else {
-			val["awesome"] = "yay"
 		}
 		c.HTML(http.StatusOK, "index.tmpl", val)
+	})
+	r.GET("/dev", func(c *gin.Context) {
+		val := gin.H{}
+		if current != "" {
+			val["current"] = current
+		}
+		c.HTML(http.StatusOK, "dev.tmpl", val)
 	})
 	//r.GET("/model")
 	r.GET("/static/*name", Static)

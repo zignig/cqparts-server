@@ -19,6 +19,7 @@ function load(name){
 		scene.add( gltf.scene );
         obj = gltf.scene;
 		//grab all the meshes for selection
+        meshlist = [];
         gltf.scene.traverse( function ( child ) {
             if ( child.isMesh ) {
                 meshlist.push(child);
@@ -48,6 +49,10 @@ function init() {
 	light2 = new THREE.PointLight(0xf0f0f0,2,100);
 	light2.position.set( 50,50,50);
 	scene.add( light2 );
+    // light 3
+	light3 = new THREE.PointLight(0xf0f0f0,2,100);
+	light3.position.set( 0,0,-50);
+	scene.add( light2) ;
     // renderer
 	renderer = new THREE.WebGLRenderer( { canvas: canvas, antialias: true, preserveDrawingBuffer: true } );
     canvas.width = canvas.clientWidth;
@@ -62,6 +67,10 @@ function init() {
     canvas.addEventListener('mousemove',onDocumentMouseMove,false);
     canvas.addEventListener('mousedown',onDocumentClick,false);
     document.addEventListener('keydown',onKey,false);
+    // Base grid helps us orient ourselves
+    var baseGrid = new THREE.GridHelper(1, 10);
+    //baseGrid.geometry.rotateX( Math.PI / 2 );
+    scene.add(baseGrid);
     // final resize
     onWindowResize();
 }

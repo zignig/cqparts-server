@@ -6,9 +6,12 @@
 // asset/html/dev.tmpl
 // asset/html/index.tmpl
 // asset/html/menu.tmpl
+// asset/html/tmpl.tmpl
+// asset/html/viewer.tmpl
 // asset/js/GLTFLoader.js
 // asset/js/OrbitControls.js
 // asset/js/app.js
+// asset/js/components.js
 // asset/js/cqpartsViewer.js
 // asset/js/saver.js
 // asset/js/three.min.js
@@ -148,6 +151,42 @@ func assetHtmlMenuTmpl() (*asset, error) {
 	return a, err
 }
 
+// assetHtmlTmplTmpl reads file data from disk. It returns an error on failure.
+func assetHtmlTmplTmpl() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/html/tmpl.tmpl"
+	name := "asset/html/tmpl.tmpl"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// assetHtmlViewerTmpl reads file data from disk. It returns an error on failure.
+func assetHtmlViewerTmpl() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/html/viewer.tmpl"
+	name := "asset/html/viewer.tmpl"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
 // assetJsGltfloaderJs reads file data from disk. It returns an error on failure.
 func assetJsGltfloaderJs() (*asset, error) {
 	path := "/opt/cqparts-server/src/server/asset/js/GLTFLoader.js"
@@ -188,6 +227,24 @@ func assetJsOrbitcontrolsJs() (*asset, error) {
 func assetJsAppJs() (*asset, error) {
 	path := "/opt/cqparts-server/src/server/asset/js/app.js"
 	name := "asset/js/app.js"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// assetJsComponentsJs reads file data from disk. It returns an error on failure.
+func assetJsComponentsJs() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/js/components.js"
+	name := "asset/js/components.js"
 	bytes, err := bindataRead(path, name)
 	if err != nil {
 		return nil, err
@@ -350,9 +407,12 @@ var _bindata = map[string]func() (*asset, error){
 	"asset/html/dev.tmpl": assetHtmlDevTmpl,
 	"asset/html/index.tmpl": assetHtmlIndexTmpl,
 	"asset/html/menu.tmpl": assetHtmlMenuTmpl,
+	"asset/html/tmpl.tmpl": assetHtmlTmplTmpl,
+	"asset/html/viewer.tmpl": assetHtmlViewerTmpl,
 	"asset/js/GLTFLoader.js": assetJsGltfloaderJs,
 	"asset/js/OrbitControls.js": assetJsOrbitcontrolsJs,
 	"asset/js/app.js": assetJsAppJs,
+	"asset/js/components.js": assetJsComponentsJs,
 	"asset/js/cqpartsViewer.js": assetJsCqpartsviewerJs,
 	"asset/js/saver.js": assetJsSaverJs,
 	"asset/js/three.min.js": assetJsThreeMinJs,
@@ -410,11 +470,14 @@ var _bintree = &bintree{nil, map[string]*bintree{
 			"dev.tmpl": &bintree{assetHtmlDevTmpl, map[string]*bintree{}},
 			"index.tmpl": &bintree{assetHtmlIndexTmpl, map[string]*bintree{}},
 			"menu.tmpl": &bintree{assetHtmlMenuTmpl, map[string]*bintree{}},
+			"tmpl.tmpl": &bintree{assetHtmlTmplTmpl, map[string]*bintree{}},
+			"viewer.tmpl": &bintree{assetHtmlViewerTmpl, map[string]*bintree{}},
 		}},
 		"js": &bintree{nil, map[string]*bintree{
 			"GLTFLoader.js": &bintree{assetJsGltfloaderJs, map[string]*bintree{}},
 			"OrbitControls.js": &bintree{assetJsOrbitcontrolsJs, map[string]*bintree{}},
 			"app.js": &bintree{assetJsAppJs, map[string]*bintree{}},
+			"components.js": &bintree{assetJsComponentsJs, map[string]*bintree{}},
 			"cqpartsViewer.js": &bintree{assetJsCqpartsviewerJs, map[string]*bintree{}},
 			"saver.js": &bintree{assetJsSaverJs, map[string]*bintree{}},
 			"three.min.js": &bintree{assetJsThreeMinJs, map[string]*bintree{}},

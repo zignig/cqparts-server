@@ -25,7 +25,7 @@ function ActivateAutorotate(){
 }
 
 var model = Vue.component('model',{
-    template : "#m",
+    template : "#navigation",
     props: {
         value: String, 
     },
@@ -35,10 +35,12 @@ var model = Vue.component('model',{
     },
 
     created: function(){
-        this.models= [ 'one','two','three' ];
+        this.models= [ 'one','two','three','case','train' ];
     }
 });
 
+Vue.config.productionTip = false;
+
 new Vue({
-    el: '#main'
+   el: '#main'
 });

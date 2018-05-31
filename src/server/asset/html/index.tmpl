@@ -9,27 +9,25 @@
     <script src="/static/js/GLTFLoader.js"></script>
   </head>
   <body>
-    <div id="layout" class="content pure-g">
-    <div id="nav" class="pure-u">
-      {{ template "menu.tmpl" }}
-    </div>
-    <div id="main" class="pure-u-1">
-        <div id="outer">
-            <canvas class="threejs" id="viewer"></canvas>
+    <div id="main" class="pure-g">
+        <div id="nav" class="pure-u-1-5">
+            <model></model>
         </div>
-            <div id=alert></div>
+        <div class="pure-u-3-5">
+            [[ template "viewer.tmpl"]]
+            [[ template "buttons.tmpl"]]
         </div>
     </div>
-      {{ template "buttons.tmpl" }}
-      <br><br>
-    <small> SPACE to hide / A to show all</small>
+    [[ template "tmpl.tmpl"]]
+    <script src="/static/js/vue.js"></script>
     <script src="/static/js/app.js"></script>
+    <script src="/static/js/components.js"></script>
     <script src="/static/js/cqpartsViewer.js"></script>
     <script src="/static/js/saver.js"></script>
-    {{if .current}}
+    [[if .current]]
         <script>
-            load({{.current}});
+            load([[.current]]);
         </script>
-    {{end}}
+    [[end]]
   </body>
 </html>

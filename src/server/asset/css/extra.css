@@ -1,13 +1,19 @@
 #outer { 
+      width: 1024px;
       height: 768px;
-      /* margin: 0 auto; */
-      valign : left;
+      margin: 0 auto;
       border: 1px solid gray;
       overflow: hidden; /*  Disable scrollbars */
-      display: block;  /* No floating content on sides */
 }
 
 .button-success {
     background: rgb(28, 184, 65); /* this is a green */
 }
 
+#nav {
+    /* navigation */
+	width: 10%;
+    position: relative;
+    background: rgb(37, 42, 58);
+    text-align: center;
+}

@@ -77,12 +77,12 @@ function init() {
 
 function onKey( event ) {
     if (event.code == "KeyA"){
-        console.log(event);
+        //console.log(event);
         for ( var i in meshlist){
             meshlist[i].visible = true;
         }
     };
-    console.log(event);
+    //console.log(event);
     if (event.code == "Space"){
         if ( INTERSECTED ) {
             INTERSECTED.visible = false;
@@ -92,7 +92,7 @@ function onKey( event ) {
 
 function onDocumentClick( event ) {
     if ( INTERSECTED ) {
-        console.log(INTERSECTED);
+        //console.log(INTERSECTED);
         //INTERSECTED.visible = false;
     };
 }

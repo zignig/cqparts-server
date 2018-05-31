@@ -9,19 +9,33 @@
     <script src="/static/js/GLTFLoader.js"></script>
   </head>
   <body>
+    <div id="main">
+        <model></model>
+    </div>
+
+    <template id="m">
+        <div>
+        <ul class="item-list">
+            <li v-for="obj in models">
+                {{ obj }}
+            </li>
+        </ul>
+        </div>
+    </template>
+
     <div id="nav" class="pure-u">
-      {{ template "menu.tmpl" }}
     </div>
     <div id="outer">
         <canvas class="threejs" id="viewer"></canvas>
     </div>
 	<div id=alert></div>
+    <script src="/static/js/vue.js"></script>
     <script src="/static/js/app.js"></script>
     <script src="/static/js/cqpartsViewer.js"></script>
     <script src="/static/js/saver.js"></script>
     {{if .current}}
         <script>
-            load({{.current}});
+            load([[.current]]);
         </script>
     {{end}}
   </body>

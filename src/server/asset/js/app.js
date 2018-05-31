@@ -23,3 +23,22 @@ function ActivateAutorotate(){
         controls.autoRotate = true;
     }
 }
+
+var model = Vue.component('model',{
+    template : "#m",
+    props: {
+        value: String, 
+    },
+
+    data: function(){
+        return { models: ['one','two'] }
+    },
+
+    created: function(){
+        this.models= [ 'one','two','three' ];
+    }
+});
+
+new Vue({
+    el: '#main'
+});

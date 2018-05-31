@@ -98,7 +98,7 @@ func loadTemplate() (templ *template.Template, e error) {
 	for _, j := range pages {
 		fmt.Println(j)
 		data, _ := Asset("asset/html/" + j)
-		_, err = templ.New(j).Parse(string(data))
+		_, err = templ.New(j).Delims("[[", "]]").Parse(string(data))
 		if err != nil {
 			return nil, err
 		}

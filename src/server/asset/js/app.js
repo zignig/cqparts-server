@@ -36,6 +36,11 @@ var model = Vue.component('model',{
 
     created: function(){
         this.models= [ 'one','two','three','case','train' ];
+    },
+    methods:{
+        load: function(event){
+            console.log(this.value);
+        }
     }
 });
 

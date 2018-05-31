@@ -2,7 +2,7 @@
     <div class="pure-menu">
     <ul class="pure-menu-list">
         <li class="pure-menu-item" v-for="obj in models">
-            <a class="pure-menu-link" href="#">{{ obj }}</a>
+            <a class="pure-menu-link" v-on:click="load">{{ obj }}</a>
         </li>
     </ul>
     </div>

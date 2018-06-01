@@ -4,7 +4,6 @@ package main
 import (
 	"bytes"
 	"errors"
-	"fmt"
 	"io"
 	"log"
 	"strings"
@@ -81,7 +80,7 @@ func renderNode(n *html.Node) string {
 	return buf.String()
 }
 
-func ProcVues() {
+func ProcVues(tmpl *template.Template) (script string, css string) {
 	pages, err := AssetDir("asset/vue")
 	if err != nil {
 		return
@@ -95,8 +94,29 @@ func ProcVues() {
 		}
 		vues = append(vues, n)
 	}
+	// get templates
+	html_template := ""
 	for _, j := range vues {
-		fmt.Println(j.Template)
-		fmt.Println("----------------")
+		html_template += j.Template
+		html_template += "\n\n"
 	}
+	_, err = tmpl.New("vuetmpl").Delims("[[", "]]").Parse(html_template)
+	if err != nil {
+		panic(err)
+	}
+	// Css
+	css_string := ""
+	for _, j := range vues {
+		css_string += j.Script
+		css_string += "\n\n"
+	}
+	css = css_string
+	// Script
+	script_string := ""
+	for _, j := range vues {
+		script_string += j.Css
+		script_string += "\n\n"
+	}
+	script = script_string
+	return
 }

@@ -57,6 +57,7 @@ func main() {
 	fmt.Println("watching :", *fileToWatch)
 	go watch(*fileToWatch)
 	done := make(chan bool)
+	ProcVues()
 	<-done
 }
 

@@ -91,6 +91,13 @@
 			"path": "/context"
 		},
 		{
+			"importpath": "golang.org/x/net/html",
+			"repository": "https://go.googlesource.com/net",
+			"revision": "1e491301e022f8f977054da4c2d852decd59571f",
+			"branch": "master",
+			"path": "/html"
+		},
+		{
 			"importpath": "golang.org/x/sync/errgroup",
 			"repository": "https://go.googlesource.com/sync",
 			"revision": "1d60e4601c6fd243af51cc01ddf169918a5407ca",
@@ -103,6 +110,55 @@
 			"revision": "7c87d13f8e835d2fb3a70a2912c811ed0c1d241b",
 			"branch": "master",
 			"path": "/unix"
+		},
+		{
+			"importpath": "golang.org/x/text/encoding",
+			"repository": "https://go.googlesource.com/text",
+			"revision": "5c1cf69b5978e5a34c5f9ba09a83e56acc4b7877",
+			"branch": "master",
+			"path": "/encoding"
+		},
+		{
+			"importpath": "golang.org/x/text/internal/language",
+			"repository": "https://go.googlesource.com/text",
+			"revision": "5c1cf69b5978e5a34c5f9ba09a83e56acc4b7877",
+			"branch": "master",
+			"path": "/internal/language"
+		},
+		{
+			"importpath": "golang.org/x/text/internal/tag",
+			"repository": "https://go.googlesource.com/text",
+			"revision": "5c1cf69b5978e5a34c5f9ba09a83e56acc4b7877",
+			"branch": "master",
+			"path": "/internal/tag"
+		},
+		{
+			"importpath": "golang.org/x/text/internal/utf8internal",
+			"repository": "https://go.googlesource.com/text",
+			"revision": "5c1cf69b5978e5a34c5f9ba09a83e56acc4b7877",
+			"branch": "master",
+			"path": "/internal/utf8internal"
+		},
+		{
+			"importpath": "golang.org/x/text/language",
+			"repository": "https://go.googlesource.com/text",
+			"revision": "5c1cf69b5978e5a34c5f9ba09a83e56acc4b7877",
+			"branch": "master",
+			"path": "/language"
+		},
+		{
+			"importpath": "golang.org/x/text/runes",
+			"repository": "https://go.googlesource.com/text",
+			"revision": "5c1cf69b5978e5a34c5f9ba09a83e56acc4b7877",
+			"branch": "master",
+			"path": "/runes"
+		},
+		{
+			"importpath": "golang.org/x/text/transform",
+			"repository": "https://go.googlesource.com/text",
+			"revision": "5c1cf69b5978e5a34c5f9ba09a83e56acc4b7877",
+			"branch": "master",
+			"path": "/transform"
 		},
 		{
 			"importpath": "gopkg.in/go-playground/validator.v8",

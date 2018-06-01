@@ -6,7 +6,6 @@
 // asset/html/dev.tmpl
 // asset/html/index.tmpl
 // asset/html/menu.tmpl
-// asset/html/tmpl.tmpl
 // asset/html/viewer.tmpl
 // asset/js/GLTFLoader.js
 // asset/js/OrbitControls.js
@@ -18,6 +17,7 @@
 // asset/js/vue-router.js
 // asset/js/vue.js
 // asset/vue/App.vue
+// asset/vue/model.vue
 // DO NOT EDIT!
 
 package main
@@ -138,24 +138,6 @@ func assetHtmlIndexTmpl() (*asset, error) {
 func assetHtmlMenuTmpl() (*asset, error) {
 	path := "/opt/cqparts-server/src/server/asset/html/menu.tmpl"
 	name := "asset/html/menu.tmpl"
-	bytes, err := bindataRead(path, name)
-	if err != nil {
-		return nil, err
-	}
-
-	fi, err := os.Stat(path)
-	if err != nil {
-		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
-	}
-
-	a := &asset{bytes: bytes, info: fi}
-	return a, err
-}
-
-// assetHtmlTmplTmpl reads file data from disk. It returns an error on failure.
-func assetHtmlTmplTmpl() (*asset, error) {
-	path := "/opt/cqparts-server/src/server/asset/html/tmpl.tmpl"
-	name := "asset/html/tmpl.tmpl"
 	bytes, err := bindataRead(path, name)
 	if err != nil {
 		return nil, err
@@ -368,6 +350,24 @@ func assetVueAppVue() (*asset, error) {
 	return a, err
 }
 
+// assetVueModelVue reads file data from disk. It returns an error on failure.
+func assetVueModelVue() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/vue/model.vue"
+	name := "asset/vue/model.vue"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
 // Asset loads and returns the asset for the given name.
 // It returns an error if the asset could not be found or
 // could not be loaded.
@@ -426,7 +426,6 @@ var _bindata = map[string]func() (*asset, error){
 	"asset/html/dev.tmpl": assetHtmlDevTmpl,
 	"asset/html/index.tmpl": assetHtmlIndexTmpl,
 	"asset/html/menu.tmpl": assetHtmlMenuTmpl,
-	"asset/html/tmpl.tmpl": assetHtmlTmplTmpl,
 	"asset/html/viewer.tmpl": assetHtmlViewerTmpl,
 	"asset/js/GLTFLoader.js": assetJsGltfloaderJs,
 	"asset/js/OrbitControls.js": assetJsOrbitcontrolsJs,
@@ -438,6 +437,7 @@ var _bindata = map[string]func() (*asset, error){
 	"asset/js/vue-router.js": assetJsVueRouterJs,
 	"asset/js/vue.js": assetJsVueJs,
 	"asset/vue/App.vue": assetVueAppVue,
+	"asset/vue/model.vue": assetVueModelVue,
 }
 
 // AssetDir returns the file names below a certain
@@ -490,7 +490,6 @@ var _bintree = &bintree{nil, map[string]*bintree{
 			"dev.tmpl": &bintree{assetHtmlDevTmpl, map[string]*bintree{}},
 			"index.tmpl": &bintree{assetHtmlIndexTmpl, map[string]*bintree{}},
 			"menu.tmpl": &bintree{assetHtmlMenuTmpl, map[string]*bintree{}},
-			"tmpl.tmpl": &bintree{assetHtmlTmplTmpl, map[string]*bintree{}},
 			"viewer.tmpl": &bintree{assetHtmlViewerTmpl, map[string]*bintree{}},
 		}},
 		"js": &bintree{nil, map[string]*bintree{
@@ -506,6 +505,7 @@ var _bintree = &bintree{nil, map[string]*bintree{
 		}},
 		"vue": &bintree{nil, map[string]*bintree{
 			"App.vue": &bintree{assetVueAppVue, map[string]*bintree{}},
+			"model.vue": &bintree{assetVueModelVue, map[string]*bintree{}},
 		}},
 	}},
 }}

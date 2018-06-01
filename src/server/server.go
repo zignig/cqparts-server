@@ -18,6 +18,8 @@ import (
 
 var incoming chan string
 var current string
+var css string
+var script string
 
 func main() {
 	current = "Case"
@@ -28,6 +30,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	script, css = ProcVues(t)
 	r.SetHTMLTemplate(t)
 	r.GET("/", func(c *gin.Context) {
 		val := gin.H{}
@@ -43,7 +46,7 @@ func main() {
 		}
 		c.HTML(http.StatusOK, "dev.tmpl", val)
 	})
-	//r.GET("/model")
+	r.GET("/vue/comp.js", CompJS)
 	r.GET("/static/*name", Static)
 	r.StaticFS("/model", http.Dir("/tmp/cqpss"))
 	r.GET("/events", event)
@@ -57,7 +60,6 @@ func main() {
 	fmt.Println("watching :", *fileToWatch)
 	go watch(*fileToWatch)
 	done := make(chan bool)
-	ProcVues()
 	<-done
 }
 
@@ -71,6 +73,11 @@ func notify(c *gin.Context) {
 	fmt.Println(name, err)
 	current = name
 	incoming <- name
+}
+
+func CompJS(c *gin.Context) {
+	c.Writer.Header().Set("Content-Type", "text/javascript")
+	io.Copy(c.Writer, strings.NewReader(script))
 }
 
 func Static(c *gin.Context) {

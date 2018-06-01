@@ -39,6 +39,12 @@ func GetVue(name string, data []byte) (component *VueParse, err error) {
 	f = func(n *html.Node) {
 		if n.Type == html.ElementNode && n.Data == "template" {
 			b = n
+			b.Attr = append(b.Attr, html.Attribute{Key: "id", Val: trimmedName})
+			component.Template = renderNode(b)
+		}
+		if n.Type == html.ElementNode && n.Data == "style" {
+			style := renderNode(n.FirstChild)
+			component.Css = style
 		}
 		if n.Type == html.ElementNode && n.Data == "script" {
 			script := renderNode(n.FirstChild)
@@ -52,26 +58,19 @@ func GetVue(name string, data []byte) (component *VueParse, err error) {
 			if err != nil {
 				panic(err)
 			}
-			fmt.Println("--------------------------")
 			values := map[string]interface{}{"name": trimmedName, "script": trimmedScript}
 			var tpl bytes.Buffer
 			if err := tmpl.Execute(&tpl, values); err != nil {
 				panic(err)
 			}
-
 			component.Script = html.UnescapeString(tpl.String())
-
 		}
 		for c := n.FirstChild; c != nil; c = c.NextSibling {
 			f(c)
 		}
 	}
 	f(doc)
-	if b != nil {
-		b.Attr = append(b.Attr, html.Attribute{Key: "id", Val: trimmedName})
-		component.Template = renderNode(b)
-		return component, nil
-	}
+	return component, nil
 	return nil, errors.New("missing <template>")
 }
 
@@ -87,14 +86,17 @@ func ProcVues() {
 	if err != nil {
 		return
 	}
+	vues := make([]*VueParse, 0)
 	for _, j := range pages {
-		fmt.Println(j)
 		data, _ := Asset("asset/vue/" + j)
 		n, err := GetVue(j, data)
 		if err != nil {
 			panic(err)
 		}
-		fmt.Println("-------------------------------")
-		fmt.Println(n)
+		vues = append(vues, n)
+	}
+	for _, j := range vues {
+		fmt.Println(j.Template)
+		fmt.Println("----------------")
 	}
 }

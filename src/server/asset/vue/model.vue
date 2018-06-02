@@ -1,7 +1,7 @@
 <template>
     <div class="pure-menu">
     <ul class="pure-menu-list">
-        <li class="pure-menu-item" v-for="obj in models">
+        <li class="pure-menu-item" v-bind:model="modelList" v-for="obj in modelList">
             <a class="pure-menu-link" v-on:click="load">{{ obj }}</a>
         </li>
     </ul>
@@ -11,23 +11,17 @@
 <script>
 export default { 
     props: {
-        value: String, 
-    },
-
-    data: function(){
-        return { models: ['one','two'] }
-    },
-
-    created: function(){
-        this.models= [ 'one','two','three','case','train' ];
+        modelList: [], 
     },
     methods:{
         load: function(event){
-            console.log(this.value);
+            console.log(this);
+        },
+        add: function(item){
+            this.models.push(item);
         }
     }
 }
-
 </script>
 
 <style>

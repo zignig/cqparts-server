@@ -14,9 +14,9 @@ func build(name string, file string) bool {
 	t := time.Since(n)
 	fmt.Println(t)
 	fmt.Println(name, file)
-	fmt.Println(string(output), err)
 	if err == nil {
 		//		incoming <- name
+		fmt.Println(string(output), err)
 	}
 	return false
 }

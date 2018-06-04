@@ -14,8 +14,8 @@
 // asset/js/cqpartsViewer.js
 // asset/js/saver.js
 // asset/js/three.min.js
-// asset/js/vue-router.js
 // asset/js/vue.js
+// asset/js/vuex.js
 // asset/vue/App.vue
 // asset/vue/model.vue
 // DO NOT EDIT!
@@ -296,10 +296,10 @@ func assetJsThreeMinJs() (*asset, error) {
 	return a, err
 }
 
-// assetJsVueRouterJs reads file data from disk. It returns an error on failure.
-func assetJsVueRouterJs() (*asset, error) {
-	path := "/opt/cqparts-server/src/server/asset/js/vue-router.js"
-	name := "asset/js/vue-router.js"
+// assetJsVueJs reads file data from disk. It returns an error on failure.
+func assetJsVueJs() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/js/vue.js"
+	name := "asset/js/vue.js"
 	bytes, err := bindataRead(path, name)
 	if err != nil {
 		return nil, err
@@ -314,10 +314,10 @@ func assetJsVueRouterJs() (*asset, error) {
 	return a, err
 }
 
-// assetJsVueJs reads file data from disk. It returns an error on failure.
-func assetJsVueJs() (*asset, error) {
-	path := "/opt/cqparts-server/src/server/asset/js/vue.js"
-	name := "asset/js/vue.js"
+// assetJsVuexJs reads file data from disk. It returns an error on failure.
+func assetJsVuexJs() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/js/vuex.js"
+	name := "asset/js/vuex.js"
 	bytes, err := bindataRead(path, name)
 	if err != nil {
 		return nil, err
@@ -434,8 +434,8 @@ var _bindata = map[string]func() (*asset, error){
 	"asset/js/cqpartsViewer.js": assetJsCqpartsviewerJs,
 	"asset/js/saver.js": assetJsSaverJs,
 	"asset/js/three.min.js": assetJsThreeMinJs,
-	"asset/js/vue-router.js": assetJsVueRouterJs,
 	"asset/js/vue.js": assetJsVueJs,
+	"asset/js/vuex.js": assetJsVuexJs,
 	"asset/vue/App.vue": assetVueAppVue,
 	"asset/vue/model.vue": assetVueModelVue,
 }
@@ -500,8 +500,8 @@ var _bintree = &bintree{nil, map[string]*bintree{
 			"cqpartsViewer.js": &bintree{assetJsCqpartsviewerJs, map[string]*bintree{}},
 			"saver.js": &bintree{assetJsSaverJs, map[string]*bintree{}},
 			"three.min.js": &bintree{assetJsThreeMinJs, map[string]*bintree{}},
-			"vue-router.js": &bintree{assetJsVueRouterJs, map[string]*bintree{}},
 			"vue.js": &bintree{assetJsVueJs, map[string]*bintree{}},
+			"vuex.js": &bintree{assetJsVuexJs, map[string]*bintree{}},
 		}},
 		"vue": &bintree{nil, map[string]*bintree{
 			"App.vue": &bintree{assetVueAppVue, map[string]*bintree{}},

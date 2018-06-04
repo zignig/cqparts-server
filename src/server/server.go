@@ -7,6 +7,7 @@ import (
 	"html/template"
 	"io"
 	"io/ioutil"
+	//"mime/multipart"
 	"net/http"
 	"strconv"
 	"strings"
@@ -20,9 +21,11 @@ var incoming chan string
 var current string
 var css string
 var script string
+var store Storage
 
 func main() {
 	current = "Case"
+	store = NewMemStore("default")
 	fileToWatch := flag.String("d", "./", "folder to watch")
 	flag.Parse()
 	r := gin.Default()
@@ -46,12 +49,19 @@ func main() {
 		}
 		c.HTML(http.StatusOK, "dev.tmpl", val)
 	})
+
 	r.GET("/vue/comp.js", CompJS)
+	r.GET("/vue/comp.css", CompCSS)
+
 	r.GET("/static/*name", Static)
-	r.StaticFS("/model", http.Dir("/tmp/cqpss"))
+	//r.StaticFS("/model", http.Dir("/tmp/cqpss"))
+	r.GET("/model/*name", model)
 	r.GET("/events", event)
 
+	r.GET("/status", status)
 	r.POST("/notify", notify)
+	r.POST("/upload", upload)
+
 	r.POST("/snapshot", snapshot)
 	// web server
 	incoming = make(chan string, 100)
@@ -68,6 +78,29 @@ func snapshot(c *gin.Context) {
 	fmt.Println(data)
 }
 
+func status(c *gin.Context) {
+	c.JSON(200, gin.H{"message": "ok"})
+}
+
+func upload(c *gin.Context) {
+	form, err := c.MultipartForm()
+	if err != nil {
+		panic(err)
+	}
+	files := form.File["objs"]
+	for _, j := range files {
+		f, err := j.Open()
+		if err != nil {
+			panic(err)
+		}
+		data, err := ioutil.ReadAll(f)
+		if err != nil {
+			panic(err)
+		}
+		store.Save("/"+j.Filename, data)
+	}
+}
+
 func notify(c *gin.Context) {
 	name, err := c.GetPostForm("name")
 	fmt.Println(name, err)
@@ -78,6 +111,22 @@ func notify(c *gin.Context) {
 func CompJS(c *gin.Context) {
 	c.Writer.Header().Set("Content-Type", "text/javascript")
 	io.Copy(c.Writer, strings.NewReader(script))
+}
+
+func CompCSS(c *gin.Context) {
+	c.Writer.Header().Set("Content-Type", "text/css")
+	io.Copy(c.Writer, strings.NewReader(css))
+}
+
+func model(c *gin.Context) {
+	path := c.Params.ByName("name")
+	data, err := store.Load(path)
+	if err != nil {
+		c.AbortWithStatus(404)
+	}
+	size := int64(len(data))
+	c.Writer.Header().Set("Content-Length", strconv.FormatInt(size, 10))
+	io.Copy(c.Writer, bytes.NewReader(data))
 }
 
 func Static(c *gin.Context) {

@@ -21,9 +21,6 @@ export default {
             load(event);
             //console.log(event);
         },
-        add: function(item){
-            this.models.push(item);
-        }
     }
 }
 </script>

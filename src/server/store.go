@@ -8,6 +8,7 @@ import (
 
 // storage for uploaded files
 // make an interface so it can be swapped out for other storage later
+// TODO make file storate that is persistent
 
 type Storage interface {
 	Load(name string) (data []byte, err error)
@@ -42,6 +43,7 @@ func (ms *MemStore) Load(name string) (data []byte, err error) {
 }
 
 func (ms *MemStore) Save(name string, data []byte) (err error) {
+	fmt.Println(ms.items)
 	fmt.Println("save --> ", name)
 	ms.lock.Lock()
 	ms.items[name] = data
@@ -50,5 +52,9 @@ func (ms *MemStore) Save(name string, data []byte) (err error) {
 }
 
 func (ms *MemStore) List() (items []string) {
-	return
+	keys := make([]string, len(ms.items))
+	for i, _ := range ms.items {
+		keys = append(keys, i)
+	}
+	return keys
 }

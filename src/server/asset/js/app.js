@@ -39,17 +39,21 @@ AwesomeApp = new Vue({
     },
     methods: {
         setupStream() {
-            // Not a real URL, just using for demo purposes
             let es = new EventSource('/events');
             es.onerror = function(e){
                 console.log(e);
             }
+
+            es.addEventListener('menu', event => {
+                let data = JSON.parse(event.data);
+                this.modelList.push(data.Name);
+            }, false);
+
             es.addEventListener('update', event => {
                 let data = JSON.parse(event.data);
-                this.modelList.push(data.Name);;
+                this.modelList.push(data.Name);
                 clear();
                 load(data.Name);
-                console.log(data);
             }, false);
 
             es.addEventListener('error', event => {

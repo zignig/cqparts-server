@@ -18,14 +18,18 @@ import (
 )
 
 var incoming chan string
-var current string
+var menu chan string
 var css string
 var script string
-var store Storage
+var store Storage  // model file storage
+var models Storage // list of model names
 
 func main() {
-	current = "Case"
 	store = NewMemStore("default")
+	models = NewMemStore("models")
+	incoming = make(chan string, 100)
+	menu = make(chan string, 100)
+
 	fileToWatch := flag.String("d", "./", "folder to watch")
 	flag.Parse()
 	r := gin.Default()
@@ -37,16 +41,10 @@ func main() {
 	r.SetHTMLTemplate(t)
 	r.GET("/", func(c *gin.Context) {
 		val := gin.H{}
-		if current != "" {
-			val["current"] = current
-		}
 		c.HTML(http.StatusOK, "index.tmpl", val)
 	})
 	r.GET("/dev", func(c *gin.Context) {
 		val := gin.H{}
-		if current != "" {
-			val["current"] = current
-		}
 		c.HTML(http.StatusOK, "dev.tmpl", val)
 	})
 
@@ -54,7 +52,6 @@ func main() {
 	r.GET("/vue/comp.css", CompCSS)
 
 	r.GET("/static/*name", Static)
-	//r.StaticFS("/model", http.Dir("/tmp/cqpss"))
 	r.GET("/model/*name", model)
 	r.GET("/events", event)
 
@@ -64,7 +61,6 @@ func main() {
 
 	r.POST("/snapshot", snapshot)
 	// web server
-	incoming = make(chan string, 100)
 	go r.Run(":8080")
 	// file watcher
 	fmt.Println("watching :", *fileToWatch)
@@ -104,7 +100,7 @@ func upload(c *gin.Context) {
 func notify(c *gin.Context) {
 	name, err := c.GetPostForm("name")
 	fmt.Println(name, err)
-	current = name
+	models.Save(name, []byte{'_'})
 	incoming <- name
 }
 

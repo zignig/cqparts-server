@@ -43,7 +43,6 @@ func (ms *MemStore) Load(name string) (data []byte, err error) {
 }
 
 func (ms *MemStore) Save(name string, data []byte) (err error) {
-	fmt.Println(ms.items)
 	fmt.Println("save --> ", name)
 	ms.lock.Lock()
 	ms.items[name] = data

@@ -4,7 +4,6 @@ package main
 import (
 	"bytes"
 	"errors"
-	"fmt"
 	"html/template"
 	"io"
 	"log"
@@ -122,7 +121,6 @@ func ProcVues(tmpl *template.Template) (script string, css string) {
 		script_string += j.Script
 		script_string += "\n\n"
 	}
-	fmt.Println("SCRIPT", script_string)
 	script = script_string
 	return
 }

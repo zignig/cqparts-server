@@ -3,9 +3,10 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/gin-gonic/gin"
 	"io"
 	"time"
+
+	"github.com/gin-gonic/gin"
 )
 
 // TODO include model info and stats
@@ -15,6 +16,7 @@ type Message struct {
 
 func event(c *gin.Context) {
 	// fill up the list with the current store listing
+	fmt.Println(models.List())
 	for _, i := range models.List() {
 		menu <- i
 	}

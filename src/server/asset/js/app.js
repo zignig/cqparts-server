@@ -33,6 +33,7 @@ AwesomeApp = new Vue({
     el: '#main',
 	data: {
         modelList : [],
+        issueItem : '',
     },
     created() {
         this.setupStream();
@@ -52,8 +53,15 @@ AwesomeApp = new Vue({
             es.addEventListener('update', event => {
                 let data = JSON.parse(event.data);
                 this.modelList.push(data.Name);
+                this.issueItem = '';
                 clear();
                 load(data.Name);
+            }, false);
+
+            es.addEventListener('issue', event => {
+                let data = JSON.parse(event.data);
+                this.issueItem = data.Name;
+                console.log(data);
             }, false);
 
             es.addEventListener('error', event => {

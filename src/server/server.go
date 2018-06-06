@@ -19,6 +19,7 @@ import (
 
 var incoming chan string
 var menu chan string
+var issue chan string
 var css string
 var script string
 var store Storage  // model file storage
@@ -29,6 +30,7 @@ func main() {
 	models = NewMemStore("models")
 	incoming = make(chan string, 100)
 	menu = make(chan string, 100)
+	issue = make(chan string, 100)
 
 	fileToWatch := flag.String("d", "./", "folder to watch")
 	flag.Parse()

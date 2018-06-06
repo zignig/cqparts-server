@@ -18,6 +18,7 @@
 // asset/js/vuex.js
 // asset/vue/App.vue
 // asset/vue/model.vue
+// asset/vue/notif.vue
 // DO NOT EDIT!
 
 package main
@@ -368,6 +369,24 @@ func assetVueModelVue() (*asset, error) {
 	return a, err
 }
 
+// assetVueNotifVue reads file data from disk. It returns an error on failure.
+func assetVueNotifVue() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/vue/notif.vue"
+	name := "asset/vue/notif.vue"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
 // Asset loads and returns the asset for the given name.
 // It returns an error if the asset could not be found or
 // could not be loaded.
@@ -438,6 +457,7 @@ var _bindata = map[string]func() (*asset, error){
 	"asset/js/vuex.js": assetJsVuexJs,
 	"asset/vue/App.vue": assetVueAppVue,
 	"asset/vue/model.vue": assetVueModelVue,
+	"asset/vue/notif.vue": assetVueNotifVue,
 }
 
 // AssetDir returns the file names below a certain
@@ -506,6 +526,7 @@ var _bintree = &bintree{nil, map[string]*bintree{
 		"vue": &bintree{nil, map[string]*bintree{
 			"App.vue": &bintree{assetVueAppVue, map[string]*bintree{}},
 			"model.vue": &bintree{assetVueModelVue, map[string]*bintree{}},
+			"notif.vue": &bintree{assetVueNotifVue, map[string]*bintree{}},
 		}},
 	}},
 }}

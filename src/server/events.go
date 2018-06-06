@@ -37,6 +37,12 @@ func event(c *gin.Context) {
 			mess := Message{Name: msg}
 			data, _ := json.Marshal(mess)
 			c.SSEvent("update", string(data))
+		// sending issues
+		case msg := <-issue:
+			mess := Message{Name: msg}
+			data, _ := json.Marshal(mess)
+			c.SSEvent("issue", string(data))
+		// ticker
 		case <-ticker.C:
 			c.SSEvent("tick", "")
 		}

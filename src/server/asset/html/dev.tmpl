@@ -1,33 +1,59 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>CQParts display-o-tron</title>
-    <link rel="stylesheet" href="/static/css/pure-min.css">
-    <link rel="stylesheet" href="/static/css/extra.css">
-    <script src="/static/js/three.min.js"></script>
-    <script src="/static/js/OrbitControls.js"></script>
-    <script src="/static/js/GLTFLoader.js"></script>
-  </head>
-  <body>
-    <div id="main" class="pure-g">
-        <div id="nav" class="pure-u-1-5">
-            <model></model>
-        </div>
-        <div class="pure-u-3-5">
-            [[ template "viewer.tmpl"]]
-            [[ template "buttons.tmpl"]]
-        </div>
-    </div>
-    [[ template "tmpl.tmpl"]]
-    <script src="/static/js/vue.js"></script>
-    <script src="/static/js/app.js"></script>
-    <script src="/static/js/components.js"></script>
-    <script src="/static/js/cqpartsViewer.js"></script>
-    <script src="/static/js/saver.js"></script>
-    [[if .current]]
-        <script>
-            load([[.current]]);
-        </script>
-    [[end]]
-  </body>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="/static/css/pure-min.css">
+        <link rel="stylesheet" href="/static/css/extra.css">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <script src="/static/js/split.js"></script>
+        <title>Editor</title>
+    </head>
+    <body>
+
+       <div id="editor" class="split split-horizontal"></div>
+       <div id="right" class="split split-horizontal" >asdf</div>
+
+       <script src="static/js/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+       <script>
+               var editor = ace.edit("editor");
+                   editor.setTheme("ace/theme/twilight");
+                   editor.session.setMode("ace/mode/python");
+                   editor.setAutoScrollEditorIntoView(true);
+                   editor.getSession().setUseWrapMode(true);
+                   editor.commands.addCommand({
+                       name: 'sendText',
+                       bindKey: {win: 'Ctrl-Enter',  mac: 'Command-M'},
+                       exec: function(editor) {
+                           alert("send data to server for execution");
+                           },
+                       readOnly: true // false if this command should not apply in readOnly mode
+                   });
+                   editor.commands.addCommand({
+                       name: 'saver',
+                       bindKey: {win: 'Ctrl-S',  mac: 'Command-S'},
+                       exec: function(editor) {
+                           sendFile(editor.getValue(),'saver');
+                           },
+                       readOnly: true // false if this command should not apply in readOnly mode
+                   });
+                function sendFile(data, url){
+                        var xhr = new XMLHttpRequest();
+                        xhr.open("POST", url, true);
+                        XMLHttpRequest.prototype.sendAsBinary = function(text){
+                            this.send(data);
+                        }
+                        xhr.sendAsBinary(data);	
+                    }
+                function updateEditor(){
+                    editor.resize();
+                }
+                   Split(['#editor', '#right'], {
+                         sizes: [50,50],
+                         gutterSize: 8,
+                         cursor: 'col-resize',
+                         onDragEnd: updateEditor
+                       });
+                    editor.resize();
+       </script>
+    </body>
 </html>

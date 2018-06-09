@@ -2,6 +2,8 @@
 // sources:
 // asset/css/extra.css
 // asset/css/pure-min.css
+// asset/grips/vertical.png
+// asset/html/bork.html
 // asset/html/buttons.tmpl
 // asset/html/dev.tmpl
 // asset/html/index.tmpl
@@ -9,10 +11,14 @@
 // asset/html/viewer.tmpl
 // asset/js/GLTFLoader.js
 // asset/js/OrbitControls.js
+// asset/js/ace/ace.js
+// asset/js/ace/mode-python.js
+// asset/js/ace/theme-twilight.js
 // asset/js/app.js
 // asset/js/components.js
 // asset/js/cqpartsViewer.js
 // asset/js/saver.js
+// asset/js/split.js
 // asset/js/three.min.js
 // asset/js/vue.js
 // asset/js/vuex.js
@@ -67,6 +73,42 @@ func assetCssExtraCss() (*asset, error) {
 func assetCssPureMinCss() (*asset, error) {
 	path := "/opt/cqparts-server/src/server/asset/css/pure-min.css"
 	name := "asset/css/pure-min.css"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// assetGripsVerticalPng reads file data from disk. It returns an error on failure.
+func assetGripsVerticalPng() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/grips/vertical.png"
+	name := "asset/grips/vertical.png"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// assetHtmlBorkHtml reads file data from disk. It returns an error on failure.
+func assetHtmlBorkHtml() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/html/bork.html"
+	name := "asset/html/bork.html"
 	bytes, err := bindataRead(path, name)
 	if err != nil {
 		return nil, err
@@ -207,6 +249,60 @@ func assetJsOrbitcontrolsJs() (*asset, error) {
 	return a, err
 }
 
+// assetJsAceAceJs reads file data from disk. It returns an error on failure.
+func assetJsAceAceJs() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/js/ace/ace.js"
+	name := "asset/js/ace/ace.js"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// assetJsAceModePythonJs reads file data from disk. It returns an error on failure.
+func assetJsAceModePythonJs() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/js/ace/mode-python.js"
+	name := "asset/js/ace/mode-python.js"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// assetJsAceThemeTwilightJs reads file data from disk. It returns an error on failure.
+func assetJsAceThemeTwilightJs() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/js/ace/theme-twilight.js"
+	name := "asset/js/ace/theme-twilight.js"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
 // assetJsAppJs reads file data from disk. It returns an error on failure.
 func assetJsAppJs() (*asset, error) {
 	path := "/opt/cqparts-server/src/server/asset/js/app.js"
@@ -265,6 +361,24 @@ func assetJsCqpartsviewerJs() (*asset, error) {
 func assetJsSaverJs() (*asset, error) {
 	path := "/opt/cqparts-server/src/server/asset/js/saver.js"
 	name := "asset/js/saver.js"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// assetJsSplitJs reads file data from disk. It returns an error on failure.
+func assetJsSplitJs() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/js/split.js"
+	name := "asset/js/split.js"
 	bytes, err := bindataRead(path, name)
 	if err != nil {
 		return nil, err
@@ -441,6 +555,8 @@ func AssetNames() []string {
 var _bindata = map[string]func() (*asset, error){
 	"asset/css/extra.css": assetCssExtraCss,
 	"asset/css/pure-min.css": assetCssPureMinCss,
+	"asset/grips/vertical.png": assetGripsVerticalPng,
+	"asset/html/bork.html": assetHtmlBorkHtml,
 	"asset/html/buttons.tmpl": assetHtmlButtonsTmpl,
 	"asset/html/dev.tmpl": assetHtmlDevTmpl,
 	"asset/html/index.tmpl": assetHtmlIndexTmpl,
@@ -448,10 +564,14 @@ var _bindata = map[string]func() (*asset, error){
 	"asset/html/viewer.tmpl": assetHtmlViewerTmpl,
 	"asset/js/GLTFLoader.js": assetJsGltfloaderJs,
 	"asset/js/OrbitControls.js": assetJsOrbitcontrolsJs,
+	"asset/js/ace/ace.js": assetJsAceAceJs,
+	"asset/js/ace/mode-python.js": assetJsAceModePythonJs,
+	"asset/js/ace/theme-twilight.js": assetJsAceThemeTwilightJs,
 	"asset/js/app.js": assetJsAppJs,
 	"asset/js/components.js": assetJsComponentsJs,
 	"asset/js/cqpartsViewer.js": assetJsCqpartsviewerJs,
 	"asset/js/saver.js": assetJsSaverJs,
+	"asset/js/split.js": assetJsSplitJs,
 	"asset/js/three.min.js": assetJsThreeMinJs,
 	"asset/js/vue.js": assetJsVueJs,
 	"asset/js/vuex.js": assetJsVuexJs,
@@ -505,7 +625,11 @@ var _bintree = &bintree{nil, map[string]*bintree{
 			"extra.css": &bintree{assetCssExtraCss, map[string]*bintree{}},
 			"pure-min.css": &bintree{assetCssPureMinCss, map[string]*bintree{}},
 		}},
+		"grips": &bintree{nil, map[string]*bintree{
+			"vertical.png": &bintree{assetGripsVerticalPng, map[string]*bintree{}},
+		}},
 		"html": &bintree{nil, map[string]*bintree{
+			"bork.html": &bintree{assetHtmlBorkHtml, map[string]*bintree{}},
 			"buttons.tmpl": &bintree{assetHtmlButtonsTmpl, map[string]*bintree{}},
 			"dev.tmpl": &bintree{assetHtmlDevTmpl, map[string]*bintree{}},
 			"index.tmpl": &bintree{assetHtmlIndexTmpl, map[string]*bintree{}},
@@ -515,10 +639,16 @@ var _bintree = &bintree{nil, map[string]*bintree{
 		"js": &bintree{nil, map[string]*bintree{
 			"GLTFLoader.js": &bintree{assetJsGltfloaderJs, map[string]*bintree{}},
 			"OrbitControls.js": &bintree{assetJsOrbitcontrolsJs, map[string]*bintree{}},
+			"ace": &bintree{nil, map[string]*bintree{
+				"ace.js": &bintree{assetJsAceAceJs, map[string]*bintree{}},
+				"mode-python.js": &bintree{assetJsAceModePythonJs, map[string]*bintree{}},
+				"theme-twilight.js": &bintree{assetJsAceThemeTwilightJs, map[string]*bintree{}},
+			}},
 			"app.js": &bintree{assetJsAppJs, map[string]*bintree{}},
 			"components.js": &bintree{assetJsComponentsJs, map[string]*bintree{}},
 			"cqpartsViewer.js": &bintree{assetJsCqpartsviewerJs, map[string]*bintree{}},
 			"saver.js": &bintree{assetJsSaverJs, map[string]*bintree{}},
+			"split.js": &bintree{assetJsSplitJs, map[string]*bintree{}},
 			"three.min.js": &bintree{assetJsThreeMinJs, map[string]*bintree{}},
 			"vue.js": &bintree{assetJsVueJs, map[string]*bintree{}},
 			"vuex.js": &bintree{assetJsVuexJs, map[string]*bintree{}},

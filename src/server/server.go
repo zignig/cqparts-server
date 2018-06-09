@@ -34,7 +34,7 @@ func main() {
 
 	fileToWatch := flag.String("d", "./", "folder to watch")
 	flag.Parse()
-	r := gin.New()
+	r := gin.Default()
 	t, err := loadTemplate()
 	if err != nil {
 		panic(err)
@@ -62,6 +62,7 @@ func main() {
 	r.POST("/upload", upload)
 
 	r.POST("/snapshot", snapshot)
+	r.POST("/saver", snapshot)
 	// web server
 	go r.Run(":8080")
 	// file watcher

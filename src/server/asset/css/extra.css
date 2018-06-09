@@ -1,13 +1,50 @@
 #outer { 
-      width: 1024px;
-      height: 768px;
+      height: 100%;
+      float: right;
+      position: relative;
       margin: 0 auto;
       border: 1px solid gray;
       overflow: hidden; /*  Disable scrollbars */
 }
 
+html, body {
+    height: 100%;
+}
+
+body {
+    padding: 8px;
+    background-color: #F6F6F6;
+    box-sizing: border-box;
+}
+.content {
+  border: 1px solid #C0C0C0;
+  box-shadow: inset 0 1px 2px #e4e4e4;
+  background-color: #fff;
+}
+
 .button-success {
     background: rgb(28, 184, 65); /* this is a green */
+}
+
+#right{
+}
+
+#editor{
+    height: 100%;
+    width: 50%;
+    float: left;
+    overflow: auto;
+}
+
+.gutter {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    width: 8px;
+    height: 100%;
+    cursor: col-resize;
+    background-image: url('/static/grips/vertical.png');
+    float: left;
 }
 
 #nav {
@@ -17,4 +54,18 @@
     position: relative;
     background: rgb(37, 42, 58);
     text-align: center;
+}
+
+.split {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.split.spit-horizontal .gutter.gutter-horizontal{
+    height: 100%;
+    float: left;
 }

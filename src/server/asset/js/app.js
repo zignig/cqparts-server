@@ -1,19 +1,8 @@
-//source = new EventSource('/events');
 
 function AlertBox(value){
     var alertBox = '<div class="alert-box error"><span></span>'+value+'</div>';
     return alertBox;
 }
-
-//source.addEventListener('update',function(e){
-//    var data = JSON.parse(e.data);
-    //console.log(data.Name);
-//    clear();
-//    AwesomeApp.$root.$children[0].add(data.Name);
-//    console.log(AwesomeApp.$root.$children);
-//    load(data.Name);
-//    //d1.insertAdjacentHTML('beforeend',AlertBox(data));
-//});
 
 function ActivateAutorotate(){
     but = document.getElementById("autorotate");
@@ -25,8 +14,7 @@ function ActivateAutorotate(){
         controls.autoRotate = true;
     }
 }
-
-
+// shh
 Vue.config.productionTip = false;
 
 AwesomeApp = new Vue({
@@ -41,7 +29,7 @@ AwesomeApp = new Vue({
     methods: {
         setupStream() {
             let es = new EventSource('/events');
-            es.onerror = function(e){
+                es.onerror = function(e){
                 console.log(e);
             }
 

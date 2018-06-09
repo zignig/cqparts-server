@@ -13,7 +13,8 @@
 #nav {
     /* navigation */
 	width: 5%;
-    position: absolute;
+    display: inline;
+    position: relative;
     background: rgb(37, 42, 58);
     text-align: center;
 }

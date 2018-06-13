@@ -12,7 +12,7 @@
 
 #nav {
     /* navigation */
-	width: 5%;
+	width: auto;
     display: inline;
     position: relative;
     background: rgb(37, 42, 58);

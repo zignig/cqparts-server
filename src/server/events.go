@@ -28,6 +28,7 @@ func event(c *gin.Context) {
 		select {
 		// add to menu but don't load
 		case msg := <-menu:
+			fmt.Println("message -> |", msg, "|")
 			mess := Message{Name: msg}
 			data, _ := json.Marshal(mess)
 			c.SSEvent("menu", string(data))

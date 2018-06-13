@@ -35,14 +35,16 @@ AwesomeApp = new Vue({
 
             es.addEventListener('menu', event => {
                 let data = JSON.parse(event.data);
-                if (!(data.Name in this.modelList)){
+                if ((data.Name) != ''){
                     this.modelList.push(data.Name);
                 };
             }, false);
 
             es.addEventListener('update', event => {
                 let data = JSON.parse(event.data);
-                this.modelList.push(data.Name);
+                if ((data.Name) != ''){
+                    this.modelList.push(data.Name);
+                };
                 this.issueItem = '';
                 clear();
                 load(data.Name);

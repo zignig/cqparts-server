@@ -10,16 +10,14 @@
     <script src="/static/js/GLTFLoader.js"></script>
   </head>
   <body>
-    <div id="main" class="pure-g">
-        <div id="nav" class="pure-u-1-5">
-            <model :model-list="modelList"></model>
-        </div>
-        <div class="pure-u-3-5">
-            [[ template "viewer.tmpl"]]
+      <div id="main">
         <notif :issue-item="issueItem" ></notif>
+        <div id="nav">
+        <model :model-list="modelList"></model>
         </div>
-    </div>
-            [[ template "buttons.tmpl"]]
+        [[ template "viewer.tmpl"]]
+        [[ template "buttons.tmpl"]]
+      </div>
     [[ template "vuetmpl"]]
     <script src="/static/js/vue.js"></script>
     <script src="/static/js/vuex.js"></script>

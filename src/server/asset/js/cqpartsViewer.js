@@ -32,7 +32,7 @@ function init() {
 	outer = document.getElementById('outer');
 	canvas = document.getElementById('viewer');
 
-	camera = new THREE.PerspectiveCamera( 30, canvas.clientWidth/ canvas.clientHeight, 0.001, 1000);
+    camera = new THREE.PerspectiveCamera( 30, canvas.clientWidth/ canvas.clientHeight, 0.001, 1000);
 	camera.position.set( 0.2, 0.2, 0.2);
 	controls = new THREE.OrbitControls( camera , canvas );
     //controls.autoRotate = true;
@@ -55,8 +55,8 @@ function init() {
 	scene.add( light2) ;
     // renderer
 	renderer = new THREE.WebGLRenderer( { canvas: canvas, antialias: true, preserveDrawingBuffer: true } );
-    canvas.width = canvas.clientWidth;
-    canvas.height = canvas.clientHeight;
+    canvas.width = outer.clientWidth;
+    canvas.height = outer.clientHeight;
 	renderer.setPixelRatio( window.devicePixelRatio );
     renderer.setViewport(0,0,canvas.clientWidth,canvas.clientHeight);
 	renderer.gammaOutput = true;

@@ -14,9 +14,5 @@
 #nav {
     /* navigation */
 	width: auto;
-    display: block;
     position: absolute;
-    z-index: 3;
-    background: rgb(37, 42, 58);
-    text-align: center;
 }

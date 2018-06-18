@@ -1,8 +1,14 @@
 <template>
     <div>
-    <sui-menu vertical>
-        <a is="sui-menu-item" v-bind:model="modelList" v-for="obj in modelList" v-on:click="load(obj)">{{ obj }}</a>
+    <sui-segment basic>
+    <sui-menu vertical fluid >
+        <sui-menu-item v-bind:model="modelList" v-for="obj in modelList"
+            v-on:click="load(obj)">
+            {{ obj }}
+            <sui-icon name="delete" v-on:click="remove(obj)"/>
+        </sui-menu-item>
     </sui-menu>
+    </sui-segment>
     </div>
 </template>
 
@@ -19,6 +25,9 @@ export default {
             load(event);
             //console.log(event);
         },
+        remove : function(index){
+            this.modelList.splice(this.modelList.indexOf(index),1);
+        }
     }
 }
 </script>

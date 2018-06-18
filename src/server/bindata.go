@@ -2,6 +2,11 @@
 // sources:
 // asset/css/extra.css
 // asset/css/semantic.min.css
+// asset/css/themes/default/assets/fonts/icons.eot
+// asset/css/themes/default/assets/fonts/icons.svg
+// asset/css/themes/default/assets/fonts/icons.ttf
+// asset/css/themes/default/assets/fonts/icons.woff
+// asset/css/themes/default/assets/fonts/icons.woff2
 // asset/html/buttons.tmpl
 // asset/html/dev.tmpl
 // asset/html/index.tmpl
@@ -17,6 +22,7 @@
 // asset/js/vue.js
 // asset/js/vuex.js
 // asset/vue/App.vue
+// asset/vue/card.vue
 // asset/vue/model.vue
 // asset/vue/notif.vue
 // asset/vue/steps.vue
@@ -68,6 +74,96 @@ func assetCssExtraCss() (*asset, error) {
 func assetCssSemanticMinCss() (*asset, error) {
 	path := "/opt/cqparts-server/src/server/asset/css/semantic.min.css"
 	name := "asset/css/semantic.min.css"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// assetCssThemesDefaultAssetsFontsIconsEot reads file data from disk. It returns an error on failure.
+func assetCssThemesDefaultAssetsFontsIconsEot() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/css/themes/default/assets/fonts/icons.eot"
+	name := "asset/css/themes/default/assets/fonts/icons.eot"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// assetCssThemesDefaultAssetsFontsIconsSvg reads file data from disk. It returns an error on failure.
+func assetCssThemesDefaultAssetsFontsIconsSvg() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/css/themes/default/assets/fonts/icons.svg"
+	name := "asset/css/themes/default/assets/fonts/icons.svg"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// assetCssThemesDefaultAssetsFontsIconsTtf reads file data from disk. It returns an error on failure.
+func assetCssThemesDefaultAssetsFontsIconsTtf() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/css/themes/default/assets/fonts/icons.ttf"
+	name := "asset/css/themes/default/assets/fonts/icons.ttf"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// assetCssThemesDefaultAssetsFontsIconsWoff reads file data from disk. It returns an error on failure.
+func assetCssThemesDefaultAssetsFontsIconsWoff() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/css/themes/default/assets/fonts/icons.woff"
+	name := "asset/css/themes/default/assets/fonts/icons.woff"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// assetCssThemesDefaultAssetsFontsIconsWoff2 reads file data from disk. It returns an error on failure.
+func assetCssThemesDefaultAssetsFontsIconsWoff2() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/css/themes/default/assets/fonts/icons.woff2"
+	name := "asset/css/themes/default/assets/fonts/icons.woff2"
 	bytes, err := bindataRead(path, name)
 	if err != nil {
 		return nil, err
@@ -352,6 +448,24 @@ func assetVueAppVue() (*asset, error) {
 	return a, err
 }
 
+// assetVueCardVue reads file data from disk. It returns an error on failure.
+func assetVueCardVue() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/vue/card.vue"
+	name := "asset/vue/card.vue"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
 // assetVueModelVue reads file data from disk. It returns an error on failure.
 func assetVueModelVue() (*asset, error) {
 	path := "/opt/cqparts-server/src/server/asset/vue/model.vue"
@@ -460,6 +574,11 @@ func AssetNames() []string {
 var _bindata = map[string]func() (*asset, error){
 	"asset/css/extra.css": assetCssExtraCss,
 	"asset/css/semantic.min.css": assetCssSemanticMinCss,
+	"asset/css/themes/default/assets/fonts/icons.eot": assetCssThemesDefaultAssetsFontsIconsEot,
+	"asset/css/themes/default/assets/fonts/icons.svg": assetCssThemesDefaultAssetsFontsIconsSvg,
+	"asset/css/themes/default/assets/fonts/icons.ttf": assetCssThemesDefaultAssetsFontsIconsTtf,
+	"asset/css/themes/default/assets/fonts/icons.woff": assetCssThemesDefaultAssetsFontsIconsWoff,
+	"asset/css/themes/default/assets/fonts/icons.woff2": assetCssThemesDefaultAssetsFontsIconsWoff2,
 	"asset/html/buttons.tmpl": assetHtmlButtonsTmpl,
 	"asset/html/dev.tmpl": assetHtmlDevTmpl,
 	"asset/html/index.tmpl": assetHtmlIndexTmpl,
@@ -475,6 +594,7 @@ var _bindata = map[string]func() (*asset, error){
 	"asset/js/vue.js": assetJsVueJs,
 	"asset/js/vuex.js": assetJsVuexJs,
 	"asset/vue/App.vue": assetVueAppVue,
+	"asset/vue/card.vue": assetVueCardVue,
 	"asset/vue/model.vue": assetVueModelVue,
 	"asset/vue/notif.vue": assetVueNotifVue,
 	"asset/vue/steps.vue": assetVueStepsVue,
@@ -524,6 +644,19 @@ var _bintree = &bintree{nil, map[string]*bintree{
 		"css": &bintree{nil, map[string]*bintree{
 			"extra.css": &bintree{assetCssExtraCss, map[string]*bintree{}},
 			"semantic.min.css": &bintree{assetCssSemanticMinCss, map[string]*bintree{}},
+			"themes": &bintree{nil, map[string]*bintree{
+				"default": &bintree{nil, map[string]*bintree{
+					"assets": &bintree{nil, map[string]*bintree{
+						"fonts": &bintree{nil, map[string]*bintree{
+							"icons.eot": &bintree{assetCssThemesDefaultAssetsFontsIconsEot, map[string]*bintree{}},
+							"icons.svg": &bintree{assetCssThemesDefaultAssetsFontsIconsSvg, map[string]*bintree{}},
+							"icons.ttf": &bintree{assetCssThemesDefaultAssetsFontsIconsTtf, map[string]*bintree{}},
+							"icons.woff": &bintree{assetCssThemesDefaultAssetsFontsIconsWoff, map[string]*bintree{}},
+							"icons.woff2": &bintree{assetCssThemesDefaultAssetsFontsIconsWoff2, map[string]*bintree{}},
+						}},
+					}},
+				}},
+			}},
 		}},
 		"html": &bintree{nil, map[string]*bintree{
 			"buttons.tmpl": &bintree{assetHtmlButtonsTmpl, map[string]*bintree{}},
@@ -545,6 +678,7 @@ var _bintree = &bintree{nil, map[string]*bintree{
 		}},
 		"vue": &bintree{nil, map[string]*bintree{
 			"App.vue": &bintree{assetVueAppVue, map[string]*bintree{}},
+			"card.vue": &bintree{assetVueCardVue, map[string]*bintree{}},
 			"model.vue": &bintree{assetVueModelVue, map[string]*bintree{}},
 			"notif.vue": &bintree{assetVueNotifVue, map[string]*bintree{}},
 			"steps.vue": &bintree{assetVueStepsVue, map[string]*bintree{}},

@@ -21,11 +21,15 @@ type VueParse struct {
 	Css      string
 }
 
-var scriptTmpl string = ` var [[ .name ]] = Vue.component('[[ .name ]]',
+var scriptTmpl string = ` 
+
+// [[ .name ]]
+var [[ .name ]] = Vue.component('[[ .name ]]',
 { template : '#[[.name]]',
  name: '[[.name]]',
 [[ .script ]]
-}}); `
+}}); 
+`
 
 func GetVue(name string, data []byte) (component *VueParse, err error) {
 	doc, err := html.Parse(bytes.NewReader(data))

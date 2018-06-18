@@ -16,6 +16,7 @@ function ActivateAutorotate(){
 }
 // shh
 Vue.config.productionTip = false;
+Vue.use(SemanticUIVue);
 
 AwesomeApp = new Vue({
     el: '#main',

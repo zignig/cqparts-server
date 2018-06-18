@@ -1,10 +1,8 @@
 <template>
-    <div class="pure-menu">
-    <ul class="pure-menu-list ">
-        <li class="pure-menu-item" v-bind:model="modelList" v-for="obj in modelList">
-            <a class="pure-menu-link" v-on:click="load(obj)">{{ obj }}</a>
-        </li>
-    </ul>
+    <div>
+    <sui-menu vertical>
+        <a is="sui-menu-item" v-bind:model="modelList" v-for="obj in modelList" v-on:click="load(obj)">{{ obj }}</a>
+    </sui-menu>
     </div>
 </template>
 

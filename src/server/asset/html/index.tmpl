@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>CQParts display-o-tron</title>
-    <link rel="stylesheet" href="/static/css/pure-min.css">
+    <link rel="stylesheet" href="/static/css/semantic.min.css">
     <link rel="stylesheet" href="/static/css/extra.css">
     <link rel="stylesheet" href="/vue/comp.css">
     <script src="/static/js/three.min.js"></script>
@@ -11,6 +11,7 @@
   </head>
   <body>
       <div id="main">
+      <sui_grid></sui_grid>
         <notif :issue-item="issueItem" ></notif>
         <div id="nav">
         <model :model-list="modelList"></model>
@@ -21,6 +22,7 @@
     [[ template "vuetmpl"]]
     <script src="/static/js/vue.js"></script>
     <script src="/static/js/vuex.js"></script>
+    <script src="/static/js/semantic-ui-vue.min.js"></script>
     <script src="/vue/comp.js"></script>
     <script src="/static/js/app.js"></script>
     <script src="/static/js/cqpartsViewer.js"></script>

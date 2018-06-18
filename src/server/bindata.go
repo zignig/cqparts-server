@@ -2,6 +2,8 @@
 // sources:
 // asset/css/extra.css
 // asset/css/pure-min.css
+// asset/css/semantic.min.css
+// asset/css/sui-card.vue
 // asset/html/buttons.tmpl
 // asset/html/dev.tmpl
 // asset/html/index.tmpl
@@ -13,12 +15,14 @@
 // asset/js/components.js
 // asset/js/cqpartsViewer.js
 // asset/js/saver.js
+// asset/js/semantic-ui-vue.min.js
 // asset/js/three.min.js
 // asset/js/vue.js
 // asset/js/vuex.js
 // asset/vue/App.vue
 // asset/vue/model.vue
 // asset/vue/notif.vue
+// asset/vue/sui_grid.vue
 // DO NOT EDIT!
 
 package main
@@ -67,6 +71,42 @@ func assetCssExtraCss() (*asset, error) {
 func assetCssPureMinCss() (*asset, error) {
 	path := "/opt/cqparts-server/src/server/asset/css/pure-min.css"
 	name := "asset/css/pure-min.css"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// assetCssSemanticMinCss reads file data from disk. It returns an error on failure.
+func assetCssSemanticMinCss() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/css/semantic.min.css"
+	name := "asset/css/semantic.min.css"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// assetCssSuiCardVue reads file data from disk. It returns an error on failure.
+func assetCssSuiCardVue() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/css/sui-card.vue"
+	name := "asset/css/sui-card.vue"
 	bytes, err := bindataRead(path, name)
 	if err != nil {
 		return nil, err
@@ -279,6 +319,24 @@ func assetJsSaverJs() (*asset, error) {
 	return a, err
 }
 
+// assetJsSemanticUiVueMinJs reads file data from disk. It returns an error on failure.
+func assetJsSemanticUiVueMinJs() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/js/semantic-ui-vue.min.js"
+	name := "asset/js/semantic-ui-vue.min.js"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
 // assetJsThreeMinJs reads file data from disk. It returns an error on failure.
 func assetJsThreeMinJs() (*asset, error) {
 	path := "/opt/cqparts-server/src/server/asset/js/three.min.js"
@@ -387,6 +445,24 @@ func assetVueNotifVue() (*asset, error) {
 	return a, err
 }
 
+// assetVueSui_gridVue reads file data from disk. It returns an error on failure.
+func assetVueSui_gridVue() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/vue/sui_grid.vue"
+	name := "asset/vue/sui_grid.vue"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
 // Asset loads and returns the asset for the given name.
 // It returns an error if the asset could not be found or
 // could not be loaded.
@@ -441,6 +517,8 @@ func AssetNames() []string {
 var _bindata = map[string]func() (*asset, error){
 	"asset/css/extra.css": assetCssExtraCss,
 	"asset/css/pure-min.css": assetCssPureMinCss,
+	"asset/css/semantic.min.css": assetCssSemanticMinCss,
+	"asset/css/sui-card.vue": assetCssSuiCardVue,
 	"asset/html/buttons.tmpl": assetHtmlButtonsTmpl,
 	"asset/html/dev.tmpl": assetHtmlDevTmpl,
 	"asset/html/index.tmpl": assetHtmlIndexTmpl,
@@ -452,12 +530,14 @@ var _bindata = map[string]func() (*asset, error){
 	"asset/js/components.js": assetJsComponentsJs,
 	"asset/js/cqpartsViewer.js": assetJsCqpartsviewerJs,
 	"asset/js/saver.js": assetJsSaverJs,
+	"asset/js/semantic-ui-vue.min.js": assetJsSemanticUiVueMinJs,
 	"asset/js/three.min.js": assetJsThreeMinJs,
 	"asset/js/vue.js": assetJsVueJs,
 	"asset/js/vuex.js": assetJsVuexJs,
 	"asset/vue/App.vue": assetVueAppVue,
 	"asset/vue/model.vue": assetVueModelVue,
 	"asset/vue/notif.vue": assetVueNotifVue,
+	"asset/vue/sui_grid.vue": assetVueSui_gridVue,
 }
 
 // AssetDir returns the file names below a certain
@@ -504,6 +584,8 @@ var _bintree = &bintree{nil, map[string]*bintree{
 		"css": &bintree{nil, map[string]*bintree{
 			"extra.css": &bintree{assetCssExtraCss, map[string]*bintree{}},
 			"pure-min.css": &bintree{assetCssPureMinCss, map[string]*bintree{}},
+			"semantic.min.css": &bintree{assetCssSemanticMinCss, map[string]*bintree{}},
+			"sui-card.vue": &bintree{assetCssSuiCardVue, map[string]*bintree{}},
 		}},
 		"html": &bintree{nil, map[string]*bintree{
 			"buttons.tmpl": &bintree{assetHtmlButtonsTmpl, map[string]*bintree{}},
@@ -519,6 +601,7 @@ var _bintree = &bintree{nil, map[string]*bintree{
 			"components.js": &bintree{assetJsComponentsJs, map[string]*bintree{}},
 			"cqpartsViewer.js": &bintree{assetJsCqpartsviewerJs, map[string]*bintree{}},
 			"saver.js": &bintree{assetJsSaverJs, map[string]*bintree{}},
+			"semantic-ui-vue.min.js": &bintree{assetJsSemanticUiVueMinJs, map[string]*bintree{}},
 			"three.min.js": &bintree{assetJsThreeMinJs, map[string]*bintree{}},
 			"vue.js": &bintree{assetJsVueJs, map[string]*bintree{}},
 			"vuex.js": &bintree{assetJsVuexJs, map[string]*bintree{}},
@@ -527,6 +610,7 @@ var _bintree = &bintree{nil, map[string]*bintree{
 			"App.vue": &bintree{assetVueAppVue, map[string]*bintree{}},
 			"model.vue": &bintree{assetVueModelVue, map[string]*bintree{}},
 			"notif.vue": &bintree{assetVueNotifVue, map[string]*bintree{}},
+			"sui_grid.vue": &bintree{assetVueSui_gridVue, map[string]*bintree{}},
 		}},
 	}},
 }}

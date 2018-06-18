@@ -13,10 +13,10 @@
       <div class="ui" id="main">
         <notif :issue-item="issueItem" ></notif>
         <div id="nav">
+        [[ template "buttons.tmpl"]]
         <model :model-list="modelList"></model>
         </div>
         [[ template "viewer.tmpl"]]
-        [[ template "buttons.tmpl"]]
       </div>
     [[ template "vuetmpl"]]
     <script src="/static/js/vue.js"></script>

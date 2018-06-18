@@ -44,13 +44,16 @@ AwesomeApp = new Vue({
             es.addEventListener('update', event => {
                 let data = JSON.parse(event.data);
                 len = this.modelList.length
-                for ( var i = 0 ; i < len ; i++){
-                    if ( data.Name == this.modelList[i] ){
-                        console.log("duplicate "+this.modelList[i]);
-                    }
-                }
                 if ((data.Name) != ''){
-                    this.modelList.push(data.Name);
+                    if (this.modelList.includes(data.Name) == false){
+                        this.modelList.unshift(data.Name);
+                    } else {
+                        console.log("fnord");
+                        if (this.modelList.indexOf(data.Name) > 0) {
+                            this.modelList.splice(this.modelList.indexOf(data.Name), 1);
+                            this.modelList.unshift(data.Name);
+                        }
+                    }
                 };
                 this.issueItem = '';
                 clear();

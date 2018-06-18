@@ -43,6 +43,12 @@ AwesomeApp = new Vue({
 
             es.addEventListener('update', event => {
                 let data = JSON.parse(event.data);
+                len = this.modelList.length
+                for ( var i = 0 ; i < len ; i++){
+                    if ( data.Name == this.modelList[i] ){
+                        console.log("duplicate "+this.modelList[i]);
+                    }
+                }
                 if ((data.Name) != ''){
                     this.modelList.push(data.Name);
                 };

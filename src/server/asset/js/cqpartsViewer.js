@@ -124,7 +124,7 @@ function render(){
             if (INTERSECTED) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHEX);
 			INTERSECTED = intersects[0].object;
 			INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
-		    INTERSECTED.material.emissive.setHex(0x007A00);
+		    INTERSECTED.material.emissive.setHex(0x252500);
 		}
 	} else {
         if ( INTERSECTED ) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);

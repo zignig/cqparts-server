@@ -16,7 +16,11 @@ function ActivateAutorotate(){
 }
 // shh
 Vue.config.productionTip = false;
+// add semantic ui
 Vue.use(SemanticUIVue);
+
+// create and event bus
+EventBus = new Vue();
 
 AwesomeApp = new Vue({
     el: '#main',
@@ -44,6 +48,7 @@ AwesomeApp = new Vue({
             es.addEventListener('update', event => {
                 let data = JSON.parse(event.data);
                 len = this.modelList.length
+                EventBus.$emit('menu item',4);
                 if ((data.Name) != ''){
                     if (this.modelList.includes(data.Name) == false){
                         this.modelList.unshift(data.Name);
@@ -53,6 +58,9 @@ AwesomeApp = new Vue({
                             this.modelList.splice(this.modelList.indexOf(data.Name), 1);
                             this.modelList.unshift(data.Name);
                         }
+                    }
+                    if (this.modelList.length > 15){
+                        this.modelList.slice(0,15)
                     }
                 };
                 this.issueItem = '';

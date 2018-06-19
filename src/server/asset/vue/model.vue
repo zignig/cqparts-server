@@ -27,6 +27,7 @@ export default {
         },
         remove : function(index){
             this.modelList.splice(this.modelList.indexOf(index),1);
+            EventBus.$emit('delete item',index);
         }
     }
 }

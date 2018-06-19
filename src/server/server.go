@@ -34,7 +34,8 @@ func main() {
 
 	fileToWatch := flag.String("d", "./", "folder to watch")
 	flag.Parse()
-	r := gin.New()
+	r := gin.Default()
+	//r := gin.New()
 	t, err := loadTemplate()
 	if err != nil {
 		panic(err)

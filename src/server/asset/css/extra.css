@@ -1,16 +1,3 @@
-#outer { 
-      width: auto ;
-      height: 800px;
-      margin: 0 auto;
-      border: 1px solid gray;
-      overflow: hidden; /*  Disable scrollbars */
-      display: flex;
-}
-
-.button-success {
-    background: rgb(28, 184, 65); /* this is a green */
-}
-
 #nav {
     /* navigation */
 	width: auto;

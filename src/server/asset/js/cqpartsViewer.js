@@ -60,7 +60,7 @@ function init() {
     // raycaster
     raycaster = new THREE.Raycaster();
     // add to doc and bind events
-    document.addEventListener( 'resize', onWindowResize, false );
+    window.addEventListener( 'resize', onWindowResize, false );
     canvas.addEventListener('mousemove',onDocumentMouseMove,false);
     canvas.addEventListener('mousedown',onDocumentClick,false);
     document.addEventListener('keydown',onKey,false);

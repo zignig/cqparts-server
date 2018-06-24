@@ -71,7 +71,7 @@ AwesomeApp = new Vue({
             es.addEventListener('issue', event => {
                 let data = JSON.parse(event.data);
                 this.issueItem = data.Name;
-                console.log(data);
+                EventBus.$emit('issue',data.Name);
             }, false);
 
             es.addEventListener('error', event => {

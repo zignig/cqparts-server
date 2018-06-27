@@ -1,4 +1,5 @@
 <template>
+    <sui-segment>
     <div class="cat" is="sui-card-group">
     <card></card>
     <card></card>
@@ -10,6 +11,7 @@
     <card></card>
     <card></card>
     </div>
+    </sui-segment>
 </template>
 
 <script>
@@ -25,9 +27,5 @@ export default {
 </script>
 
 <style>
-
-.cat {
-    float:right;
-    }
 
 </style>

@@ -14,9 +14,17 @@
       <div class="ui" id="main">
         <notif :issue-item="issueItem" ></notif>
         <div id="nav">
-        [[ template "buttons.tmpl"]]
-        <model :model-list="modelList"></model>
-        <catalogue></catalogue>
+                    [[ template "buttons.tmpl"]]
+        <sui-grid>
+            <sui-grid-row :columns="10" >
+                <sui-grid-column :width="2">
+                    <model :model-list="modelList"></model>
+                </sui-grid-column>
+                <sui-grid-column :width="8" stretched >
+                    <catalogue></catalogue>
+                </sui-grid-column>
+            <sui-grid-row>
+            </sui-grid>
         </div>
         [[ template "viewer.tmpl"]]
       </div>

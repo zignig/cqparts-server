@@ -1,14 +1,12 @@
 <template>
     <div class="m">
-    <sui-segment v-show="modelList.length" basic>
-    <sui-menu vertical fluid >
+    <sui-menu vertical>
         <sui-menu-item v-bind:model="modelList" :key="obj" v-for="obj in modelList"
             v-on:click="load(obj)">
             {{ obj }}
             <sui-icon name="delete" v-on:click="remove(obj)"/>
         </sui-menu-item>
     </sui-menu>
-    </sui-segment>
     </div>
 </template>
 
@@ -34,7 +32,4 @@ export default {
 </script>
 
 <style>
- .m {
-    float:left;
-    }
 </style>

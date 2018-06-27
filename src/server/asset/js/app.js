@@ -48,7 +48,7 @@ AwesomeApp = new Vue({
             es.addEventListener('update', event => {
                 let data = JSON.parse(event.data);
                 len = this.modelList.length
-                EventBus.$emit('menu item',4);
+                EventBus.$emit('menu item',event.data);
                 if ((data.Name) != ''){
                     if (this.modelList.includes(data.Name) == false){
                         this.modelList.unshift(data.Name);

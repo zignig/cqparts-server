@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="m">
     <sui-segment v-show="modelList.length" basic>
     <sui-menu vertical fluid >
         <sui-menu-item v-bind:model="modelList" :key="obj" v-for="obj in modelList"
@@ -34,4 +34,7 @@ export default {
 </script>
 
 <style>
+ .m {
+    float:left;
+    }
 </style>

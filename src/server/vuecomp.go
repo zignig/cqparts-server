@@ -105,6 +105,7 @@ func ProcVues(tmpl *template.Template) (script string, css string) {
 	// get templates
 	html_template := ""
 	for _, j := range vues {
+		html_template += "\n\n"
 		html_template += j.Template
 		html_template += "\n\n"
 	}

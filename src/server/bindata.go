@@ -14,6 +14,7 @@
 // asset/js/GLTFLoader.js
 // asset/js/OrbitControls.js
 // asset/js/app.js
+// asset/js/axios.min.js
 // asset/js/components.js
 // asset/js/cqpartsViewer.js
 // asset/js/saver.js
@@ -23,6 +24,7 @@
 // asset/js/vuex.js
 // asset/vue/App.vue
 // asset/vue/card.vue
+// asset/vue/catalogue.vue
 // asset/vue/model.vue
 // asset/vue/notif.vue
 // asset/vue/steps.vue
@@ -304,6 +306,24 @@ func assetJsAppJs() (*asset, error) {
 	return a, err
 }
 
+// assetJsAxiosMinJs reads file data from disk. It returns an error on failure.
+func assetJsAxiosMinJs() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/js/axios.min.js"
+	name := "asset/js/axios.min.js"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
 // assetJsComponentsJs reads file data from disk. It returns an error on failure.
 func assetJsComponentsJs() (*asset, error) {
 	path := "/opt/cqparts-server/src/server/asset/js/components.js"
@@ -466,6 +486,24 @@ func assetVueCardVue() (*asset, error) {
 	return a, err
 }
 
+// assetVueCatalogueVue reads file data from disk. It returns an error on failure.
+func assetVueCatalogueVue() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/vue/catalogue.vue"
+	name := "asset/vue/catalogue.vue"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
 // assetVueModelVue reads file data from disk. It returns an error on failure.
 func assetVueModelVue() (*asset, error) {
 	path := "/opt/cqparts-server/src/server/asset/vue/model.vue"
@@ -586,6 +624,7 @@ var _bindata = map[string]func() (*asset, error){
 	"asset/js/GLTFLoader.js": assetJsGltfloaderJs,
 	"asset/js/OrbitControls.js": assetJsOrbitcontrolsJs,
 	"asset/js/app.js": assetJsAppJs,
+	"asset/js/axios.min.js": assetJsAxiosMinJs,
 	"asset/js/components.js": assetJsComponentsJs,
 	"asset/js/cqpartsViewer.js": assetJsCqpartsviewerJs,
 	"asset/js/saver.js": assetJsSaverJs,
@@ -595,6 +634,7 @@ var _bindata = map[string]func() (*asset, error){
 	"asset/js/vuex.js": assetJsVuexJs,
 	"asset/vue/App.vue": assetVueAppVue,
 	"asset/vue/card.vue": assetVueCardVue,
+	"asset/vue/catalogue.vue": assetVueCatalogueVue,
 	"asset/vue/model.vue": assetVueModelVue,
 	"asset/vue/notif.vue": assetVueNotifVue,
 	"asset/vue/steps.vue": assetVueStepsVue,
@@ -668,6 +708,7 @@ var _bintree = &bintree{nil, map[string]*bintree{
 			"GLTFLoader.js": &bintree{assetJsGltfloaderJs, map[string]*bintree{}},
 			"OrbitControls.js": &bintree{assetJsOrbitcontrolsJs, map[string]*bintree{}},
 			"app.js": &bintree{assetJsAppJs, map[string]*bintree{}},
+			"axios.min.js": &bintree{assetJsAxiosMinJs, map[string]*bintree{}},
 			"components.js": &bintree{assetJsComponentsJs, map[string]*bintree{}},
 			"cqpartsViewer.js": &bintree{assetJsCqpartsviewerJs, map[string]*bintree{}},
 			"saver.js": &bintree{assetJsSaverJs, map[string]*bintree{}},
@@ -679,6 +720,7 @@ var _bintree = &bintree{nil, map[string]*bintree{
 		"vue": &bintree{nil, map[string]*bintree{
 			"App.vue": &bintree{assetVueAppVue, map[string]*bintree{}},
 			"card.vue": &bintree{assetVueCardVue, map[string]*bintree{}},
+			"catalogue.vue": &bintree{assetVueCatalogueVue, map[string]*bintree{}},
 			"model.vue": &bintree{assetVueModelVue, map[string]*bintree{}},
 			"notif.vue": &bintree{assetVueNotifVue, map[string]*bintree{}},
 			"steps.vue": &bintree{assetVueStepsVue, map[string]*bintree{}},

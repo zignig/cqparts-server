@@ -1,5 +1,4 @@
 <template lang="html">
-  <div>
       <sui-card>
         <sui-card-content>
           <sui-card-header>Stepper Motor</sui-card-header>
@@ -13,7 +12,6 @@
             Collect
         </sui-button>
       </sui-card>
-  </div>
 </template>
 
 <script>

@@ -1,5 +1,6 @@
 <template>
     <div id="app">
+    <card></card>
     </div>
 </template>
 

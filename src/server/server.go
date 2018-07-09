@@ -26,8 +26,8 @@ var store Storage  // model file storage
 var models Storage // list of model names
 
 func main() {
-	store = NewMemStore("default")
 	models = NewMemStore("models")
+	store = NewBBoltStore("hello")
 	incoming = make(chan string, 100)
 	menu = make(chan string, 100)
 	issue = make(chan string, 100)

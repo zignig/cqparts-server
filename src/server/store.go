@@ -7,6 +7,8 @@ import (
 	"os"
 	"sync"
 	"time"
+
+	bolt "github.com/coreos/bbolt"
 )
 
 // storage for uploaded files
@@ -17,6 +19,46 @@ type Storage interface {
 	Load(name string) (data []byte, err error)
 	Save(name string, data []byte) (err error)
 	List() (items []string)
+}
+
+// bbolt store
+type BBoltStore struct {
+	db *bolt.DB
+}
+
+func NewBBoltStore(name string) (bb *BBoltStore) {
+	bb = &BBoltStore{}
+	bb.db, _ = bolt.Open(name+".db", 0600, nil)
+	bb.db.Update(func(tx *bolt.Tx) error {
+		_, err := tx.CreateBucket([]byte("models"))
+		if err != nil {
+			return fmt.Errorf("create bucket: %s", err)
+		}
+		return nil
+	})
+	return
+}
+
+func (bb BBoltStore) Load(name string) (data []byte, err error) {
+	bb.db.View(func(tx *bolt.Tx) error {
+		b := tx.Bucket([]byte("models"))
+		data = b.Get([]byte(name))
+		return err
+	})
+	return data, err
+}
+
+func (bb BBoltStore) Save(name string, data []byte) (err error) {
+	err = bb.db.Update(func(tx *bolt.Tx) error {
+		b := tx.Bucket([]byte("models"))
+		err := b.Put([]byte(name), data)
+		return err
+	})
+	return
+}
+
+func (bb BBoltStore) List() (items []string) {
+	return
 }
 
 // basic in memory storage

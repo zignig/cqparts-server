@@ -1,7 +1,7 @@
 import json
 import requests
 
-r = requests.get('http://localhost:8080/events', stream=True)
+r = requests.get('http://localhost:8080/render', stream=True)
 
 def fetch(url):
     pass

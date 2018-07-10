@@ -14,6 +14,11 @@ function ActivateAutorotate(){
         controls.autoRotate = true;
     }
 }
+
+function PostRender(){
+    axios.post('/postrender');
+}
+
 // shh
 Vue.config.productionTip = false;
 // add semantic ui

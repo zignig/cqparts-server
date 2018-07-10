@@ -1,7 +1,7 @@
 <template>
     <div>
     <sui-segment v-show="modelList.length" basic>
-    <sui-menu vertical fluid >
+    <sui-menu vertical fluid activeIndex="1" >
         <sui-menu-item v-bind:model="modelList" :key="obj" v-for="obj in modelList"
             v-on:click="load(obj)">
             {{ obj }}

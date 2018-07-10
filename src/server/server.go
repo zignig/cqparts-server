@@ -20,6 +20,7 @@ import (
 var incoming chan string
 var menu chan string
 var issue chan string
+var render_chan chan string
 var css string
 var script string
 var store Storage  // model file storage
@@ -31,6 +32,7 @@ func main() {
 	incoming = make(chan string, 100)
 	menu = make(chan string, 100)
 	issue = make(chan string, 100)
+	render_chan = make(chan string, 100)
 
 	fileToWatch := flag.String("d", "./", "folder to watch")
 	flag.Parse()
@@ -63,6 +65,11 @@ func main() {
 	r.POST("/upload", upload)
 
 	r.POST("/snapshot", snapshot)
+
+	// blender render endpoints
+	r.GET("/render", render)
+	r.POST("/postrender", postrender)
+
 	// web server
 	go r.Run(":8080")
 	// file watcher

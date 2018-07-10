@@ -16,7 +16,10 @@ function ActivateAutorotate(){
 }
 
 function PostRender(){
-    axios.post('/postrender');
+    console.log(vm.current);
+    axios.post('/postrender',{
+        name: vm.current
+    });
 }
 
 // shh
@@ -27,17 +30,25 @@ Vue.use(SemanticUIVue);
 // create and event bus
 EventBus = new Vue();
 
-AwesomeApp = new Vue({
+vm = new Vue({
     el: '#main',
 	data: {
         modelList : [],
         issueItem : '',
+        current : '',
     },
     created() {
-        this.setupStream();
+        this.setup();
     },
     methods: {
-        setupStream() {
+        setCurrent : function (obj) {
+            this.current = obj;
+        },
+        setup : function () {
+            EventBus.$on('active',function(payload){
+                vm.setCurrent(payload);
+            });
+
             let es = new EventSource('/events');
                 es.onerror = function(e){
                 console.log(e);

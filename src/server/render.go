@@ -10,13 +10,16 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// post reder post format
+type Render struct {
+	Name string `form:"name" json:"name" binding:"required"`
+}
+
 func postrender(c *gin.Context) {
-	var name string
-	name, err := c.GetPostForm("name")
-	if err == false {
-		name = "ERROR"
-	}
-	render_chan <- name
+	var r Render
+	err := c.ShouldBind(&r)
+	fmt.Println(r, err)
+	render_chan <- r.Name
 }
 
 func render(c *gin.Context) {

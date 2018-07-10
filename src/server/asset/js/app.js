@@ -18,7 +18,9 @@ function ActivateAutorotate(){
 function PostRender(){
     console.log(vm.current);
     axios.post('/postrender',{
-        name: vm.current
+        name: vm.current,
+        cam : camera.position,
+        target : controls.target
     });
 }
 

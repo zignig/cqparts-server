@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"encoding/gob"
 	"errors"
 	"fmt"
@@ -19,6 +20,7 @@ type Storage interface {
 	Load(name string) (data []byte, err error)
 	Save(name string, data []byte) (err error)
 	List() (items []string)
+	Multi(name string) (files map[string][]byte, err error)
 }
 
 // bbolt store
@@ -58,6 +60,21 @@ func (bb BBoltStore) Save(name string, data []byte) (err error) {
 }
 
 func (bb BBoltStore) List() (items []string) {
+	return
+}
+
+func (bb BBoltStore) Multi(name string) (files map[string][]byte, err error) {
+	files = make(map[string][]byte)
+	err = bb.db.View(func(tx *bolt.Tx) error {
+		b := tx.Bucket([]byte("models"))
+		c := b.Cursor()
+		prefix := []byte("/" + name)
+		for k, v := c.Seek(prefix); k != nil && bytes.HasPrefix(k, prefix); k, v = c.Next() {
+			fmt.Println(string(k))
+			files[string(k)] = v
+		}
+		return nil
+	})
 	return
 }
 
@@ -139,6 +156,10 @@ func (ms *MemStore) Dump() (err error) {
 	}
 	file.Close()
 	return err
+}
+
+func (ms *MemStore) Multi(name string) (files map[string][]byte, err error) {
+	return
 }
 
 func (ms *MemStore) List() (items []string) {

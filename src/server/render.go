@@ -3,41 +3,80 @@ package main
 import (
 	"encoding/json"
 	"io"
-	"time"
 
 	"fmt"
 
+	"archive/zip"
+	"bytes"
 	"github.com/gin-gonic/gin"
+	"strconv"
 )
+
+var render_active bool
+
+type XYZ struct {
+	X float64 `form:"x" json:"x" `
+	Y float64 `form:"y" json:"y" `
+	Z float64 `form:"z" json:"z" `
+}
 
 // post reder post format
 type Render struct {
-	Name string `form:"name" json:"name" binding:"required"`
+	Name   string `form:"name" json:"name" binding:"required"`
+	Cam    XYZ    `form:"cam" json:"cam" binding:"required"`
+	Target XYZ    `form:"target" json:"target" binding:"required"`
+}
+
+func zipped(c *gin.Context) {
+	path := c.Params.ByName("name")
+	data, err := store.Multi(path)
+	if err != nil {
+		panic(err)
+	}
+	buf := new(bytes.Buffer)
+	w := zip.NewWriter(buf)
+	for name, data := range data {
+		fmt.Println("adding " + name)
+		f, err := w.Create(name[1:])
+		if err != nil {
+			panic(err)
+		}
+		_, err = f.Write(data)
+		if err != nil {
+			panic(err)
+		}
+	}
+	err = w.Close()
+	if err != nil {
+		panic(err)
+	}
+	size := int64(buf.Len())
+	c.Writer.Header().Set("Content-Length", strconv.FormatInt(size, 10))
+	c.Writer.Header().Set("Content-Type", "application/zip")
+	io.Copy(c.Writer, buf)
 }
 
 func postrender(c *gin.Context) {
 	var r Render
 	err := c.ShouldBind(&r)
 	fmt.Println(r, err)
-	render_chan <- r.Name
+	//if render_active {
+	render_chan <- r
+	//}
 }
 
 func render(c *gin.Context) {
 	// fill up the list with the current store listing
 	fmt.Println("RENDER ATTACHED")
-	ticker := time.NewTicker(30 * time.Second)
-	defer func() {
-		ticker.Stop()
-	}()
+	// render_active = true
 	c.Stream(func(w io.Writer) bool {
 		select {
 		case msg := <-render_chan:
-			mess := Message{Name: msg}
-			data, _ := json.Marshal(mess)
+			data, _ := json.Marshal(msg)
 			c.SSEvent("render", string(data))
-		case <-ticker.C:
-			c.SSEvent("tick", "")
 		}
 		return true
 	})
+	// render_active = false
+	fmt.Println("RENDERER DETACHED")
 }

@@ -1,9 +1,9 @@
-this server should connect to the cqparts server
-wait for events
-grab the gltf as a zip file
-unzip in temporary storage
-load the gltf
-render
+DONE this server should connect to the cqparts server
+DONE wait for events
+DONE grab the gltf as a zip file
+DONE unzip in temporary storage (NOT TEMP)
+DONE load the gltf
+DONE render
 upload the image
 clean up the temporary folder
 wait for more events 

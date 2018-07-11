@@ -53,7 +53,8 @@ def render_this(jdata):
 def make_blender(name,cam_loc,tgt_loc):
     multiplier =  100
     res = (800,600) # pass down from parts server 
-    samples =  200 
+    samples =  3 
+    size_per = 20
     bpy.ops.wm.addon_enable(module="io_scene_gltf")
     # maybe script build the entire scene
     bpy.ops.scene.new(type='NEW')
@@ -72,7 +73,7 @@ def make_blender(name,cam_loc,tgt_loc):
     theScene.render.filepath = "/opt/stash/"+name+".png"
     theScene.render.resolution_x = res[0] 
     theScene.render.resolution_y = res[1] 
-    theScene.render.resolution_percentage = 100
+    theScene.render.resolution_percentage = size_per 
     # make and bind the camera
     bpy.ops.object.camera_add()
     cam = bpy.context.selected_objects[0]
@@ -105,11 +106,22 @@ def make_blender(name,cam_loc,tgt_loc):
 
     bpy.ops.import_scene.gltf(filepath="/opt/stash/"+name+"/out.gltf")
     # this does not work second time.
+    try:
+        outer = theScene.objects['out']
+        outer.scale = (100,100,100)
+        bpy.ops.render.render(write_still=True)
+        outer.select
+        bpy.ops.object.delete()
+        bpy.ops.scene.delete()
+    except:
+        for i in theScene.objects:
+            print(i)
 
-    outer = theScene.objects['out']
-    outer.scale = (100,100,100)
+    for i in theScene.objects:
 
-    bpy.ops.render.render(write_still=True)
+        i.select = True
+    bpy.ops.object.delete()
+    print(theScene.objects)
 
 def uploader(name):
     file_ref = ('objs',(name+"png",open("/opt/stash/"+name+".png","rb")))

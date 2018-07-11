@@ -53,11 +53,11 @@ def render_this(jdata):
 def make_blender(name,cam_loc,tgt_loc):
     multiplier =  100
     res = (800,600) # pass down from parts server 
-    samples = 5 
+    samples =  200 
     bpy.ops.wm.addon_enable(module="io_scene_gltf")
     # maybe script build the entire scene
     bpy.ops.scene.new(type='NEW')
-    bpy.context.scene.name = 'cqparts'
+    #bpy.context.scene.name = 'cqparts'
     # make the world
     bpy.ops.world.new()
     world = bpy.data.worlds['World.001']
@@ -66,7 +66,8 @@ def make_blender(name,cam_loc,tgt_loc):
 
     bpy.context.scene.world = world
 
-    theScene = bpy.data.scenes['cqparts']
+    #theScene = bpy.data.scenes['cqparts']
+    theScene = bpy.context.scene
     theScene.cycles.samples = samples 
     theScene.render.filepath = "/opt/stash/"+name+".png"
     theScene.render.resolution_x = res[0] 
@@ -103,6 +104,8 @@ def make_blender(name,cam_loc,tgt_loc):
     lamp2.location = (-10,-10,10)
 
     bpy.ops.import_scene.gltf(filepath="/opt/stash/"+name+"/out.gltf")
+    # this does not work second time.
+
     outer = theScene.objects['out']
     outer.scale = (100,100,100)
 

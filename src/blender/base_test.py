@@ -53,8 +53,9 @@ def render_this(jdata):
 def make_blender(name,cam_loc,tgt_loc):
     multiplier =  100
     res = (800,600) # pass down from parts server 
-    samples =  3 
-    size_per = 20
+    samples =  100 
+    size_per = 100
+    bpy.ops.wm.read_homefile()
     bpy.ops.wm.addon_enable(module="io_scene_gltf")
     # maybe script build the entire scene
     bpy.ops.scene.new(type='NEW')
@@ -114,14 +115,9 @@ def make_blender(name,cam_loc,tgt_loc):
         bpy.ops.object.delete()
         bpy.ops.scene.delete()
     except:
+        print("FAIL")
         for i in theScene.objects:
             print(i)
-
-    for i in theScene.objects:
-
-        i.select = True
-    bpy.ops.object.delete()
-    print(theScene.objects)
 
 def uploader(name):
     file_ref = ('objs',(name+"png",open("/opt/stash/"+name+".png","rb")))

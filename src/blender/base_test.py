@@ -17,6 +17,7 @@ def tryAgain(retries=0):
             if line:
                 decoded_line = line.decode('utf-8')
                 spl = decoded_line.split(":",1)
+                print(spl)
                 if is_data:
                     if spl[0] == 'data':
                         data = spl[1]
@@ -42,16 +43,17 @@ def render_this(jdata):
     z= zipfile.ZipFile(io.BytesIO(r.content))
     z.extractall("/opt/stash/")
     print(r)
-    make_blender(name,jdata['cam'])
+    make_blender(name,jdata['cam'],jdata['target'])
+    uploader(name)
 
 
 # using
 # https://github.com/ksons/gltf-blender-importer
 # snippit , not working script
-def make_blender(name,cam_loc):
+def make_blender(name,cam_loc,tgt_loc):
     multiplier =  100
     res = (800,600) # pass down from parts server 
-    samples = 100 
+    samples = 5 
     bpy.ops.wm.addon_enable(module="io_scene_gltf")
     # maybe script build the entire scene
     bpy.ops.scene.new(type='NEW')
@@ -74,7 +76,7 @@ def make_blender(name,cam_loc):
     bpy.ops.object.camera_add()
     cam = bpy.context.selected_objects[0]
     bpy.context.scene.camera = cam
-    cam.location = (-cam_loc['y']*multiplier,-cam_loc['x']*multiplier,-cam_loc['z']*multiplier)
+    cam.location = (-cam_loc['x']*multiplier,-cam_loc['y']*multiplier,-cam_loc['z']*multiplier)
     # add the track
     bpy.ops.object.constraint_add(type="TRACK_TO")
 
@@ -82,6 +84,7 @@ def make_blender(name,cam_loc):
     bpy.ops.object.empty_add(type='SPHERE')
     tgt  = bpy.context.selected_objects[0]
     tgt.name = "cam_target"
+    tgt.location = (-tgt_loc['x']*multiplier,-tgt_loc['y']*multiplier,-tgt_loc['z']*multiplier)
     # select the camers
     track = cam.constraints["Track To"]
     track.target = bpy.data.objects['cam_target']
@@ -104,6 +107,10 @@ def make_blender(name,cam_loc):
     outer.scale = (100,100,100)
 
     bpy.ops.render.render(write_still=True)
+
+def uploader(name):
+    file_ref = ('objs',(name+"png",open("/opt/stash/"+name+".png","rb")))
+    requests.post(target+'/image',files=[file_ref])
 
 print ("Running Blender Render runner")
 tryAgain()

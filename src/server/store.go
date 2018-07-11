@@ -23,50 +23,74 @@ type Storage interface {
 	Multi(name string) (files map[string][]byte, err error)
 }
 
+type databucket struct {
+	db   *bolt.DB
+	name string
+}
+
 // bbolt store
 type BBoltStore struct {
-	db *bolt.DB
+	db      *bolt.DB
+	buckets map[string]databucket
 }
 
 func NewBBoltStore(name string) (bb *BBoltStore) {
 	bb = &BBoltStore{}
 	bb.db, _ = bolt.Open(name+".db", 0600, nil)
+	bb.buckets = make(map[string]databucket)
+	return
+}
+
+func (bb BBoltStore) NewBucket(name string) (buk *databucket) {
+	buk = &databucket{
+		db:   bb.db,
+		name: name,
+	}
 	bb.db.Update(func(tx *bolt.Tx) error {
-		_, err := tx.CreateBucket([]byte("models"))
+		_, err := tx.CreateBucket([]byte(name))
 		if err != nil {
 			return fmt.Errorf("create bucket: %s", err)
 		}
 		return nil
 	})
-	return
+	return buk
 }
 
-func (bb BBoltStore) Load(name string) (data []byte, err error) {
-	bb.db.View(func(tx *bolt.Tx) error {
-		b := tx.Bucket([]byte("models"))
+func (bk databucket) Load(name string) (data []byte, err error) {
+	bk.db.View(func(tx *bolt.Tx) error {
+		b := tx.Bucket([]byte(bk.name))
 		data = b.Get([]byte(name))
 		return err
 	})
 	return data, err
 }
 
-func (bb BBoltStore) Save(name string, data []byte) (err error) {
-	err = bb.db.Update(func(tx *bolt.Tx) error {
-		b := tx.Bucket([]byte("models"))
+func (bk databucket) Save(name string, data []byte) (err error) {
+	err = bk.db.Update(func(tx *bolt.Tx) error {
+		b := tx.Bucket([]byte(bk.name))
 		err := b.Put([]byte(name), data)
 		return err
 	})
 	return
 }
 
-func (bb BBoltStore) List() (items []string) {
-	return
+func (bk databucket) List() (items []string) {
+	items = make([]string, 0)
+	bk.db.View(func(tx *bolt.Tx) error {
+		b := tx.Bucket([]byte(bk.name))
+		c := b.Cursor()
+		for k, _ := c.First(); k != nil; k, _ = c.Next() {
+			items = append(items, string(k))
+		}
+		return nil
+	})
+	return items
 }
 
-func (bb BBoltStore) Multi(name string) (files map[string][]byte, err error) {
+func (bk databucket) Multi(name string) (files map[string][]byte, err error) {
 	files = make(map[string][]byte)
-	err = bb.db.View(func(tx *bolt.Tx) error {
-		b := tx.Bucket([]byte("models"))
+	err = bk.db.View(func(tx *bolt.Tx) error {
+		b := tx.Bucket([]byte(bk.name))
 		c := b.Cursor()
 		prefix := []byte("/" + name)
 		for k, v := c.Seek(prefix); k != nil && bytes.HasPrefix(k, prefix); k, v = c.Next() {

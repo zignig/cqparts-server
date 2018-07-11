@@ -27,8 +27,10 @@ var store Storage  // model file storage
 var models Storage // list of model names
 
 func main() {
-	models = NewMemStore("models")
-	store = NewBBoltStore("hello")
+	bolty := NewBBoltStore("data")
+	store = bolty.NewBucket("names")
+	models = bolty.NewBucket("models")
+
 	incoming = make(chan string, 100)
 	menu = make(chan string, 100)
 	issue = make(chan string, 100)
@@ -70,12 +72,15 @@ func main() {
 	r.GET("/render", render)
 	r.POST("/postrender", postrender)
 	r.GET("/zipped/:name", zipped)
+	r.POST("/image", receiveImage)
 
 	// web server
 	go r.Run(":8080")
 	// file watcher
 	fmt.Println("watching :", *fileToWatch)
 	go watch(*fileToWatch)
+	fmt.Println(models.List())
+	fmt.Println(store.List())
 	done := make(chan bool)
 	<-done
 }

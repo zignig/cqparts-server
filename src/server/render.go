@@ -8,8 +8,9 @@ import (
 
 	"archive/zip"
 	"bytes"
-	"github.com/gin-gonic/gin"
 	"strconv"
+
+	"github.com/gin-gonic/gin"
 )
 
 var render_active bool
@@ -54,6 +55,10 @@ func zipped(c *gin.Context) {
 	c.Writer.Header().Set("Content-Length", strconv.FormatInt(size, 10))
 	c.Writer.Header().Set("Content-Type", "application/zip")
 	io.Copy(c.Writer, buf)
+}
+
+func receiveImage(c *gin.Context) {
+
 }
 
 func postrender(c *gin.Context) {

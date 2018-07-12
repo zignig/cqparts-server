@@ -51,12 +51,13 @@ def render_this(jdata):
 
 # using
 # https://github.com/ksons/gltf-blender-importer
-# snippit , not working script
 def make_blender(name,cam_loc,tgt_loc):
+    # should pass render sets from the cqpart-server
     multiplier =  100
-    res = (800,600) # pass down from parts server 
-    samples =  100 
+    res = (1024,768)
+    samples = 30
     size_per = 100
+
     bpy.ops.wm.read_homefile()
     bpy.ops.wm.addon_enable(module="io_scene_gltf")
     # maybe script build the entire scene
@@ -72,16 +73,16 @@ def make_blender(name,cam_loc,tgt_loc):
 
     #theScene = bpy.data.scenes['cqparts']
     theScene = bpy.context.scene
-    theScene.cycles.samples = samples 
+    theScene.cycles.samples = samples
     theScene.render.filepath = folder+name+".png"
-    theScene.render.resolution_x = res[0] 
-    theScene.render.resolution_y = res[1] 
-    theScene.render.resolution_percentage = size_per 
+    theScene.render.resolution_x = res[0]
+    theScene.render.resolution_y = res[1]
+    theScene.render.resolution_percentage = size_per
     # make and bind the camera
     bpy.ops.object.camera_add()
     cam = bpy.context.selected_objects[0]
     bpy.context.scene.camera = cam
-    cam.location = (-cam_loc['x']*multiplier,-cam_loc['y']*multiplier,-cam_loc['z']*multiplier)
+    cam.location = (-cam_loc['x']*multiplier,cam_loc['z']*multiplier,cam_loc['y']*multiplier)
     # add the track
     bpy.ops.object.constraint_add(type="TRACK_TO")
 
@@ -89,7 +90,7 @@ def make_blender(name,cam_loc,tgt_loc):
     bpy.ops.object.empty_add(type='SPHERE')
     tgt  = bpy.context.selected_objects[0]
     tgt.name = "cam_target"
-    tgt.location = (-tgt_loc['x']*multiplier,-tgt_loc['y']*multiplier,-tgt_loc['z']*multiplier)
+    tgt.location = (-tgt_loc['x']*multiplier,tgt_loc['z']*multiplier,tgt_loc['y']*multiplier)
     # select the camers
     track = cam.constraints["Track To"]
     track.target = bpy.data.objects['cam_target']

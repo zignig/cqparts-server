@@ -25,11 +25,13 @@ var css string
 var script string
 var store Storage  // model file storage
 var models Storage // list of model names
+var images Storage // list of model names
 
 func main() {
 	bolty := NewBBoltStore("data")
 	store = bolty.NewBucket("names")
 	models = bolty.NewBucket("models")
+	images = bolty.NewBucket("images")
 
 	incoming = make(chan string, 100)
 	menu = make(chan string, 100)
@@ -72,6 +74,7 @@ func main() {
 	r.GET("/render", render)
 	r.POST("/postrender", postrender)
 	r.GET("/zipped/:name", zipped)
+	r.GET("/pic/:name", pic)
 	r.POST("/image", receiveImage)
 
 	// web server
@@ -80,7 +83,8 @@ func main() {
 	fmt.Println("watching :", *fileToWatch)
 	go watch(*fileToWatch)
 	fmt.Println(models.List())
-	fmt.Println(store.List())
+	// fmt.Println(store.List())
+	fmt.Println(images.List())
 	done := make(chan bool)
 	<-done
 }

@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"io"
+	"io/ioutil"
 
 	"fmt"
 
@@ -58,7 +59,22 @@ func zipped(c *gin.Context) {
 }
 
 func receiveImage(c *gin.Context) {
-
+	form, err := c.MultipartForm()
+	if err != nil {
+		panic(err)
+	}
+	files := form.File["objs"]
+	for _, j := range files {
+		f, err := j.Open()
+		if err != nil {
+			panic(err)
+		}
+		data, err := ioutil.ReadAll(f)
+		if err != nil {
+			panic(err)
+		}
+		images.Save(j.Filename, data)
+	}
 }
 
 func postrender(c *gin.Context) {
@@ -68,6 +84,17 @@ func postrender(c *gin.Context) {
 	//if render_active {
 	render_chan <- r
 	//}
+}
+
+func pic(c *gin.Context) {
+	path := c.Params.ByName("name")
+	data, err := images.Load(path)
+	if err != nil {
+		c.AbortWithStatus(404)
+	}
+	size := int64(len(data))
+	c.Writer.Header().Set("Content-Length", strconv.FormatInt(size, 10))
+	io.Copy(c.Writer, bytes.NewReader(data))
 }
 
 func render(c *gin.Context) {

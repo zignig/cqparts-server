@@ -126,7 +126,7 @@ def make_blender(name,cam_loc,tgt_loc):
             print(i)
 
 def uploader(name):
-    file_ref = ('objs',(name+"png",open(folder+name+".png","rb")))
+    file_ref = ('objs',(name+".png",open(folder+name+".png","rb")))
     requests.post(target+'/image',files=[file_ref])
 
 print ("Running Blender Render runner")

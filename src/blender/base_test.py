@@ -8,6 +8,8 @@ import zipfile ,io
 import bpy
 
 target =  os.environ['CQPARTS_SERVER']
+folder = "/opt/stash/"
+
 def tryAgain(retries=0):
     if retries > 50: return
     is_data = False
@@ -41,7 +43,7 @@ def render_this(jdata):
     print(jdata)
     r = requests.get(target+'/zipped/'+name,stream=True)
     z= zipfile.ZipFile(io.BytesIO(r.content))
-    z.extractall("/opt/stash/")
+    z.extractall(folder)
     print(r)
     make_blender(name,jdata['cam'],jdata['target'])
     uploader(name)
@@ -71,7 +73,7 @@ def make_blender(name,cam_loc,tgt_loc):
     #theScene = bpy.data.scenes['cqparts']
     theScene = bpy.context.scene
     theScene.cycles.samples = samples 
-    theScene.render.filepath = "/opt/stash/"+name+".png"
+    theScene.render.filepath = folder+name+".png"
     theScene.render.resolution_x = res[0] 
     theScene.render.resolution_y = res[1] 
     theScene.render.resolution_percentage = size_per 
@@ -94,23 +96,27 @@ def make_blender(name,cam_loc,tgt_loc):
     track.up_axis = 'UP_Y'
     track.track_axis = 'TRACK_NEGATIVE_Z'
 
-
+    # hemisphere
+    bpy.ops.object.lamp_add(type='HEMI')
+    lamp = bpy.context.selected_objects[0]
+    lamp.location = (0,0,20)
     # lamp 1
     bpy.ops.object.lamp_add(type='POINT')
     lamp = bpy.context.selected_objects[0]
-    lamp.location = (10,-10,10)
+    lamp.location = (50,50,50)
 
     # lamp 2
     bpy.ops.object.lamp_add(type='POINT')
     lamp2 = bpy.context.selected_objects[0]
-    lamp2.location = (-10,-10,10)
+    lamp2.location = (0,0,-50)
 
-    bpy.ops.import_scene.gltf(filepath="/opt/stash/"+name+"/out.gltf")
+    bpy.ops.import_scene.gltf(filepath=folder+name+"/out.gltf")
     # this does not work second time.
     try:
         outer = theScene.objects['out']
         outer.scale = (100,100,100)
         bpy.ops.render.render(write_still=True)
+        bpy.ops.wm.save_as_mainfile(filepath=folder+name+'.blend')
         outer.select
         bpy.ops.object.delete()
         bpy.ops.scene.delete()
@@ -120,7 +126,7 @@ def make_blender(name,cam_loc,tgt_loc):
             print(i)
 
 def uploader(name):
-    file_ref = ('objs',(name+"png",open("/opt/stash/"+name+".png","rb")))
+    file_ref = ('objs',(name+"png",open(folder+name+".png","rb")))
     requests.post(target+'/image',files=[file_ref])
 
 print ("Running Blender Render runner")

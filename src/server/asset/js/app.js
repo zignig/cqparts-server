@@ -60,6 +60,7 @@ vm = new Vue({
                 let data = JSON.parse(event.data);
                 if ((data.Name) != ''){
                     this.modelList.push(data.Name);
+                    this.current = data.Name;
                 };
             }, false);
 
@@ -70,11 +71,13 @@ vm = new Vue({
                 if ((data.Name) != ''){
                     if (this.modelList.includes(data.Name) == false){
                         this.modelList.unshift(data.Name);
+                        this.current = data.Name;
                     } else {
                         console.log("fnord");
                         if (this.modelList.indexOf(data.Name) > 0) {
                             this.modelList.splice(this.modelList.indexOf(data.Name), 1);
                             this.modelList.unshift(data.Name);
+                            this.current = data.Name;
                         }
                     }
                     if (this.modelList.length > 15){

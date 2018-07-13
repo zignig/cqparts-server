@@ -15,6 +15,7 @@ def tryAgain(retries=0):
     is_data = False
     try:
         r = requests.get(target+'/render', stream=True)
+        print("connected to "+target)
         for line in r.iter_lines():
             if line:
                 decoded_line = line.decode('utf-8')
@@ -55,7 +56,7 @@ def make_blender(name,cam_loc,tgt_loc):
     # should pass render sets from the cqpart-server
     multiplier =  100
     res = (1024,768)
-    samples = 30
+    samples = 200
     size_per = 100
 
     bpy.ops.wm.read_homefile()
@@ -67,6 +68,10 @@ def make_blender(name,cam_loc,tgt_loc):
     bpy.ops.world.new()
     world = bpy.data.worlds['World.001']
     world.name = 'NewWorld'
+    world.use_nodes = True
+    bg = world.node_tree.nodes['Background']
+    bg.inputs[0].default_value = (1,1,1,1)
+    bg.inputs[1].default_value = (0.6)
     world.light_settings.use_ambient_occlusion = True
 
     bpy.context.scene.world = world
@@ -98,9 +103,9 @@ def make_blender(name,cam_loc,tgt_loc):
     track.track_axis = 'TRACK_NEGATIVE_Z'
 
     # hemisphere
-    bpy.ops.object.lamp_add(type='HEMI')
+    bpy.ops.object.lamp_add(type='AREA')
     lamp = bpy.context.selected_objects[0]
-    lamp.location = (0,0,20)
+    lamp.location = (0,1,20)
     # lamp 1
     bpy.ops.object.lamp_add(type='POINT')
     lamp = bpy.context.selected_objects[0]

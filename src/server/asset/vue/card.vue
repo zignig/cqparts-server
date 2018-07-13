@@ -2,16 +2,22 @@
   <div>
       <sui-card>
         <sui-card-content>
-          <sui-card-header>Stepper Motor</sui-card-header>
-          <sui-card-meta>motor</sui-card-meta>
+          <sui-card-header>Rover</sui-card-header>
           <sui-card-description>
-            Collection of stepper motors
+            Awesome rover thing 
           </sui-card-description>
         </sui-card-content>
-        <sui-button attached="bottom">
-        <sui-icon name="truck"></sui-icon>
-            Collect
-        </sui-button>
+        <sui-image src="/pic/Rover.png"></sui-image>
+        <sui-button-group>
+            <sui-button >
+            <sui-icon name="truck"></sui-icon>
+               Add 
+            </sui-button>
+            <sui-button >
+            <sui-icon name="eye"></sui-icon>
+               View 
+            </sui-button>
+        </sui-button-group>
       </sui-card>
   </div>
 </template>

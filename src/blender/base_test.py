@@ -57,7 +57,7 @@ def make_blender(name,cam_loc,tgt_loc):
     multiplier =  100
     res = (1024,768)
     samples = 200
-    size_per = 100
+    size_per = 31.25 
 
     bpy.ops.wm.read_homefile()
     bpy.ops.wm.addon_enable(module="io_scene_gltf")
@@ -79,6 +79,7 @@ def make_blender(name,cam_loc,tgt_loc):
     #theScene = bpy.data.scenes['cqparts']
     theScene = bpy.context.scene
     theScene.cycles.samples = samples
+    theScene.cycles.film_transparent = True 
     theScene.render.filepath = folder+name+".png"
     theScene.render.resolution_x = res[0]
     theScene.render.resolution_y = res[1]

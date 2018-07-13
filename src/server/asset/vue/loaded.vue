@@ -1,21 +1,20 @@
 <template lang="html">
-  <div>
-
+    <div>
         <sui-progress v-bind:model="loading"
-          progress
-          :percent="loading"
-        >
+            progress
+            :percent="loading"
+            >
         </sui-progress>
-  </div>
+    </div>
 </template>
 
 <script>
 export default {
-  props: ['loading','active'],
-  methods: {
-  },
-  computed: {
-  }
+    props: ['loading','active'],
+    methods: {
+    },
+    computed: {
+    }
 }
 </script>
 

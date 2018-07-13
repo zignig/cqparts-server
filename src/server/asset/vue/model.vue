@@ -1,14 +1,14 @@
 <template>
     <div>
-    <sui-segment v-show="modelList.length" basic>
-    <sui-menu vertical fluid >
-        <sui-menu-item :active="isActive(obj)" v-bind:model="modelList" :key="obj" v-for="obj in modelList"
-            v-on:click="load(obj)">
-            {{ obj }}
-            <sui-icon name="delete" v-on:click="remove(obj)"/>
-        </sui-menu-item>
-    </sui-menu>
-    </sui-segment>
+        <sui-segment v-show="modelList.length" basic>
+            <sui-menu vertical fluid >
+                <sui-menu-item :active="isActive(obj)" v-bind:model="modelList" :key="obj" v-for="obj in modelList"
+                    v-on:click="load(obj)">
+                    {{ obj }}
+                    <sui-icon name="delete" v-on:click="remove(obj)"/>
+                </sui-menu-item>
+            </sui-menu>
+        </sui-segment>
     </div>
 </template>
 

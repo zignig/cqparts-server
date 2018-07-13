@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>CQParts display-o-tron</title>
-    <link rel="stylesheet" href="/static/css/semantic.min.css">
-    <link rel="stylesheet" href="/static/css/extra.css">
-    <link rel="stylesheet" href="/vue/comp.css">
-    <script src="/static/js/three.min.js"></script>
-    <script src="/static/js/OrbitControls.js"></script>
-    <script src="/static/js/GLTFLoader.js"></script>
-    <script src="/static/js/axios.min.js"></script>
-  </head>
-  <body>
-      <div class="ui" id="main">
-        <notif :issue-item="issueItem" ></notif>
-        <div id="nav">
-        [[ template "buttons.tmpl"]]
-        <model :current="current" :model-list="modelList"></model>
+    <head>
+        <title>CQParts display-o-tron</title>
+        <link rel="stylesheet" href="/static/css/semantic.min.css">
+        <link rel="stylesheet" href="/static/css/extra.css">
+        <link rel="stylesheet" href="/vue/comp.css">
+        <script src="/static/js/three.min.js"></script>
+        <script src="/static/js/OrbitControls.js"></script>
+        <script src="/static/js/GLTFLoader.js"></script>
+        <script src="/static/js/axios.min.js"></script>
+    </head>
+    <body>
+        <div class="ui" id="main">
+            <notif :issue-item="issueItem" ></notif>
+            <div id="nav">
+                [[ template "buttons.tmpl"]]
+                <model :current="current" :model-list="modelList"></model>
+            </div>
+            [[ template "viewer.tmpl"]]
         </div>
-        [[ template "viewer.tmpl"]]
-      </div>
-    [[ template "vuetmpl"]]
-    <script src="/static/js/vue.js"></script>
-    <script src="/static/js/vuex.js"></script>
-    <script src="/static/js/semantic-ui-vue.min.js"></script>
-    <script src="/vue/comp.js"></script>
-    <script src="/static/js/app.js"></script>
-    <script src="/static/js/cqpartsViewer.js"></script>
-    <script src="/static/js/saver.js"></script>
-    [[if .current]]
+        [[ template "vuetmpl"]]
+        <script src="/static/js/vue.js"></script>
+        <script src="/static/js/vuex.js"></script>
+        <script src="/static/js/semantic-ui-vue.min.js"></script>
+        <script src="/vue/comp.js"></script>
+        <script src="/static/js/app.js"></script>
+        <script src="/static/js/cqpartsViewer.js"></script>
+        <script src="/static/js/saver.js"></script>
+        [[if .current]]
         <script>
             load([[.current]]);
         </script>
-    [[end]]
-  </body>
+        [[end]]
+    </body>
 </html>

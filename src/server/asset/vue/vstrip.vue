@@ -1,17 +1,18 @@
 <template>
     <sui-segment>
+        <sui-button @click="viz" :positive="visible" basic compact icon="bars"></sui-button>
         <sui-input icon="search" placeholder="Search..."></sui-input>
-        <sui-item-group divided >
+        <sui-item-group v-show="visible" divided >
             <sui-item :key="model.name" v-for="model in paginatedData">
-                <sui-button compact basic v-on:click="load(model)">
+                <sui-button class="nogap" basic v-on:click="load(model)">
                     <sui-item-image wrapped v-on:click="load(model)" size="tiny" v-show="model.img" :src="model.img">
                     </sui-item-image>
                 </sui-button>
                 <sui-item-content>
-                    <sui-header :color="isActive(model)">
-                        {{ model.name }}
+                    <h4 is="sui-header" :color="isActive(model)">
                         <span><sui-icon size="small" name="delete" v-on:click="remove(model)"/></sui-icon></span>
-                    </sui-header>
+                        {{ model.name }}
+                    </h4>
                     <sui-item-extra>
                         <sui-button-group>
                             <sui-button size="mini" icon="newspaper" v-on:click=""></sui-button>
@@ -22,9 +23,10 @@
                 </sui-item-content>
             </sui-item>
         </sui-item-group>
-        <sui-button-group attached="bottom">
-            <sui-button @click="prevPage" :disabled="pageNumber === 0" icon="caret left" label-position="left">Prev</sui-button>
-            <sui-button @click="nextPage" :disabled="pageNumber >= pageCount -1" icon="caret right" label-position="right" floated="right">Next</sui-button>
+        <sui-button-group size="small" v-show="visible" >
+            <sui-button @click="prevPage" :disabled="pageNumber === 0" icon="caret left"></sui-button>
+            <sui-button > {{ pageNumber }}/{{ pageCount }} </sui-button>
+            <sui-button @click="nextPage" :disabled="pageNumber >= pageCount -1" icon="caret right" floated="right"></sui-button>
         </sui-button-group>
     </sui-segment>
 </template>
@@ -33,7 +35,8 @@
 export default {
     data(){
         return {
-            pageNumber: 0
+            pageNumber: 0,
+            visible: true 
         }
     },
     props: {
@@ -48,6 +51,9 @@ export default {
         }
     },
     methods:{
+        viz: function(){
+            this.visible = !this.visible;
+        },
         nextPage: function(){
             this.pageNumber++;
         },
@@ -90,4 +96,10 @@ export default {
 </script>
 
 <style>
+.nogap {
+    padding-top: 0.0 !important;
+    padding-right: 0.0 !important;
+    padding-left: 0.0 !important;
+    padding-bottom: 0.0 !important;
+}
 </style>

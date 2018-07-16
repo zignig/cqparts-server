@@ -72,19 +72,16 @@ vm = new Vue({
                 len = this.modelList.length
                 EventBus.$emit('menu item',4);
                 if ((data.Name) != ''){
-                    if (this.modelList.includes(data.Name) == false){
-                        this.modelList.unshift(data.Name);
+                    if (this.modelList.includes(data) == false){
+                        this.modelList.unshift(data);
                         this.current = data.name;
                     } else {
                         console.log("fnord");
-                        if (this.modelList.indexOf(data.Name) > 0) {
-                            this.modelList.splice(this.modelList.indexOf(data.Name), 1);
-                            this.modelList.unshift(data.Name);
+                        if (this.modelList.indexOf(data) > 0) {
+                            this.modelList.splice(this.modelList.indexOf(data), 1);
+                            this.modelList.unshift(data);
                             this.current = data.Name;
                         }
-                    }
-                    if (this.modelList.length > 15){
-                        this.modelList.slice(0,15)
                     }
                 };
                 this.issueItem = '';

@@ -14,8 +14,8 @@
         <div class="ui" id="main">
             <notif :issue-item="issueItem" ></notif>
             <div id="nav">
+                <vstrip :model-list="modelList"></vstrip>
                 [[ template "buttons.tmpl"]]
-        <vstrip :model-list="modelList"></vstrip>
             </div>
             [[ template "viewer.tmpl"]]
         </div>

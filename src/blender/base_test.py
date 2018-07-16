@@ -34,7 +34,7 @@ def tryAgain(retries=0):
 
     except Exception as e:
         print(e)
-        time.sleep(2)
+        time.sleep(1.5*retries)
         retries+=1
         print ("retries :"+str(retries))
         tryAgain(retries)

@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>CQParts display-o-tron</title>
-    <link rel="stylesheet" href="/static/css/semantic.min.css">
-    <link rel="stylesheet" href="/static/css/extra.css">
-    <link rel="stylesheet" href="/vue/comp.css">
-    <script src="/static/js/three.min.js"></script>
-    <script src="/static/js/OrbitControls.js"></script>
-    <script src="/static/js/GLTFLoader.js"></script>
-  </head>
-  <body>
-      <div id="main">
-        <card></card>
-        <steps></steps>
-      </div>
+    <head>
+        <title>CQParts display-o-tron</title>
+        <link rel="stylesheet" href="/static/css/semantic.min.css">
+        <link rel="stylesheet" href="/static/css/extra.css">
+        <link rel="stylesheet" href="/vue/comp.css">
+        <script src="/static/js/three.min.js"></script>
+        <script src="/static/js/OrbitControls.js"></script>
+        <script src="/static/js/GLTFLoader.js"></script>
+    </head>
+    <body>
+        <div id="main">
+            <toolbar></toolbar>
+            <deck :model-list="modelList"></deck>
+        </div>
 
-    [[ template "vuetmpl"]]
+        [[ template "vuetmpl"]]
 
-    <script src="/static/js/vue.js"></script>
-    <script src="/static/js/vuex.js"></script>
-    <script src="/static/js/semantic-ui-vue.min.js"></script>
-    <script src="/vue/comp.js"></script>
-    <script src="/static/js/app.js"></script>
-    [[if .current]]
+        <script src="/static/js/vue.js"></script>
+        <script src="/static/js/vuex.js"></script>
+        <script src="/static/js/semantic-ui-vue.min.js"></script>
+        <script src="/vue/comp.js"></script>
+        <script src="/static/js/app.js"></script>
+        [[if .current]]
         <script>
             load([[.current]]);
         </script>
-    [[end]]
-  </body>
+        [[end]]
+    </body>
 </html>

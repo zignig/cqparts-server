@@ -82,10 +82,11 @@ func main() {
 	// file watcher
 	fmt.Println("watching :", *fileToWatch)
 	go watch(*fileToWatch)
+	done := make(chan bool)
+	go eventBus(done)
 	fmt.Println(models.List())
 	// fmt.Println(store.List())
 	fmt.Println(images.List())
-	done := make(chan bool)
 	<-done
 }
 

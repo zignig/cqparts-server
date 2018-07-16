@@ -14,13 +14,22 @@ type Message struct {
 	Name string
 }
 
+func eventBus(exit chan bool) {
+	for {
+		select {
+		case <-exit:
+			return
+		}
+	}
+}
+
 func event(c *gin.Context) {
 	// fill up the list with the current store listing
 	fmt.Println(models.List())
 	for _, i := range models.List() {
 		menu <- i
 	}
-	ticker := time.NewTicker(5 * time.Second)
+	ticker := time.NewTicker(20 * time.Second)
 	defer func() {
 		ticker.Stop()
 	}()
@@ -29,8 +38,12 @@ func event(c *gin.Context) {
 		// add to menu but don't load
 		case msg := <-menu:
 			fmt.Println("message -> |", msg, "|")
-			mess := Message{Name: msg}
+			mess := Model{
+				Name: msg,
+				Img:  "/pic/" + msg + ".png",
+			}
 			data, _ := json.Marshal(mess)
+			fmt.Println(string(data))
 			c.SSEvent("menu", string(data))
 		// add to menu and load
 		case msg := <-incoming:

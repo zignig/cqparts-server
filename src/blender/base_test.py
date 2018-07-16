@@ -71,7 +71,7 @@ def make_blender(name,cam_loc,tgt_loc):
     world.use_nodes = True
     bg = world.node_tree.nodes['Background']
     bg.inputs[0].default_value = (1,1,1,1)
-    bg.inputs[1].default_value = (0.3)
+    bg.inputs[1].default_value = (0.5)
     world.light_settings.use_ambient_occlusion = True
 
     bpy.context.scene.world = world

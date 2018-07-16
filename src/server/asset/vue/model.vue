@@ -2,9 +2,9 @@
     <div>
         <sui-segment v-show="modelList.length" basic>
             <sui-menu vertical fluid >
-                <sui-menu-item :active="isActive(obj)" v-bind:model="modelList" :key="obj" v-for="obj in modelList"
+                <sui-menu-item :active="isActive(obj)" v-bind:model="modelList" :key="obj.name" v-for="obj in modelList"
                     v-on:click="load(obj)">
-                    {{ obj }}
+                    {{ obj.name }}
                     <sui-icon name="delete" v-on:click="remove(obj)"/>
                 </sui-menu-item>
             </sui-menu>
@@ -24,11 +24,11 @@ export default {
         isActive: function(name){
             return this.current ===  name
         },
-        load: function(event){
+        load: function(obj){
             clear();
-            load(event);
-            //console.log(event);
-            EventBus.$emit('active',event);
+            load(obj);
+            console.log(obj);
+            EventBus.$emit('select',obj);
         },
         remove : function(index){
             this.modelList.splice(this.modelList.indexOf(index),1);

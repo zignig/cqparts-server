@@ -24,9 +24,13 @@
 // asset/js/vuex.js
 // asset/vue/App.vue
 // asset/vue/card.vue
+// asset/vue/deck.vue
+// asset/vue/loaded.vue
 // asset/vue/model.vue
 // asset/vue/notif.vue
 // asset/vue/steps.vue
+// asset/vue/toolbar.vue
+// asset/vue/vstrip.vue
 // DO NOT EDIT!
 
 package main
@@ -485,6 +489,42 @@ func assetVueCardVue() (*asset, error) {
 	return a, err
 }
 
+// assetVueDeckVue reads file data from disk. It returns an error on failure.
+func assetVueDeckVue() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/vue/deck.vue"
+	name := "asset/vue/deck.vue"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// assetVueLoadedVue reads file data from disk. It returns an error on failure.
+func assetVueLoadedVue() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/vue/loaded.vue"
+	name := "asset/vue/loaded.vue"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
 // assetVueModelVue reads file data from disk. It returns an error on failure.
 func assetVueModelVue() (*asset, error) {
 	path := "/opt/cqparts-server/src/server/asset/vue/model.vue"
@@ -525,6 +565,42 @@ func assetVueNotifVue() (*asset, error) {
 func assetVueStepsVue() (*asset, error) {
 	path := "/opt/cqparts-server/src/server/asset/vue/steps.vue"
 	name := "asset/vue/steps.vue"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// assetVueToolbarVue reads file data from disk. It returns an error on failure.
+func assetVueToolbarVue() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/vue/toolbar.vue"
+	name := "asset/vue/toolbar.vue"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// assetVueVstripVue reads file data from disk. It returns an error on failure.
+func assetVueVstripVue() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/vue/vstrip.vue"
+	name := "asset/vue/vstrip.vue"
 	bytes, err := bindataRead(path, name)
 	if err != nil {
 		return nil, err
@@ -615,9 +691,13 @@ var _bindata = map[string]func() (*asset, error){
 	"asset/js/vuex.js": assetJsVuexJs,
 	"asset/vue/App.vue": assetVueAppVue,
 	"asset/vue/card.vue": assetVueCardVue,
+	"asset/vue/deck.vue": assetVueDeckVue,
+	"asset/vue/loaded.vue": assetVueLoadedVue,
 	"asset/vue/model.vue": assetVueModelVue,
 	"asset/vue/notif.vue": assetVueNotifVue,
 	"asset/vue/steps.vue": assetVueStepsVue,
+	"asset/vue/toolbar.vue": assetVueToolbarVue,
+	"asset/vue/vstrip.vue": assetVueVstripVue,
 }
 
 // AssetDir returns the file names below a certain
@@ -700,9 +780,13 @@ var _bintree = &bintree{nil, map[string]*bintree{
 		"vue": &bintree{nil, map[string]*bintree{
 			"App.vue": &bintree{assetVueAppVue, map[string]*bintree{}},
 			"card.vue": &bintree{assetVueCardVue, map[string]*bintree{}},
+			"deck.vue": &bintree{assetVueDeckVue, map[string]*bintree{}},
+			"loaded.vue": &bintree{assetVueLoadedVue, map[string]*bintree{}},
 			"model.vue": &bintree{assetVueModelVue, map[string]*bintree{}},
 			"notif.vue": &bintree{assetVueNotifVue, map[string]*bintree{}},
 			"steps.vue": &bintree{assetVueStepsVue, map[string]*bintree{}},
+			"toolbar.vue": &bintree{assetVueToolbarVue, map[string]*bintree{}},
+			"vstrip.vue": &bintree{assetVueVstripVue, map[string]*bintree{}},
 		}},
 	}},
 }}

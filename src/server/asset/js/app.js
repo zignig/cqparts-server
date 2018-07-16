@@ -28,7 +28,9 @@ function PostRender(){
 Vue.config.productionTip = false;
 // add semantic ui
 Vue.use(SemanticUIVue);
+Vue.use(Vuex);
 
+const store = new Vuex.Store({});
 // create and event bus
 EventBus = new Vue();
 
@@ -47,8 +49,9 @@ vm = new Vue({
             this.current = obj;
         },
         setup : function () {
-            EventBus.$on('active',function(payload){
-                vm.setCurrent(payload);
+            EventBus.$on('select',function(payload){
+                console.log("select "+payload)
+                vm.setCurrent(payload.name);
             });
 
             let es = new EventSource('/events');
@@ -59,7 +62,7 @@ vm = new Vue({
             es.addEventListener('menu', event => {
                 let data = JSON.parse(event.data);
                 if ((data.Name) != ''){
-                    this.modelList.push(data.Name);
+                    this.modelList.push(data);
                     this.current = data.Name;
                 };
             }, false);
@@ -71,7 +74,7 @@ vm = new Vue({
                 if ((data.Name) != ''){
                     if (this.modelList.includes(data.Name) == false){
                         this.modelList.unshift(data.Name);
-                        this.current = data.Name;
+                        this.current = data.name;
                     } else {
                         console.log("fnord");
                         if (this.modelList.indexOf(data.Name) > 0) {
@@ -86,7 +89,7 @@ vm = new Vue({
                 };
                 this.issueItem = '';
                 clear();
-                load(data.Name);
+                load(data.name);
             }, false);
 
             es.addEventListener('issue', event => {

@@ -28,14 +28,14 @@ function PostRender(){
 Vue.config.productionTip = false;
 // add semantic ui
 Vue.use(SemanticUIVue);
-Vue.use(Vuex);
+//Vue.use(Vuex);
 
-const store = new Vuex.Store({});
 // create and event bus
 EventBus = new Vue();
 
 vm = new Vue({
     el: '#main',
+    store,
 	data: {
         modelList : [],
         issueItem : '',
@@ -50,7 +50,7 @@ vm = new Vue({
         },
         setup : function () {
             EventBus.$on('select',function(payload){
-                console.log("select "+payload)
+                //console.log("select "+payload)
                 vm.setCurrent(payload.name);
             });
 

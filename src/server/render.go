@@ -14,8 +14,10 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// Is the renderer running
 var render_active bool
 
+// 3d point structure
 type XYZ struct {
 	X float64 `form:"x" json:"x" `
 	Y float64 `form:"y" json:"y" `
@@ -29,6 +31,9 @@ type Render struct {
 	Target XYZ    `form:"target" json:"target" binding:"required"`
 }
 
+// TODO add error checking
+// add json datafile and even the python code
+// Hands a zip files of all files in a model
 func zipped(c *gin.Context) {
 	path := c.Params.ByName("name")
 	data, err := store.Multi(path)
@@ -58,6 +63,7 @@ func zipped(c *gin.Context) {
 	io.Copy(c.Writer, buf)
 }
 
+// TODO version multi store for each model
 func receiveImage(c *gin.Context) {
 	form, err := c.MultipartForm()
 	if err != nil {
@@ -77,6 +83,8 @@ func receiveImage(c *gin.Context) {
 	}
 }
 
+// Take a render event from the web interface
+// and pass id down to the render stream
 func postrender(c *gin.Context) {
 	var r Render
 	err := c.ShouldBind(&r)
@@ -86,6 +94,7 @@ func postrender(c *gin.Context) {
 	//}
 }
 
+// Get a picture out of the storage
 func pic(c *gin.Context) {
 	path := c.Params.ByName("name")
 	data, err := images.Load(path)
@@ -97,6 +106,10 @@ func pic(c *gin.Context) {
 	io.Copy(c.Writer, bytes.NewReader(data))
 }
 
+// Blender renderer attaches to here
+// /src/blender/
+// TODO pass down render sizes and handle a group of
+// render daemons
 func render(c *gin.Context) {
 	// fill up the list with the current store listing
 	fmt.Println("RENDER ATTACHED")

@@ -7,7 +7,6 @@ import (
 	"html/template"
 	"io"
 	"io/ioutil"
-	//"mime/multipart"
 	"net/http"
 	"strconv"
 	"strings"
@@ -17,6 +16,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// TODO wrap this into a scruct ( per user )
+// TODO add cookies for session control
 var incoming chan string
 var menu chan string
 var issue chan string
@@ -27,7 +28,9 @@ var store Storage  // model file storage
 var models Storage // list of model names
 var images Storage // list of model names
 
+// TODO add authentication and session per users
 func main() {
+	// Wrap all these into a struct
 	bolty := NewBBoltStore("data")
 	store = bolty.NewBucket("names")
 	models = bolty.NewBucket("models")
@@ -38,8 +41,12 @@ func main() {
 	issue = make(chan string, 100)
 	render_chan = make(chan Render, 100)
 
+	// wrap me
+
 	fileToWatch := flag.String("d", "./", "folder to watch")
+
 	flag.Parse()
+	// base web server
 	r := gin.Default()
 	//r := gin.New()
 	t, err := loadTemplate()
@@ -90,15 +97,19 @@ func main() {
 	<-done
 }
 
+// TODO save threejs snapshot into the database
 func snapshot(c *gin.Context) {
 	data, _ := ioutil.ReadAll(c.Request.Body)
 	fmt.Println(data)
 }
 
+// Cqparts display aliveness test
 func status(c *gin.Context) {
 	c.JSON(200, gin.H{"message": "ok"})
 }
 
+// Upload from cqparts display
+// gltf files
 func upload(c *gin.Context) {
 	form, err := c.MultipartForm()
 	if err != nil {
@@ -118,6 +129,7 @@ func upload(c *gin.Context) {
 	}
 }
 
+// push from cqparts display info blob
 func notify(c *gin.Context) {
 	name, err := c.GetPostForm("name")
 	fmt.Println(name, err)
@@ -125,16 +137,19 @@ func notify(c *gin.Context) {
 	incoming <- name
 }
 
+// vuejs composited scripts
 func CompJS(c *gin.Context) {
 	c.Writer.Header().Set("Content-Type", "text/javascript")
 	io.Copy(c.Writer, strings.NewReader(script))
 }
 
+// vuejs composited css
 func CompCSS(c *gin.Context) {
 	c.Writer.Header().Set("Content-Type", "text/css")
 	io.Copy(c.Writer, strings.NewReader(css))
 }
 
+// get out.glft for mode name
 func model(c *gin.Context) {
 	path := c.Params.ByName("name")
 	data, err := store.Load(path)
@@ -146,6 +161,7 @@ func model(c *gin.Context) {
 	io.Copy(c.Writer, bytes.NewReader(data))
 }
 
+// serve the static content
 func Static(c *gin.Context) {
 	path := c.Params.ByName("name")
 	data, err := Asset("asset" + path)
@@ -163,6 +179,7 @@ func Static(c *gin.Context) {
 	io.Copy(c.Writer, bytes.NewReader(data))
 }
 
+// load the and build the templates from the assets
 func loadTemplate() (templ *template.Template, e error) {
 	pages, err := AssetDir("asset/html")
 	if err != nil {

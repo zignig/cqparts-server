@@ -12,7 +12,10 @@
     <body>
         <div id="main">
             <toolbar></toolbar>
-            <deck :model-list="modelList"></deck>
+            <div id="nav">
+                <vmenu :model-list="modelList"></vmenu>
+                <deck :model-list="modelList"></deck>
+            </div>
         </div>
 
         [[ template "vuetmpl"]]
@@ -21,6 +24,7 @@
         <script src="/static/js/vuex.js"></script>
         <script src="/static/js/semantic-ui-vue.min.js"></script>
         <script src="/vue/comp.js"></script>
+        <script src="/static/js/store.js"></script>
         <script src="/static/js/app.js"></script>
         [[if .current]]
         <script>

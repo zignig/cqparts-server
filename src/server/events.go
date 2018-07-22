@@ -14,6 +14,8 @@ type Message struct {
 	Name string
 }
 
+// TODO build a pipeline defined by a YAML file in the assets
+// load into the database for editing
 func eventBus(exit chan bool) {
 	for {
 		select {
@@ -23,6 +25,9 @@ func eventBus(exit chan bool) {
 	}
 }
 
+// Base event runner
+// need to convert to individual go routines per user with a broadcast channel
+// change into a model/issue/stuff events
 func event(c *gin.Context) {
 	// fill up the list with the current store listing
 	fmt.Println(models.List())

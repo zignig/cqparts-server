@@ -8,6 +8,7 @@ import (
 	"github.com/fsnotify/fsnotify"
 )
 
+// Watch for file changes
 func watch(name string) {
 	files := make(chan string, 10)
 	watcher, err := fsnotify.NewWatcher()
@@ -25,6 +26,7 @@ func watch(name string) {
 		if strings.HasSuffix(n, ".py") {
 			fmt.Println(n)
 			watcher.Add(name + n)
+			// TODO add to the model store
 		}
 	}
 	go func() {

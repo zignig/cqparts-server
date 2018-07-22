@@ -9,6 +9,9 @@ import bpy
 
 target =  os.environ['CQPARTS_SERVER']
 folder = "/opt/stash/"
+section = ""
+render_sets = {}
+
 
 def tryAgain(retries=0):
     if retries > 50: return
@@ -23,14 +26,15 @@ def tryAgain(retries=0):
                 print(spl)
                 if is_data:
                     if spl[0] == 'data':
-                        data = spl[1]
-                        jdata = json.loads(data)
-                        is_data == False
-                        render_this(jdata)
-
+                        if section == 'render':
+                            data = spl[1]
+                            jdata = json.loads(data)
+                            is_data == False
+                            render_this(jdata)
                 if spl[0] == "event":
-                    if spl[1] == 'render':
-                       is_data = True
+                    if spl[1] != '':
+                        section = spl[1]
+                        is_data = True
 
     except Exception as e:
         print(e)
@@ -49,15 +53,14 @@ def render_this(jdata):
     make_blender(name,jdata['cam'],jdata['target'])
     uploader(name)
 
-
-# using
 # https://github.com/ksons/gltf-blender-importer
 def make_blender(name,cam_loc,tgt_loc):
-    # should pass render sets from the cqpart-server
+    # TODO should pass render sets from the cqpart-server
+    # split me into a dictionary
     multiplier =  100
     res = (1024,768)
-    samples = 200
-    size_per = 31.25 
+    samples = 5
+    size_per = 31.25
 
     bpy.ops.wm.read_homefile()
     bpy.ops.wm.addon_enable(module="io_scene_gltf")

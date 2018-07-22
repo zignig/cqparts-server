@@ -1,12 +1,12 @@
 # cqparts-server
+
 Proxy server and file watcher for cparts
 
 This is an adjunct server to the cqparts project.
 
-
 https://github.com/fragmuffin/cqparts
 
-# Usage
+## Usage
 
 define a CQPARTS_SERVER=http://localhost:8080 as an enviromental variable
 and the latest version of cqparts will post to it and update a threejs
@@ -18,11 +18,11 @@ run the server with -d pointing towards a folder of .py files, it will watch for
 
 running display() in a python script will push to the server and display.
 
-# Building
+## Building
 
 Needs a golang dev environment and gb (https://github.com/constabulary/gb) for building.
 
-# TODO
+## TODO
 
 I will try to do binary release once it has settled.
 

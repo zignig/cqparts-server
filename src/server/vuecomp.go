@@ -1,6 +1,10 @@
 package main
 
 // view component loader
+// takes vue components files and breaks them into templates/js/css
+// is brittle and minimal
+// but it works
+
 import (
 	"bytes"
 	"errors"

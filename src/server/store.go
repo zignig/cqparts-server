@@ -12,10 +12,9 @@ import (
 	bolt "github.com/coreos/bbolt"
 )
 
-// storage for uploaded files
-// make an interface so it can be swapped out for other storage later
-// TODO make file storate that is persistent
+// Key value store(s) for data
 
+// interface for golang awesomeness
 type Storage interface {
 	Load(name string) (data []byte, err error)
 	Save(name string, data []byte) (err error)
@@ -23,6 +22,7 @@ type Storage interface {
 	Multi(name string) (files map[string][]byte, err error)
 }
 
+// a named kv store for bbolt
 type databucket struct {
 	db   *bolt.DB
 	name string
@@ -56,6 +56,7 @@ func (bb BBoltStore) NewBucket(name string) (buk *databucket) {
 	return buk
 }
 
+// Makei Storage interface for the databucket
 func (bk databucket) Load(name string) (data []byte, err error) {
 	bk.db.View(func(tx *bolt.Tx) error {
 		b := tx.Bucket([]byte(bk.name))

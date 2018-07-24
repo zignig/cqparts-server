@@ -58,9 +58,9 @@ def make_blender(name,cam_loc,tgt_loc):
     # TODO should pass render sets from the cqpart-server
     # split me into a dictionary
     multiplier =  100
-    res = (1024,768)
-    samples = 5
-    size_per = 31.25
+    res = (310,240)
+    samples = 70 
+    size_per = 100
 
     bpy.ops.wm.read_homefile()
     bpy.ops.wm.addon_enable(module="io_scene_gltf")

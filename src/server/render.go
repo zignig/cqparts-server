@@ -89,6 +89,8 @@ func postrender(c *gin.Context) {
 	var r Render
 	err := c.ShouldBind(&r)
 	fmt.Println(r, err)
+	b, _ := json.Marshal(r)
+	view.Save(r.Name, b)
 	//if render_active {
 	render_chan <- r
 	//}

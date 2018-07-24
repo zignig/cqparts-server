@@ -45,6 +45,24 @@
 			"path": "/proto"
 		},
 		{
+			"importpath": "github.com/gorilla/context",
+			"repository": "https://github.com/gorilla/context",
+			"revision": "08b5f424b9271eedf6f9f0ce86cb9396ed337a42",
+			"branch": "master"
+		},
+		{
+			"importpath": "github.com/gorilla/securecookie",
+			"repository": "https://github.com/gorilla/securecookie",
+			"revision": "78f3d318a8bf316cda921f25e96fd0b441c5173d",
+			"branch": "master"
+		},
+		{
+			"importpath": "github.com/gorilla/sessions",
+			"repository": "https://github.com/gorilla/sessions",
+			"revision": "03b6f63cc43ef9c7240a635a5e22b13180e822b8",
+			"branch": "master"
+		},
+		{
 			"importpath": "github.com/jessevdk/go-assets",
 			"repository": "https://github.com/jessevdk/go-assets",
 			"revision": "4f4301a06e153ff90e17793577ab6bf79f8dc5c5",
@@ -60,6 +78,12 @@
 			"importpath": "github.com/mattn/go-isatty",
 			"repository": "https://github.com/mattn/go-isatty",
 			"revision": "6ca4dbf54d38eea1a992b3c722a76a5d1c4cb25c",
+			"branch": "master"
+		},
+		{
+			"importpath": "github.com/satori/go.uuid",
+			"repository": "https://github.com/satori/go.uuid",
+			"revision": "36e9d2ebbde5e3f13ab2e25625fd453271d6522e",
 			"branch": "master"
 		},
 		{

@@ -15,8 +15,13 @@ function ActivateAutorotate(){
     }
 }
 
+function EventToServer(section,name){
+    axios.post('/postevent',{
+        section: section,
+        name: name,
+    });
+}
 function PostRender(){
-    console.log(vm.current);
     axios.post('/postrender',{
         name: vm.current,
         cam : camera.position,
@@ -49,11 +54,17 @@ vm = new Vue({
             this.current = obj;
         },
         setup : function () {
+            EventBus.$on('pin',function(payload){
+                EventToServer('pin',payload);
+            });
             EventBus.$on('select',function(payload){
-                //console.log("select "+payload)
                 vm.setCurrent(payload.name);
             });
 
+            EventBus.$on('render',function(payload){
+                vm.setCurrent(payload.name);
+                PostRender();
+            });
             let es = new EventSource('/events');
                 es.onerror = function(e){
                 console.log(e);

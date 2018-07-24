@@ -8,24 +8,24 @@
         <script src="/static/js/three.min.js"></script>
         <script src="/static/js/OrbitControls.js"></script>
         <script src="/static/js/GLTFLoader.js"></script>
+        <script src="/static/js/axios.min.js"></script>
     </head>
     <body>
-        <div id="main">
-            <toolbar></toolbar>
+        <div class="ui" id="main">
             <div id="nav">
-                <vmenu :model-list="modelList"></vmenu>
                 <deck :model-list="modelList"></deck>
             </div>
+            [[ template "viewer.tmpl"]]
         </div>
-
         [[ template "vuetmpl"]]
-
         <script src="/static/js/vue.js"></script>
         <script src="/static/js/vuex.js"></script>
         <script src="/static/js/semantic-ui-vue.min.js"></script>
         <script src="/vue/comp.js"></script>
         <script src="/static/js/store.js"></script>
         <script src="/static/js/app.js"></script>
+        <script src="/static/js/cqpartsViewer.js"></script>
+        <script src="/static/js/saver.js"></script>
         [[if .current]]
         <script>
             load([[.current]]);

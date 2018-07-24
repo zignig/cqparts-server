@@ -66,8 +66,9 @@ function init() {
     document.addEventListener('keydown',onKey,false);
     // Base grid helps us orient ourselves
     var baseGrid = new THREE.GridHelper(1, 10);
-    //baseGrid.geometry.rotateX( Math.PI / 2 );
     scene.add(baseGrid);
+    var baseGridSmall = new THREE.GridHelper(0.1, 10);
+    scene.add(baseGridSmall);
     // final resize
     onWindowResize();
 }
@@ -90,6 +91,7 @@ function onKey( event ) {
 function onDocumentClick( event ) {
     if ( INTERSECTED ) {
         //console.log(INTERSECTED);
+        EventBus.$emit("click",INTERSECTED.name);
         //INTERSECTED.visible = false;
     };
 }

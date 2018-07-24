@@ -1,14 +1,25 @@
 <template>
     <sui-segment>
-        <sui-button @click="viz" :positive="visible" basic compact icon="bars"></sui-button>
-        <sui-button @click="viz" :positive="visible" circular basic compact icon="info circle"></sui-button>
+        <sui-menu pointing>
+            <sui-menu-item @click="viz" :positive="visible" basic compact icon="bars"></sui-menu-item>
+            <a 
+                is='sui-menu-item'
+                v-for="section in sections"
+                :disabled="!visible" 
+                :active="sectionActive(section)"
+                :key="section"
+                :content="section"
+                @click="selectSection(section)"
+                >
+            </a>
+        </sui-menu>
         <sui-item-group v-show="visible" divided >
-            <sui-button-group attached="top" size="small" v-show="visible" >
-                <sui-button @click="prevPage" :disabled="pageNumber === 0" icon="caret left"></sui-button>
-                <sui-button > {{ pageNumber + 1 }}/{{ pageCount }} </sui-button>
-                <sui-button @click="nextPage" :disabled="pageNumber >= pageCount -1" icon="caret right" floated="right"></sui-button>
+            <sui-button-group v-show="pageCount>1" attached="top" size="small" v-show="visible" >
+                <sui-button @click="prevPage" :disabled="currentPage === 0" icon="caret left"></sui-button>
+                <sui-button > {{ currentPage + 1 }}/{{ pageCount }} </sui-button>
+                <sui-button @click="nextPage" :disabled="currentPage >= pageCount -1" icon="caret right" floated="right"></sui-button>
             </sui-button-group>
-            <sui-item :key="model.name" v-for="model in paginatedData">
+            <sui-item :key="model.name" v-for="model in pages">
                 <sui-button class="nogap" basic v-on:click="load(model)">
                     <sui-item-image wrapped v-on:click="load(model)" size="tiny" v-show="model.img" :src="model.img">
                     </sui-item-image>
@@ -22,15 +33,15 @@
                         <sui-button-group>
                             <sui-button size="mini" icon="camera" v-on:click=""></sui-button>
                             <sui-button size="mini" icon="newspaper" v-on:click=""></sui-button>
-                            <sui-button size="mini" icon="thumbtack" v-on:click=""></sui-button>
+                            <sui-button :secondary="isPinned(model)" @click="pin(model)" size="mini" icon="thumbtack" v-on:click=""></sui-button>
                         </sui-button-group>
                     </sui-item-extra>
                 </sui-item-content>
             </sui-item>
-            <sui-button-group attached="bottom" size="small" v-show="visible" >
-                <sui-button @click="prevPage" :disabled="pageNumber === 0" icon="caret left"></sui-button>
-                <sui-button > {{ pageNumber + 1 }}/{{ pageCount }} </sui-button>
-                <sui-button @click="nextPage" :disabled="pageNumber >= pageCount -1" icon="caret right" floated="right"></sui-button>
+            <sui-button-group v-show="pageCount>1" attached="top" size="small" v-show="visible" >
+                <sui-button @click="prevPage" :disabled="currentPage === 0" icon="caret left"></sui-button>
+                <sui-button > {{ currentPage + 1 }}/{{ pageCount }} </sui-button>
+                <sui-button @click="nextPage" :disabled="currentPage >= pageCount -1" icon="caret right" floated="right"></sui-button>
             </sui-button-group>
         </sui-item-group>
     </sui-segment>
@@ -40,8 +51,10 @@
 export default {
     data(){
         return {
-            pageNumber: 0,
-            visible: true 
+            page: { 'All':0,'Pinned':0,'Fix':0},
+            visible: true,
+            active: 'All',
+            sections: ['All','Pinned','Fix']
         }
     },
     props: {
@@ -56,14 +69,27 @@ export default {
         }
     },
     methods:{
+        sectionActive: function(name){
+            return this.active === name
+        },
+        selectSection: function(name){
+            if (this.visible){
+                this.active = name
+            }
+        },
         viz: function(){
             this.visible = !this.visible;
         },
         nextPage: function(){
-            this.pageNumber++;
+            this.page[this.active]++;
         },
         prevPage: function(){
-            this.pageNumber--;
+            this.page[this.active]--;
+        },
+        isPinned: function(obj){
+            if (obj.pinned){
+                return true
+            }
         },
         isActive: function(obj){
             if (this.current == obj.name){
@@ -73,6 +99,10 @@ export default {
                 return "black"
             }
         },
+        pin: function(obj){
+            obj.pinned = !obj.pinned
+            EventBus.$emit('pin',obj.name);
+        },
         load: function(obj){
             clear();
             load(obj.name);
@@ -81,20 +111,45 @@ export default {
         remove : function(index){
             this.modelList.splice(this.modelList.indexOf(index),1);
             EventBus.$emit('delete item',index);
+        },
+        pinned : function(model){
+            return this.modelList.filter(function(model){
+                return model.pinned === true
+            })
+        },
+        currentData: function(){
+            let data = []
+            if ( this.active  == 'Pinned' ){
+                data = this.pinned()
+            }
+            if ( this.active  == 'All' ){
+                data = this.modelList
+            }
+            if ( this.active  == 'Fix' ){
+                data = this.modelList
+            }
+            return data
+        },
+        paginatedData: function(){
+            const start = this.page[this.active]* this.size,
+                end = start + this.size;
+            data = this.currentData()
+            return data.slice(start, end);
         }
     },
     computed:{
+        currentPage(){
+            return this.page[this.active]
+        },
         pageCount(){
-            let l = this.modelList.length,
+            let l = this.currentData().length,
                 s = this.size;
             return Math.ceil(l/s);
         },
-        paginatedData(){
-            const start = this.pageNumber * this.size,
-                end = start + this.size;
-            return this.modelList
-                .slice(start, end);
-        }}
+        pages() {
+            return this.paginatedData();
+        }
+        }
 };
 
 </script>

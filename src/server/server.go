@@ -21,12 +21,14 @@ import (
 var incoming chan string
 var menu chan string
 var issue chan string
+var model_chan chan Model
 var render_chan chan Render
 var css string
 var script string
 var store Storage  // model file storage
 var models Storage // list of model names
-var images Storage // list of model names
+var images Storage // list of model image
+var view Storage   // list of model views
 
 // TODO add authentication and session per users
 func main() {
@@ -35,11 +37,13 @@ func main() {
 	store = bolty.NewBucket("names")
 	models = bolty.NewBucket("models")
 	images = bolty.NewBucket("images")
+	view = bolty.NewBucket("view")
 
 	incoming = make(chan string, 100)
 	menu = make(chan string, 100)
 	issue = make(chan string, 100)
 	render_chan = make(chan Render, 100)
+	model_chan = make(chan Model, 100)
 
 	// wrap me
 
@@ -63,6 +67,10 @@ func main() {
 		val := gin.H{}
 		c.HTML(http.StatusOK, "dev.tmpl", val)
 	})
+	r.GET("/layout", func(c *gin.Context) {
+		val := gin.H{}
+		c.HTML(http.StatusOK, "layout.tmpl", val)
+	})
 
 	r.GET("/vue/comp.js", CompJS)
 	r.GET("/vue/comp.css", CompCSS)
@@ -71,6 +79,8 @@ func main() {
 	r.GET("/model/*name", model)
 	r.GET("/events", event)
 
+	// Event stuff
+	r.POST("/postevent", postEvent)
 	r.GET("/status", status)
 	r.POST("/notify", notify)
 	r.POST("/upload", upload)
@@ -91,9 +101,10 @@ func main() {
 	go watch(*fileToWatch)
 	done := make(chan bool)
 	go eventBus(done)
-	fmt.Println(models.List())
+	//fmt.Println(models.List())
 	// fmt.Println(store.List())
-	fmt.Println(images.List())
+	//fmt.Println(images.List())
+	fmt.Println(view.List())
 	<-done
 }
 

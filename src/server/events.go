@@ -14,6 +14,18 @@ type Message struct {
 	Name string
 }
 
+type Event struct {
+	Section string `form:"section" json:"section"`
+	Name    string `form:"name json:"name"`
+}
+
+// Events from the web application
+func postEvent(c *gin.Context) {
+	var e Event
+	err := c.ShouldBind(&e)
+	fmt.Println(e, err)
+}
+
 // TODO build a pipeline defined by a YAML file in the assets
 // load into the database for editing
 func eventBus(exit chan bool) {

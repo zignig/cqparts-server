@@ -32,8 +32,6 @@ export default {
         },
         load: function(obj){
             this.viz();
-            clear();
-            load(obj.name);
             EventBus.$emit('select',obj);
         },
     },

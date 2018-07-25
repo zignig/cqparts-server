@@ -41,7 +41,7 @@ EventBus = new Vue();
 vm = new Vue({
     el: '#main',
     store,
-	data: {
+    data: {
         modelList : [],
         issueItem : '',
         current : '',
@@ -58,15 +58,22 @@ vm = new Vue({
                 EventToServer('pin',payload);
             });
             EventBus.$on('select',function(payload){
+                clear();
+                camera.position.x = payload.view.cam.x;
+                camera.position.y = payload.view.cam.y;
+                camera.position.z = payload.view.cam.z;
+                controls.target.x = payload.view.target.x;
+                controls.target.y = payload.view.target.y;
+                controls.target.z = payload.view.target.z;
+                load(payload.name);
                 vm.setCurrent(payload.name);
             });
-
             EventBus.$on('render',function(payload){
                 vm.setCurrent(payload.name);
                 PostRender();
             });
             let es = new EventSource('/events');
-                es.onerror = function(e){
+            es.onerror = function(e){
                 console.log(e);
             }
 

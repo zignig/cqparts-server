@@ -19,16 +19,20 @@ import (
 // TODO wrap this into a scruct ( per user )
 // TODO add cookies for session control
 var incoming chan string
-var menu chan string
 var issue chan string
+var files chan string
+var client_event chan Event
 var model_chan chan Model
+var menu chan *Model
 var render_chan chan Render
+var render_update chan Render
 var css string
 var script string
 var store Storage  // model file storage
 var models Storage // list of model names
 var images Storage // list of model image
 var view Storage   // list of model views
+var mc *ModelCollection
 
 // TODO add authentication and session per users
 func main() {
@@ -38,12 +42,16 @@ func main() {
 	models = bolty.NewBucket("models")
 	images = bolty.NewBucket("images")
 	view = bolty.NewBucket("view")
+	mc = NewModelCollection("default", bolty)
 
 	incoming = make(chan string, 100)
-	menu = make(chan string, 100)
+	files = make(chan string, 100)
+	menu = make(chan *Model, 100)
 	issue = make(chan string, 100)
 	render_chan = make(chan Render, 100)
+	render_update = make(chan Render, 100)
 	model_chan = make(chan Model, 100)
+	client_event = make(chan Event, 100)
 
 	// wrap me
 
@@ -104,7 +112,7 @@ func main() {
 	//fmt.Println(models.List())
 	// fmt.Println(store.List())
 	//fmt.Println(images.List())
-	fmt.Println(view.List())
+	fmt.Println(bolty.names.List())
 	<-done
 }
 

@@ -104,8 +104,6 @@ export default {
             EventBus.$emit('pin',obj.name);
         },
         load: function(obj){
-            clear();
-            load(obj.name);
             EventBus.$emit('select',obj);
         },
         remove : function(index){

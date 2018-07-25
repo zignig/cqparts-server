@@ -5,11 +5,11 @@ import (
 	"encoding/gob"
 	"errors"
 	"fmt"
+	bolt "github.com/coreos/bbolt"
 	"os"
+	"strings"
 	"sync"
 	"time"
-
-	bolt "github.com/coreos/bbolt"
 )
 
 // Key value store(s) for data
@@ -31,6 +31,7 @@ type databucket struct {
 // bbolt store
 type BBoltStore struct {
 	db      *bolt.DB
+	names   *databucket
 	buckets map[string]databucket
 }
 
@@ -38,6 +39,7 @@ func NewBBoltStore(name string) (bb *BBoltStore) {
 	bb = &BBoltStore{}
 	bb.db, _ = bolt.Open(name+".db", 0600, nil)
 	bb.buckets = make(map[string]databucket)
+	bb.names = bb.NewBucket("names")
 	return
 }
 
@@ -45,6 +47,10 @@ func (bb BBoltStore) NewBucket(name string) (buk *databucket) {
 	buk = &databucket{
 		db:   bb.db,
 		name: name,
+	}
+	// check it's not the name bucket
+	if strings.Compare(name, "names") != 0 {
+		bb.names.Save(name, []byte("_"))
 	}
 	bb.db.Update(func(tx *bolt.Tx) error {
 		_, err := tx.CreateBucket([]byte(name))
@@ -56,11 +62,14 @@ func (bb BBoltStore) NewBucket(name string) (buk *databucket) {
 	return buk
 }
 
-// Makei Storage interface for the databucket
+// Make Storage interface for the databucket
 func (bk databucket) Load(name string) (data []byte, err error) {
-	bk.db.View(func(tx *bolt.Tx) error {
+	err = bk.db.View(func(tx *bolt.Tx) error {
 		b := tx.Bucket([]byte(bk.name))
 		data = b.Get([]byte(name))
+		if len(data) == 0 {
+			return errors.New("key " + name + " does not exist")
+		}
 		return err
 	})
 	return data, err

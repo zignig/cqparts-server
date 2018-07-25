@@ -32,6 +32,7 @@ function init() {
 	canvas = document.getElementById('viewer');
 
     camera = new THREE.PerspectiveCamera( 30, canvas.clientWidth/ canvas.clientHeight, 0.001, 1000);
+    camera.fov = 35;
 	camera.position.set( 0.2, 0.2, 0.2);
 	controls = new THREE.OrbitControls( camera , canvas );
     //controls.autoRotate = true;

@@ -93,6 +93,7 @@ func postrender(c *gin.Context) {
 	view.Save(r.Name, b)
 	//if render_active {
 	render_chan <- r
+	render_update <- r
 	//}
 }
 

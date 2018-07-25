@@ -10,7 +10,6 @@ import (
 
 // Watch for file changes
 func watch(name string) {
-	files := make(chan string, 10)
 	watcher, err := fsnotify.NewWatcher()
 	if err != nil {
 		fmt.Println(err)
@@ -43,15 +42,6 @@ func watch(name string) {
 				fmt.Println("ERROR", err)
 			}
 			fmt.Println("next")
-		}
-	}()
-	go func() {
-		for {
-			select {
-			case action := <-files:
-				fmt.Println("RUN THIS")
-				build(name, action)
-			}
 		}
 	}()
 }

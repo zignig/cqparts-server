@@ -23,7 +23,7 @@ func watch(name string) {
 	for _, f := range filelist {
 		n := f.Name()
 		if strings.HasSuffix(n, ".py") {
-			fmt.Println(n)
+			//fmt.Println(n)
 			watcher.Add(name + n)
 			// TODO add to the model store
 		}

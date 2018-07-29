@@ -97,6 +97,17 @@ func postrender(c *gin.Context) {
 	//}
 }
 
+func renderAll(c *gin.Context) {
+	data, err := mc.List()
+	if err != nil {
+		return
+	}
+	for _, i := range data {
+		fmt.Println("rendering ", i.Name)
+		render_chan <- *i.View
+	}
+}
+
 // Get a picture out of the storage
 func pic(c *gin.Context) {
 	path := c.Params.ByName("name")

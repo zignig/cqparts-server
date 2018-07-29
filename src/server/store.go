@@ -104,7 +104,7 @@ func (bk databucket) Multi(name string) (files map[string][]byte, err error) {
 		c := b.Cursor()
 		prefix := []byte("/" + name)
 		for k, v := c.Seek(prefix); k != nil && bytes.HasPrefix(k, prefix); k, v = c.Next() {
-			fmt.Println(string(k))
+			//fmt.Println(string(k))
 			files[string(k)] = v
 		}
 		return nil

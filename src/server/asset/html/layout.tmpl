@@ -15,9 +15,13 @@
             <notif :issue-item="issueItem" ></notif>
             <div id="nav">
                 <vstrip :model-list="modelList"></vstrip>
-                [[ template "buttons.tmpl"]]
             </div>
-            [[ template "viewer.tmpl"]]
+            <div id="info">
+                INFO SLOT
+            </div>
+            <div id="toolbuttons">
+                TOOL BUTTONS 
+            </div>
         </div>
         [[ template "vuetmpl"]]
         <script src="/static/js/vue.js"></script>

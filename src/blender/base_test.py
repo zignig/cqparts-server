@@ -58,8 +58,10 @@ def make_blender(name,cam_loc,tgt_loc):
     # TODO should pass render sets from the cqpart-server
     # split me into a dictionary
     multiplier =  100
-    res = (310,240)
-    samples = 70 
+    res = (320,240)
+    samples = 20
+    #res = (1024,768)
+    #samples = 200
     size_per = 100
 
     bpy.ops.wm.read_homefile()

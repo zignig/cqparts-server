@@ -54,9 +54,14 @@ vm = new Vue({
             this.current = obj;
         },
         setup : function () {
+            // base load
+            axios.get('/list')
+                .then( response => (this.modelList = response.data));
+
             EventBus.$on('pin',function(payload){
                 EventToServer('pin',payload);
             });
+            // select a model, set camera and dislpay
             EventBus.$on('select',function(payload){
                 clear();
                 camera.position.x = payload.view.cam.x;
@@ -72,6 +77,7 @@ vm = new Vue({
                 vm.setCurrent(payload.name);
                 PostRender();
             });
+
             let es = new EventSource('/events');
             es.onerror = function(e){
                 console.log(e);

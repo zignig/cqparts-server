@@ -72,15 +72,15 @@ func eventBus(exit chan bool) {
 // change into a model/issue/stuff events
 func event(c *gin.Context) {
 	// fill up the list with the current store listing
-	fmt.Println(mc.List())
-	li, err := mc.List()
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	for _, i := range li {
-		menu <- i
-	}
+	//fmt.Println(mc.List())
+	//li, err := mc.List()
+	//if err != nil {
+	//		fmt.Println(err)
+	//		return
+	//	}
+	//for _, i := range li {
+	//		menu <- i
+	//	}
 	ticker := time.NewTicker(20 * time.Second)
 	defer func() {
 		ticker.Stop()

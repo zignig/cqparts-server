@@ -86,6 +86,7 @@ func main() {
 	r.GET("/static/*name", Static)
 	r.GET("/model/*name", model)
 	r.GET("/events", event)
+	r.GET("/list", list)
 
 	// Event stuff
 	r.POST("/postevent", postEvent)
@@ -97,6 +98,8 @@ func main() {
 
 	// blender render endpoints
 	r.GET("/render", render)
+	// spool all the models to be rendered
+	r.GET("/renderall", renderAll)
 	r.POST("/postrender", postrender)
 	r.GET("/zipped/:name", zipped)
 	r.GET("/pic/:name", pic)
@@ -112,7 +115,7 @@ func main() {
 	//fmt.Println(models.List())
 	// fmt.Println(store.List())
 	//fmt.Println(images.List())
-	fmt.Println(bolty.names.List())
+	//	fmt.Println(bolty.names.List())
 	<-done
 }
 
@@ -148,11 +151,18 @@ func upload(c *gin.Context) {
 	}
 }
 
+func list(c *gin.Context) {
+	data, err := mc.List()
+	if err != nil {
+		return
+	}
+	c.JSON(http.StatusOK, data)
+}
+
 // push from cqparts display info blob
 func notify(c *gin.Context) {
 	name, err := c.GetPostForm("name")
 	fmt.Println(name, err)
-	models.Save(name, []byte{'_'})
 	incoming <- name
 }
 

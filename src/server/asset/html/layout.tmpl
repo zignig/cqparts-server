@@ -5,23 +5,13 @@
         <link rel="stylesheet" href="/static/css/semantic.min.css">
         <link rel="stylesheet" href="/static/css/extra.css">
         <link rel="stylesheet" href="/vue/comp.css">
-        <script src="/static/js/three.min.js"></script>
-        <script src="/static/js/OrbitControls.js"></script>
-        <script src="/static/js/GLTFLoader.js"></script>
+        <script src="/static/js/babylon.js"></script>
+        <script src="/static/js/babylon.glTFFileLoader.js"></script>
         <script src="/static/js/axios.min.js"></script>
     </head>
     <body>
         <div class="ui" id="main">
-            <notif :issue-item="issueItem" ></notif>
-            <div id="nav">
-                <vstrip :model-list="modelList"></vstrip>
-            </div>
-            <div id="info">
-                INFO SLOT
-            </div>
-            <div id="toolbuttons">
-                TOOL BUTTONS 
-            </div>
+            <canvas class="baby" id="viewer"></canvas>
         </div>
         [[ template "vuetmpl"]]
         <script src="/static/js/vue.js"></script>
@@ -30,8 +20,7 @@
         <script src="/vue/comp.js"></script>
         <script src="/static/js/store.js"></script>
         <script src="/static/js/app.js"></script>
-        <script src="/static/js/cqpartsViewer.js"></script>
-        <script src="/static/js/saver.js"></script>
+        <script src="/static/js/babylonviewer.js"></script>
         [[if .current]]
         <script>
             load([[.current]]);

@@ -16,6 +16,9 @@
 // asset/js/OrbitControls.js
 // asset/js/app.js
 // asset/js/axios.min.js
+// asset/js/babylon.glTFFileLoader.js
+// asset/js/babylon.js
+// asset/js/babylonviewer.js
 // asset/js/components.js
 // asset/js/cqpartsViewer.js
 // asset/js/saver.js
@@ -334,6 +337,60 @@ func assetJsAppJs() (*asset, error) {
 func assetJsAxiosMinJs() (*asset, error) {
 	path := "/opt/cqparts-server/src/server/asset/js/axios.min.js"
 	name := "asset/js/axios.min.js"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// assetJsBabylonGltffileloaderJs reads file data from disk. It returns an error on failure.
+func assetJsBabylonGltffileloaderJs() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/js/babylon.glTFFileLoader.js"
+	name := "asset/js/babylon.glTFFileLoader.js"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// assetJsBabylonJs reads file data from disk. It returns an error on failure.
+func assetJsBabylonJs() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/js/babylon.js"
+	name := "asset/js/babylon.js"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// assetJsBabylonviewerJs reads file data from disk. It returns an error on failure.
+func assetJsBabylonviewerJs() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/js/babylonviewer.js"
+	name := "asset/js/babylonviewer.js"
 	bytes, err := bindataRead(path, name)
 	if err != nil {
 		return nil, err
@@ -740,6 +797,9 @@ var _bindata = map[string]func() (*asset, error){
 	"asset/js/OrbitControls.js": assetJsOrbitcontrolsJs,
 	"asset/js/app.js": assetJsAppJs,
 	"asset/js/axios.min.js": assetJsAxiosMinJs,
+	"asset/js/babylon.glTFFileLoader.js": assetJsBabylonGltffileloaderJs,
+	"asset/js/babylon.js": assetJsBabylonJs,
+	"asset/js/babylonviewer.js": assetJsBabylonviewerJs,
 	"asset/js/components.js": assetJsComponentsJs,
 	"asset/js/cqpartsViewer.js": assetJsCqpartsviewerJs,
 	"asset/js/saver.js": assetJsSaverJs,
@@ -830,6 +890,9 @@ var _bintree = &bintree{nil, map[string]*bintree{
 			"OrbitControls.js": &bintree{assetJsOrbitcontrolsJs, map[string]*bintree{}},
 			"app.js": &bintree{assetJsAppJs, map[string]*bintree{}},
 			"axios.min.js": &bintree{assetJsAxiosMinJs, map[string]*bintree{}},
+			"babylon.glTFFileLoader.js": &bintree{assetJsBabylonGltffileloaderJs, map[string]*bintree{}},
+			"babylon.js": &bintree{assetJsBabylonJs, map[string]*bintree{}},
+			"babylonviewer.js": &bintree{assetJsBabylonviewerJs, map[string]*bintree{}},
 			"components.js": &bintree{assetJsComponentsJs, map[string]*bintree{}},
 			"cqpartsViewer.js": &bintree{assetJsCqpartsviewerJs, map[string]*bintree{}},
 			"saver.js": &bintree{assetJsSaverJs, map[string]*bintree{}},

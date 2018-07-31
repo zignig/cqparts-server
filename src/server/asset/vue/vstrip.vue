@@ -16,8 +16,8 @@
         <sui-item-group v-show="visible" divided >
             <sui-button-group v-show="pageCount>1" attached="top" size="small" v-show="visible" >
                 <sui-button @click="prevPage" :disabled="currentPage === 0" icon="caret left"></sui-button>
-                <sui-button > {{ currentPage + 1 }}/{{ pageCount }} </sui-button>
-                <sui-button @click="nextPage" :disabled="currentPage >= pageCount -1" icon="caret right" floated="right"></sui-button>
+            <sui-button > {{ currentPage + 1 }}/{{ pageCount }} </sui-button>
+            <sui-button @click="nextPage" :disabled="currentPage >= pageCount -1" icon="caret right" floated="right"></sui-button>
             </sui-button-group>
             <sui-item :key="model.name" v-for="model in pages">
                 <sui-button class="nogap" basic v-on:click="load(model)">
@@ -53,8 +53,8 @@ export default {
         return {
             page: { 'All':0,'Pinned':0,'Fix':0},
             visible: true,
-            active: 'All',
-            sections: ['All','Pinned','Fix']
+            active: 'Pinned',
+            sections: ['Pinned','All','Fix']
         }
     },
     props: {
@@ -92,11 +92,13 @@ export default {
             }
         },
         isActive: function(obj){
-            if (this.current == obj.name){
-                return "green"
-            }
-            else {
-                return "black"
+            if (this.currenti != null ){
+                if (this.current.name  == obj.name){
+                    return "green"
+                }
+                else {
+                    return "black"
+                }
             }
         },
         pin: function(obj){
@@ -147,7 +149,7 @@ export default {
         pages() {
             return this.paginatedData();
         }
-        }
+    }
 };
 
 </script>

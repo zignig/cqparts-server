@@ -59,7 +59,7 @@ def make_blender(name,cam_loc,tgt_loc):
     # split me into a dictionary
     multiplier =  100
     res = (320,240)
-    samples = 20
+    samples = 200 
     #res = (1024,768)
     #samples = 200
     size_per = 100

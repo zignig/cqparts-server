@@ -31,6 +31,16 @@ type Render struct {
 	Target XYZ    `form:"target" json:"target" binding:"required"`
 }
 
+func NewRender(name string) (r *Render){
+	r =  &Render{}
+	r.Cam = XYZ{
+		X:0.5,
+		Y:0.5,
+		Z:0.5,
+	}
+	return r
+}
+
 // TODO add error checking
 // add json datafile and even the python code
 // Hands a zip files of all files in a model

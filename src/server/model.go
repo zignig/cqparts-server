@@ -36,7 +36,7 @@ func NewModel(name string) (m *Model) {
 	m = &Model{
 		Name:    name,
 		Created: time.Now(),
-		View:    &Render{},
+		View:    NewRender("base"),
 		Img:     " ",
 		UUID:    uuid.Must(uuid.NewV4()),
 	}

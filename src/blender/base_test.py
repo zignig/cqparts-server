@@ -47,8 +47,11 @@ def render_this(jdata):
     name = jdata['name']
     print(jdata)
     r = requests.get(target+'/zipped/'+name,stream=True)
-    z= zipfile.ZipFile(io.BytesIO(r.content))
-    z.extractall(folder)
+    try:
+        z = zipfile.ZipFile(io.BytesIO(r.content))
+        z.extractall(folder)
+    except:
+        print("BROKEN ZIP :"+folder)
     print(r)
     make_blender(name,jdata['cam'],jdata['target'])
     uploader(name)
@@ -59,7 +62,7 @@ def make_blender(name,cam_loc,tgt_loc):
     # split me into a dictionary
     multiplier =  100
     res = (320,240)
-    samples = 200 
+    samples = 60 
     #res = (1024,768)
     #samples = 200
     size_per = 100

@@ -45,6 +45,7 @@ func eventBus(exit chan bool) {
 			fmt.Println("posted incoming file ->", inc)
 			m := mc.Find(inc)
 			fmt.Println(m)
+			menu <- m
 		case r := <-render_update:
 			fmt.Println("RENDER UPDATE", r)
 			m := mc.Find(r.Name)

@@ -18,7 +18,7 @@ import (
 
 // TODO wrap this into a scruct ( per user )
 // TODO add cookies for session control
-var incoming chan string
+var incoming chan string 
 var issue chan string
 var files chan string
 var client_event chan Event

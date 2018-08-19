@@ -84,10 +84,16 @@ vm = new Vue({
             }
 
             es.addEventListener('menu', event => {
+
+	    }, false);
+
+            es.addEventListener('menu', event => {
                 let data = JSON.parse(event.data);
+                EventBus.$emit('menu item',data);
+		console.log(data);
                 if ((data.Name) != ''){
-                    this.modelList.push(data);
-                    this.current = data.Name;
+			clear();
+			load(data.name);
                 };
             }, false);
 

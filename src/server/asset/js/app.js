@@ -84,10 +84,6 @@ vm = new Vue({
             }
 
             es.addEventListener('menu', event => {
-
-	    }, false);
-
-            es.addEventListener('menu', event => {
                 let data = JSON.parse(event.data);
                 EventBus.$emit('menu item',data);
 		console.log(data);

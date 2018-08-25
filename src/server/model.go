@@ -25,6 +25,8 @@ type Model struct {
 	UUID    uuid.UUID `json:"uuid"`
 	Created time.Time `json:"created"`
 	Pinned  bool      `json:"pinned"`
+	Thumb bool `json:"thumb"`
+
 }
 
 type ModelCollection struct {

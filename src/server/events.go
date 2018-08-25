@@ -52,10 +52,11 @@ func eventBus(exit chan bool) {
 			fmt.Println("update me ", m)
 			m.View = &r
 			m.Img = "/pic/" + m.Name + ".png"
-			err := mc.Put(m)
-			if err == nil {
-				menu <- m
-			}
+			mc.Put(m)
+//			err := mc.Put(m)
+//			if err == nil {
+//				menu <- m
+//			}
 		case ce := <-client_event:
 			fmt.Println("INCOMING EVENT ", ce)
 			if ce.Section == "pin" {

@@ -9,7 +9,7 @@ import (
 )
 
 // Watch for file changes
-func watch(name string) {
+func watch(name string,module string) {
 	watcher, err := fsnotify.NewWatcher()
 	if err != nil {
 		fmt.Println(err)
@@ -36,7 +36,10 @@ func watch(name string) {
 				if (event.Op&fsnotify.Remove == fsnotify.Remove) || (event.Op&fsnotify.Write == fsnotify.Write) {
 					fmt.Println("removed file add again: ", event.Name)
 					watcher.Add(event.Name)
-					files <- event.Name
+                                        parts := strings.Split(event.Name,"/")
+                                        name := strings.TrimSuffix(parts[len(parts)-1:len(parts)][0],".py")
+                                        fmt.Println(name)
+					files <- module+"."+name
 				}
 			case err := <-watcher.Errors:
 				fmt.Println("ERROR", err)

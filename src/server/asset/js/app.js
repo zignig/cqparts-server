@@ -45,6 +45,7 @@ vm = new Vue({
         modelList : [],
         issueItem : '',
         current : '',
+        modeltree : {'children':[]}, 
     },
     created() {
         this.setup();
@@ -52,6 +53,9 @@ vm = new Vue({
     methods: {
         setCurrent : function (obj) {
             this.current = obj;
+        },
+        setTree: function (obj) {
+            this.modeltree = obj;
         },
         setup : function () {
             // base load
@@ -112,7 +116,8 @@ vm = new Vue({
                 };
                 this.issueItem = '';
                 clear();
-                load(data.name);
+                o = load(data.name);
+                vm.setTree(o);
             }, false);
 
             es.addEventListener('issue', event => {

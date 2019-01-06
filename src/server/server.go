@@ -56,6 +56,7 @@ func main() {
 	// wrap me
 
 	fileToWatch := flag.String("d", "./", "folder to watch")
+	module := flag.String("m", "./", "name of the module")
 
 	flag.Parse()
 	// base web server
@@ -109,7 +110,7 @@ func main() {
 	go r.Run(":8080")
 	// file watcher
 	fmt.Println("watching :", *fileToWatch)
-	go watch(*fileToWatch)
+	go watch(*fileToWatch,*module)
 	done := make(chan bool)
 	go eventBus(done)
 	//fmt.Println(models.List())

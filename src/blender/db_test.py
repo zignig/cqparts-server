@@ -16,6 +16,7 @@ import bpy
 # postgresql+psycopg2://user:password@host/database
 sql_string = os.environ["CQPARTS_DB"]
 target =  os.environ['CQPARTS_SERVER']
+target =  "http://localhost:8089" #os.environ['CQPARTS_SERVER']
 
 folder = "/opt/stash/"
 section = ""
@@ -39,8 +40,10 @@ def make_blender(name,cam_loc,tgt_loc):
     # TODO should pass render sets from the cqpart-server
     # split me into a dictionary
     multiplier =  100
-    res = (320,240)
-    samples = 4 
+    #res = (320,240)
+    #samples = 90 
+    res = (640,480)
+    samples = 500 
     #res = (1024,768)
     #samples = 200
     size_per = 100
@@ -142,20 +145,24 @@ class Incoming:
         self.conn.execute(upd, render=True)
 
     def list(self):
+        print("Fetching New")
         s = select([self.things]).where(self.things.c.render == False)
         result = self.conn.execute(s)
+        l = []
         for row in result:
+            l.append(row)
+        for row in l:
             data = {}
             data['name'] = row.name
             js = json.loads(row.jsondata)
             print(js)
-            try:
-                data['cam']  = js['view']['cam']
-                data['target']  = js['view']['target']
-                render_this(data)
-                self.mark(data['name'])
-            except:
-                print("BOOOOORK")
+            data['cam']  = js['view']['cam']
+            data['target']  = js['view']['target']
+            render_this(data)
+            self.mark(data['name'])
 
 i = Incoming()
-i.list()
+while True:
+    i.list()
+    time.sleep(10)
+

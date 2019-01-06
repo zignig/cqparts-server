@@ -34,9 +34,9 @@ type Render struct {
 func NewRender(name string) (r *Render){
 	r =  &Render{}
 	r.Cam = XYZ{
-		X:0.5,
-		Y:0.5,
-		Z:0.5,
+		X:0.2,
+		Y:0.2,
+		Z:0.2,
 	}
 	return r
 }

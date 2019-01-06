@@ -11,7 +11,7 @@ import (
 // turn issue output into formatted array
 func build(file string) bool {
 	n := time.Now()
-	cmd := exec.Command("/usr/bin/python2.7", file)
+	cmd := exec.Command("/usr/bin/python2.7","-m", file)
 	output, err := cmd.CombinedOutput()
 	t := time.Since(n)
 	fmt.Println(t)

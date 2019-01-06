@@ -26,6 +26,7 @@ function load(name){
             }
             } );
         } );
+    return obj;
     }
 
 function init() {

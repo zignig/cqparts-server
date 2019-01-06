@@ -32,6 +32,7 @@
 // asset/vue/notif.vue
 // asset/vue/steps.vue
 // asset/vue/toolbar.vue
+// asset/vue/tree.vue
 // asset/vue/vmenu.vue
 // asset/vue/vstrip.vue
 // DO NOT EDIT!
@@ -636,6 +637,24 @@ func assetVueToolbarVue() (*asset, error) {
 	return a, err
 }
 
+// assetVueTreeVue reads file data from disk. It returns an error on failure.
+func assetVueTreeVue() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/vue/tree.vue"
+	name := "asset/vue/tree.vue"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
 // assetVueVmenuVue reads file data from disk. It returns an error on failure.
 func assetVueVmenuVue() (*asset, error) {
 	path := "/opt/cqparts-server/src/server/asset/vue/vmenu.vue"
@@ -756,6 +775,7 @@ var _bindata = map[string]func() (*asset, error){
 	"asset/vue/notif.vue": assetVueNotifVue,
 	"asset/vue/steps.vue": assetVueStepsVue,
 	"asset/vue/toolbar.vue": assetVueToolbarVue,
+	"asset/vue/tree.vue": assetVueTreeVue,
 	"asset/vue/vmenu.vue": assetVueVmenuVue,
 	"asset/vue/vstrip.vue": assetVueVstripVue,
 }
@@ -848,6 +868,7 @@ var _bintree = &bintree{nil, map[string]*bintree{
 			"notif.vue": &bintree{assetVueNotifVue, map[string]*bintree{}},
 			"steps.vue": &bintree{assetVueStepsVue, map[string]*bintree{}},
 			"toolbar.vue": &bintree{assetVueToolbarVue, map[string]*bintree{}},
+			"tree.vue": &bintree{assetVueTreeVue, map[string]*bintree{}},
 			"vmenu.vue": &bintree{assetVueVmenuVue, map[string]*bintree{}},
 			"vstrip.vue": &bintree{assetVueVstripVue, map[string]*bintree{}},
 		}},

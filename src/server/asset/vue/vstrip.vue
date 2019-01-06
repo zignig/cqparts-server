@@ -1,11 +1,10 @@
 <template>
     <sui-segment>
-        <sui-menu pointing>
             <sui-menu-item @click="viz" :positive="visible" basic compact icon="bars"></sui-menu-item>
+        <sui-menu v-show="visible" pointing>
             <a 
                 is='sui-menu-item'
                 v-for="section in sections"
-                :disabled="!visible" 
                 :active="sectionActive(section)"
                 :key="section"
                 :content="section"
@@ -31,8 +30,6 @@
                     </h4>
                     <sui-item-extra>
                         <sui-button-group>
-                            <sui-button size="mini" icon="camera" v-on:click=""></sui-button>
-                            <sui-button size="mini" icon="newspaper" v-on:click=""></sui-button>
                             <sui-button :secondary="isPinned(model)" @click="pin(model)" size="mini" icon="thumbtack" v-on:click=""></sui-button>
                         </sui-button-group>
                     </sui-item-extra>

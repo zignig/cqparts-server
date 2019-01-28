@@ -3,23 +3,18 @@
         <p class="panel-tabs" v-show="visible">
             <a 
                 v-for="section in sections"
-                :is-active="sectionActive(section)"
+                v-bind:class="sectionActive(section)"
                 :key="section"
                 @click="selectSection(section)"
                 >{{ section }}</a>
         </p>
-        <sui-item-group v-show="visible" divided >
-            <sui-button-group v-show="pageCount>1" attached="top" size="small" v-show="visible" >
-                <sui-button @click="prevPage" :disabled="currentPage === 0" icon="caret left"></sui-button>
-            <sui-button > {{ currentPage + 1 }}/{{ pageCount }} </sui-button>
-            <sui-button @click="nextPage" :disabled="currentPage >= pageCount -1" icon="caret right" floated="right"></sui-button>
-            </sui-button-group>
-            <sui-item :key="model.name" v-for="model in pages">
-                <sui-button class="nogap" basic v-on:click="load(model)">
-                    <sui-item-image wrapped v-on:click="load(model)" size="tiny" v-show="model.img" :src="model.img">
-                    </sui-item-image>
-                </sui-button>
-                <sui-item-content>
+        <div class="" v-show="visible">
+            <div class="panel-block" :key="model.name" v-for="model in pages">
+                <a class="button" v-on:click="load(model)">
+                    <img v-on:click="load(model)" v-show="model.img" :src="model.img"></img>
+                </a>
+                <span class="icon" @click="pin(model)"><i class="mdi mdi-pin"></i></span>
+                <div>
                     <h4 is="sui-header" :color="isActive(model)">
                         <span><sui-icon size="small" name="delete" v-on:click="remove(model)"/></sui-icon></span>
                         {{ model.name }}
@@ -29,14 +24,20 @@
                             <sui-button :secondary="isPinned(model)" @click="pin(model)" size="mini" icon="thumbtack" v-on:click=""></sui-button>
                         </sui-button-group>
                     </sui-item-extra>
-                </sui-item-content>
-            </sui-item>
-            <div  class="field has-addons" v-show="pageCount>1" attached="top" size="small" v-show="visible" >
-                <a class="button" @click="prevPage" :disabled="currentPage === 0" icon="caret left"></a>
-                <a class="button" > {{ currentPage + 1 }}/{{ pageCount }} </a>
-                <a class="button" @click="nextPage" :disabled="currentPage >= pageCount -1" icon="caret right" floated="right"></a>
+                </div>
             </div>
-        </sui-item-group>
+            <div class="panel-block">
+                <div  class="buttons has-addons " v-show="pageCount>1" attached="top" size="small" v-show="visible" >
+                    <a class="button" @click="prevPage" :disabled="currentPage === 0">
+                        <span class="icon"><i class="mdi mdi-chevron-double-left"></i></span>
+                    </a>
+                    <a class="button" > {{ currentPage + 1 }}/{{ pageCount }} </a>
+                    <a class="button" @click="nextPage" :disabled="currentPage >= pageCount -1">
+                        <span class="icon"><i class="mdi mdi-chevron-double-right"></i></span>
+                    </a>
+                </div>
+            </div>
+        </div>
     </nav>
 </template>
 
@@ -63,7 +64,9 @@ export default {
     },
     methods:{
         sectionActive: function(name){
-            return this.active === name
+            if (this.active == name){
+                return "is-active"
+            }
         },
         selectSection: function(name){
             if (this.visible){

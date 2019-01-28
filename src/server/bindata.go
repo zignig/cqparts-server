@@ -3,6 +3,9 @@
 // asset/css/buefy.min.css
 // asset/css/bulma.css
 // asset/css/extra.css
+// asset/css/materialdesignicons.min.css
+// asset/fonts/materialdesignicons-webfont.woff
+// asset/fonts/materialdesignicons-webfont.woff2
 // asset/html/buttons.tmpl
 // asset/html/dev.tmpl
 // asset/html/index.tmpl
@@ -21,7 +24,6 @@
 // asset/js/three.min.js
 // asset/js/vue.js
 // asset/js/vuex.js
-// asset/materialdesignicons.min.css
 // asset/vue/old/App.vue
 // asset/vue/old/card.vue
 // asset/vue/old/deck.vue
@@ -99,6 +101,60 @@ func assetCssBulmaCss() (*asset, error) {
 func assetCssExtraCss() (*asset, error) {
 	path := "/opt/cqparts-server/src/server/asset/css/extra.css"
 	name := "asset/css/extra.css"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// assetCssMaterialdesigniconsMinCss reads file data from disk. It returns an error on failure.
+func assetCssMaterialdesigniconsMinCss() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/css/materialdesignicons.min.css"
+	name := "asset/css/materialdesignicons.min.css"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// assetFontsMaterialdesigniconsWebfontWoff reads file data from disk. It returns an error on failure.
+func assetFontsMaterialdesigniconsWebfontWoff() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/fonts/materialdesignicons-webfont.woff"
+	name := "asset/fonts/materialdesignicons-webfont.woff"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// assetFontsMaterialdesigniconsWebfontWoff2 reads file data from disk. It returns an error on failure.
+func assetFontsMaterialdesigniconsWebfontWoff2() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/fonts/materialdesignicons-webfont.woff2"
+	name := "asset/fonts/materialdesignicons-webfont.woff2"
 	bytes, err := bindataRead(path, name)
 	if err != nil {
 		return nil, err
@@ -437,24 +493,6 @@ func assetJsVuexJs() (*asset, error) {
 	return a, err
 }
 
-// assetMaterialdesigniconsMinCss reads file data from disk. It returns an error on failure.
-func assetMaterialdesigniconsMinCss() (*asset, error) {
-	path := "/opt/cqparts-server/src/server/asset/materialdesignicons.min.css"
-	name := "asset/materialdesignicons.min.css"
-	bytes, err := bindataRead(path, name)
-	if err != nil {
-		return nil, err
-	}
-
-	fi, err := os.Stat(path)
-	if err != nil {
-		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
-	}
-
-	a := &asset{bytes: bytes, info: fi}
-	return a, err
-}
-
 // assetVueOldAppVue reads file data from disk. It returns an error on failure.
 func assetVueOldAppVue() (*asset, error) {
 	path := "/opt/cqparts-server/src/server/asset/vue/old/App.vue"
@@ -708,6 +746,9 @@ var _bindata = map[string]func() (*asset, error){
 	"asset/css/buefy.min.css": assetCssBuefyMinCss,
 	"asset/css/bulma.css": assetCssBulmaCss,
 	"asset/css/extra.css": assetCssExtraCss,
+	"asset/css/materialdesignicons.min.css": assetCssMaterialdesigniconsMinCss,
+	"asset/fonts/materialdesignicons-webfont.woff": assetFontsMaterialdesigniconsWebfontWoff,
+	"asset/fonts/materialdesignicons-webfont.woff2": assetFontsMaterialdesigniconsWebfontWoff2,
 	"asset/html/buttons.tmpl": assetHtmlButtonsTmpl,
 	"asset/html/dev.tmpl": assetHtmlDevTmpl,
 	"asset/html/index.tmpl": assetHtmlIndexTmpl,
@@ -726,7 +767,6 @@ var _bindata = map[string]func() (*asset, error){
 	"asset/js/three.min.js": assetJsThreeMinJs,
 	"asset/js/vue.js": assetJsVueJs,
 	"asset/js/vuex.js": assetJsVuexJs,
-	"asset/materialdesignicons.min.css": assetMaterialdesigniconsMinCss,
 	"asset/vue/old/App.vue": assetVueOldAppVue,
 	"asset/vue/old/card.vue": assetVueOldCardVue,
 	"asset/vue/old/deck.vue": assetVueOldDeckVue,
@@ -785,6 +825,11 @@ var _bintree = &bintree{nil, map[string]*bintree{
 			"buefy.min.css": &bintree{assetCssBuefyMinCss, map[string]*bintree{}},
 			"bulma.css": &bintree{assetCssBulmaCss, map[string]*bintree{}},
 			"extra.css": &bintree{assetCssExtraCss, map[string]*bintree{}},
+			"materialdesignicons.min.css": &bintree{assetCssMaterialdesigniconsMinCss, map[string]*bintree{}},
+		}},
+		"fonts": &bintree{nil, map[string]*bintree{
+			"materialdesignicons-webfont.woff": &bintree{assetFontsMaterialdesigniconsWebfontWoff, map[string]*bintree{}},
+			"materialdesignicons-webfont.woff2": &bintree{assetFontsMaterialdesigniconsWebfontWoff2, map[string]*bintree{}},
 		}},
 		"html": &bintree{nil, map[string]*bintree{
 			"buttons.tmpl": &bintree{assetHtmlButtonsTmpl, map[string]*bintree{}},
@@ -808,7 +853,6 @@ var _bintree = &bintree{nil, map[string]*bintree{
 			"vue.js": &bintree{assetJsVueJs, map[string]*bintree{}},
 			"vuex.js": &bintree{assetJsVuexJs, map[string]*bintree{}},
 		}},
-		"materialdesignicons.min.css": &bintree{assetMaterialdesigniconsMinCss, map[string]*bintree{}},
 		"vue": &bintree{nil, map[string]*bintree{
 			"old": &bintree{nil, map[string]*bintree{
 				"App.vue": &bintree{assetVueOldAppVue, map[string]*bintree{}},

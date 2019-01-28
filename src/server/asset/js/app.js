@@ -32,7 +32,7 @@ function PostRender(){
 // shh
 Vue.config.productionTip = false;
 // add semantic ui
-Vue.use(SemanticUIVue);
+Vue.use(Buefy.default);
 //Vue.use(Vuex);
 
 // create and event bus

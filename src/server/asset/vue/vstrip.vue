@@ -1,17 +1,13 @@
 <template>
-    <sui-segment>
-            <sui-menu-item @click="viz" :positive="visible" basic compact icon="bars"></sui-menu-item>
-        <sui-menu v-show="visible" pointing>
+    <nav class="panel">
+        <p class="panel-tabs" v-show="visible">
             <a 
-                is='sui-menu-item'
                 v-for="section in sections"
-                :active="sectionActive(section)"
+                :is-active="sectionActive(section)"
                 :key="section"
-                :content="section"
                 @click="selectSection(section)"
-                >
-            </a>
-        </sui-menu>
+                >{{ section }}</a>
+        </p>
         <sui-item-group v-show="visible" divided >
             <sui-button-group v-show="pageCount>1" attached="top" size="small" v-show="visible" >
                 <sui-button @click="prevPage" :disabled="currentPage === 0" icon="caret left"></sui-button>
@@ -35,13 +31,13 @@
                     </sui-item-extra>
                 </sui-item-content>
             </sui-item>
-            <sui-button-group v-show="pageCount>1" attached="top" size="small" v-show="visible" >
-                <sui-button @click="prevPage" :disabled="currentPage === 0" icon="caret left"></sui-button>
-                <sui-button > {{ currentPage + 1 }}/{{ pageCount }} </sui-button>
-                <sui-button @click="nextPage" :disabled="currentPage >= pageCount -1" icon="caret right" floated="right"></sui-button>
-            </sui-button-group>
+            <div  class="field has-addons" v-show="pageCount>1" attached="top" size="small" v-show="visible" >
+                <a class="button" @click="prevPage" :disabled="currentPage === 0" icon="caret left"></a>
+                <a class="button" > {{ currentPage + 1 }}/{{ pageCount }} </a>
+                <a class="button" @click="nextPage" :disabled="currentPage >= pageCount -1" icon="caret right" floated="right"></a>
+            </div>
         </sui-item-group>
-    </sui-segment>
+    </nav>
 </template>
 
 <script>

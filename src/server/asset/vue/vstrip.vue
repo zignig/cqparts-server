@@ -1,4 +1,5 @@
 <template>
+    <section>
     <nav class="panel">
         <p class="panel-tabs" v-show="visible">
             <a 
@@ -10,21 +11,11 @@
         </p>
         <div class="" v-show="visible">
             <div class="panel-block" :key="model.name" v-for="model in pages">
-                <a class="button" v-on:click="load(model)">
-                    <img v-on:click="load(model)" v-show="model.img" :src="model.img"></img>
+                <img v-on:click="load(model)" v-show="model.img" :src="model.img"></img>
+                <a v-on:click="load(model)"> 
+                {{ model.name }}
                 </a>
-                <span class="icon" @click="pin(model)"><i class="mdi mdi-pin"></i></span>
-                <div>
-                    <h4 is="sui-header" :color="isActive(model)">
-                        <span><sui-icon size="small" name="delete" v-on:click="remove(model)"/></sui-icon></span>
-                        {{ model.name }}
-                    </h4>
-                    <sui-item-extra>
-                        <sui-button-group>
-                            <sui-button :secondary="isPinned(model)" @click="pin(model)" size="mini" icon="thumbtack" v-on:click=""></sui-button>
-                        </sui-button-group>
-                    </sui-item-extra>
-                </div>
+                <span class="icon "@click="pin(model)"><i class="mdi mdi-pin"></i></span>
             </div>
             <div class="panel-block">
                 <div  class="buttons has-addons " v-show="pageCount>1" attached="top" size="small" v-show="visible" >
@@ -39,6 +30,7 @@
             </div>
         </div>
     </nav>
+    </section>
 </template>
 
 <script>

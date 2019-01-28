@@ -24,12 +24,12 @@
 // asset/js/three.min.js
 // asset/js/vue.js
 // asset/js/vuex.js
+// asset/vue/notif.vue
 // asset/vue/old/App.vue
 // asset/vue/old/card.vue
 // asset/vue/old/deck.vue
 // asset/vue/old/loaded.vue
 // asset/vue/old/model.vue
-// asset/vue/old/notif.vue
 // asset/vue/old/steps.vue
 // asset/vue/old/toolbar.vue
 // asset/vue/old/tree.vue
@@ -493,6 +493,24 @@ func assetJsVuexJs() (*asset, error) {
 	return a, err
 }
 
+// assetVueNotifVue reads file data from disk. It returns an error on failure.
+func assetVueNotifVue() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/vue/notif.vue"
+	name := "asset/vue/notif.vue"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
 // assetVueOldAppVue reads file data from disk. It returns an error on failure.
 func assetVueOldAppVue() (*asset, error) {
 	path := "/opt/cqparts-server/src/server/asset/vue/old/App.vue"
@@ -569,24 +587,6 @@ func assetVueOldLoadedVue() (*asset, error) {
 func assetVueOldModelVue() (*asset, error) {
 	path := "/opt/cqparts-server/src/server/asset/vue/old/model.vue"
 	name := "asset/vue/old/model.vue"
-	bytes, err := bindataRead(path, name)
-	if err != nil {
-		return nil, err
-	}
-
-	fi, err := os.Stat(path)
-	if err != nil {
-		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
-	}
-
-	a := &asset{bytes: bytes, info: fi}
-	return a, err
-}
-
-// assetVueOldNotifVue reads file data from disk. It returns an error on failure.
-func assetVueOldNotifVue() (*asset, error) {
-	path := "/opt/cqparts-server/src/server/asset/vue/old/notif.vue"
-	name := "asset/vue/old/notif.vue"
 	bytes, err := bindataRead(path, name)
 	if err != nil {
 		return nil, err
@@ -767,12 +767,12 @@ var _bindata = map[string]func() (*asset, error){
 	"asset/js/three.min.js": assetJsThreeMinJs,
 	"asset/js/vue.js": assetJsVueJs,
 	"asset/js/vuex.js": assetJsVuexJs,
+	"asset/vue/notif.vue": assetVueNotifVue,
 	"asset/vue/old/App.vue": assetVueOldAppVue,
 	"asset/vue/old/card.vue": assetVueOldCardVue,
 	"asset/vue/old/deck.vue": assetVueOldDeckVue,
 	"asset/vue/old/loaded.vue": assetVueOldLoadedVue,
 	"asset/vue/old/model.vue": assetVueOldModelVue,
-	"asset/vue/old/notif.vue": assetVueOldNotifVue,
 	"asset/vue/old/steps.vue": assetVueOldStepsVue,
 	"asset/vue/old/toolbar.vue": assetVueOldToolbarVue,
 	"asset/vue/old/tree.vue": assetVueOldTreeVue,
@@ -854,13 +854,13 @@ var _bintree = &bintree{nil, map[string]*bintree{
 			"vuex.js": &bintree{assetJsVuexJs, map[string]*bintree{}},
 		}},
 		"vue": &bintree{nil, map[string]*bintree{
+			"notif.vue": &bintree{assetVueNotifVue, map[string]*bintree{}},
 			"old": &bintree{nil, map[string]*bintree{
 				"App.vue": &bintree{assetVueOldAppVue, map[string]*bintree{}},
 				"card.vue": &bintree{assetVueOldCardVue, map[string]*bintree{}},
 				"deck.vue": &bintree{assetVueOldDeckVue, map[string]*bintree{}},
 				"loaded.vue": &bintree{assetVueOldLoadedVue, map[string]*bintree{}},
 				"model.vue": &bintree{assetVueOldModelVue, map[string]*bintree{}},
-				"notif.vue": &bintree{assetVueOldNotifVue, map[string]*bintree{}},
 				"steps.vue": &bintree{assetVueOldStepsVue, map[string]*bintree{}},
 				"toolbar.vue": &bintree{assetVueOldToolbarVue, map[string]*bintree{}},
 				"tree.vue": &bintree{assetVueOldTreeVue, map[string]*bintree{}},

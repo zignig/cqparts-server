@@ -1,7 +1,7 @@
 <template>
-    <div >
+    <b-notification>
         <div v-bind:model="issueItem">{{ issueItem }}</div>
-    </div>
+    </b-notification>
 </template>
 
 <script>

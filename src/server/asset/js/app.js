@@ -21,6 +21,7 @@ function EventToServer(section,name){
         name: name,
     });
 }
+
 function PostRender(){
     axios.post('/postrender',{
         name: vm.current,
@@ -51,6 +52,9 @@ vm = new Vue({
         this.setup();
     },
     methods: {
+        setIssue: function (obj) {
+            this.issueItem = obj;
+        },
         setCurrent : function (obj) {
             this.current = obj;
         },
@@ -80,6 +84,10 @@ vm = new Vue({
             EventBus.$on('render',function(payload){
                 vm.setCurrent(payload.name);
                 PostRender();
+            });
+
+            EventBus.$on('issue',function(payload){
+                vm.setIssue(payload);
             });
 
             let es = new EventSource('/events');

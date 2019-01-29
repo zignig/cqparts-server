@@ -11,11 +11,14 @@
         </p>
         <div class="" v-show="visible">
             <div class="panel-block" :key="model.name" v-for="model in pages">
+                <span class="icon" @click="pin(model)">
+                    <i v-if="model.pinned" class="mdi mdi-pin"></i>
+                    <i v-else="model.pinned" class="mdi mdi-rotate-45 mdi-pin"></i>
+                </span>
                 <img v-on:click="load(model)" v-show="model.img" :src="model.img"></img>
                 <a v-on:click="load(model)"> 
                 {{ model.name }}
                 </a>
-                <span class="icon "@click="pin(model)"><i class="mdi mdi-pin"></i></span>
             </div>
             <div class="panel-block">
                 <div  class="buttons has-addons " v-show="pageCount>1" attached="top" size="small" v-show="visible" >

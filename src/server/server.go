@@ -18,7 +18,7 @@ import (
 
 // TODO wrap this into a scruct ( per user )
 // TODO add cookies for session control
-var incoming chan string 
+var incoming chan string
 var issue chan string
 var files chan string
 var client_event chan Event
@@ -57,6 +57,7 @@ func main() {
 
 	fileToWatch := flag.String("d", "./", "folder to watch")
 	module := flag.String("m", "./", "name of the module")
+	port := flag.Int("p", 8080, "port to listen on")
 
 	flag.Parse()
 	// base web server
@@ -107,10 +108,10 @@ func main() {
 	r.POST("/image", receiveImage)
 
 	// web server
-	go r.Run(":8080")
+	go r.Run(":" + strconv.Itoa(*port))
 	// file watcher
 	fmt.Println("watching :", *fileToWatch)
-	go watch(*fileToWatch,*module)
+	go watch(*fileToWatch, *module)
 	done := make(chan bool)
 	go eventBus(done)
 	//fmt.Println(models.List())

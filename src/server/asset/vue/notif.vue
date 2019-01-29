@@ -6,6 +6,11 @@
 
 <script>
 export default {
+    data() {
+        return {
+            "active": false
+        }
+    },
     props: {
         issueItem: {
             type: String,

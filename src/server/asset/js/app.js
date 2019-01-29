@@ -15,6 +15,11 @@ function ActivateAutorotate(){
     }
 }
 
+function finder(list,name){
+    console.log(list);
+    console.log(name);
+}
+
 function EventToServer(section,name){
     axios.post('/postevent',{
         section: section,
@@ -46,7 +51,7 @@ vm = new Vue({
         modelList : [],
         issueItem : '',
         current : '',
-        modeltree : {'children':[]}, 
+        modeltree : {'children':[]},
     },
     created() {
         this.setup();
@@ -98,10 +103,13 @@ vm = new Vue({
             es.addEventListener('menu', event => {
                 let data = JSON.parse(event.data);
                 EventBus.$emit('menu item',data);
-		console.log(data);
+                console.log(data);
                 if ((data.Name) != ''){
-			clear();
-			load(data.name);
+                    let b = finder(this.modelList,data)
+                    console.log(b);
+                    this.modelList.unshift(data);
+                    clear();
+                    load(data.name);
                 };
             }, false);
 

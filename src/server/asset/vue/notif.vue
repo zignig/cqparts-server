@@ -1,5 +1,5 @@
 <template>
-    <b-notification>
+    <b-notification class="middle" :active.sync="isActive" >
         <div v-bind:model="issueItem">{{ issueItem }}</div>
     </b-notification>
 </template>
@@ -8,7 +8,7 @@
 export default {
     data() {
         return {
-            "active": false
+            isActive: false
         }
     },
     props: {

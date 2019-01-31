@@ -12,14 +12,16 @@
         <script src="/static/js/axios.min.js"></script>
     </head>
     <body>
-        <div class="ui" id="main">
+        <div class="" id="main">
             <notif :issue-item="issueItem" ></notif>
-            <div id="nav">
-                <vstrip :model-list="modelList"></vstrip>
+            <nav class="navbar">
+                <navithing :model-list="modelList"></navithing>
                 [[ template "buttons.tmpl"]]
-            </div>
+            </nav>
             [[ template "viewer.tmpl"]]
         </div>
+
+
         [[ template "vuetmpl"]]
         <script src="/static/js/vue.js"></script>
         <script src="/static/js/vuex.js"></script>

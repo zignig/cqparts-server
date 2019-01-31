@@ -1,5 +1,5 @@
-#nav {
-    /* navigation */
-	width: auto;
-    position: absolute;
+.middle {
+    float: right;
+    width: 80%;
 }
+

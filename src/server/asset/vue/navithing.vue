@@ -1,37 +1,24 @@
 <template>
-    <section>
-    <nav class="panel">
-        <p class="panel-tabs" v-show="visible">
-            <a 
-                v-for="section in sections"
-                v-bind:class="sectionActive(section)"
-                :key="section"
-                @click="selectSection(section)"
-                >{{ section }}</a>
-        </p>
-        <div class="" v-show="visible">
-            <div class="panel-block" :key="model.name" v-for="model in pages">
-                <span class="icon" @click="pin(model)">
-                    <i v-if="model.pinned" class="mdi mdi-pin"></i>
-                    <i v-else="model.pinned" class="mdi mdi-rotate-45 mdi-pin"></i>
-                </span>
-                <a v-on:click="load(model)">{{ model.name }}</a>
-                <img v-on:click="load(model)" v-show="model.img" :src="model.img"></img>
-            </div>
-            <div class="panel-block">
-                <div  class="buttons has-addons " v-show="pageCount>1" attached="top" size="small" v-show="visible" >
-                    <a class="button" @click="prevPage" :disabled="currentPage === 0">
-                        <span class="icon"><i class="mdi mdi-chevron-double-left"></i></span>
-                    </a>
-                    <a class="button" > {{ currentPage + 1 }}/{{ pageCount }} </a>
-                    <a class="button" @click="nextPage" :disabled="currentPage >= pageCount -1">
-                        <span class="icon"><i class="mdi mdi-chevron-double-right"></i></span>
+        <div class="navbar-menu">
+                <a class="button" @click="prevPage" :disabled="currentPage === 0">
+                    <span class="icon"><i class="mdi mdi-chevron-double-left"></i></span>
+                </a>
+                <div class="">
+                    <a class="button"
+                        :key="model.name" 
+                        v-for="model in pages"
+                        v-on:click="load(model)">
+                        <span class="icon" @click="pin(model)">
+                            <i v-if="model.pinned" class="mdi mdi-pin"></i>
+                            <i v-else="model.pinned" class="mdi mdi-rotate-45 mdi-pin"></i>
+                        </span>
+                        <span>{{ model.name }}</span>
                     </a>
                 </div>
-            </div>
+                    <a class="button" @click="nextPage" :is-visible="currentPage >= pageCount -1">
+                        <span class="icon"><i class="mdi mdi-chevron-double-right"></i></span>
+                    </a>
         </div>
-    </nav>
-    </section>
 </template>
 
 <script>
@@ -40,7 +27,7 @@ export default {
         return {
             page: { 'All':0,'Pinned':0,'Fix':0},
             visible: true,
-            active: 'Pinned',
+            active: 'All',
             sections: ['Pinned','All','Fix']
         }
     },
@@ -52,7 +39,7 @@ export default {
         size:{
             type: Number,
             required: false,
-            default: 6,
+            default: 10,
         }
     },
     methods:{

@@ -24,6 +24,7 @@
 // asset/js/three.min.js
 // asset/js/vue.js
 // asset/js/vuex.js
+// asset/vue/navithing.vue
 // asset/vue/notif.vue
 // asset/vue/old/App.vue
 // asset/vue/old/card.vue
@@ -493,6 +494,24 @@ func assetJsVuexJs() (*asset, error) {
 	return a, err
 }
 
+// assetVueNavithingVue reads file data from disk. It returns an error on failure.
+func assetVueNavithingVue() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/vue/navithing.vue"
+	name := "asset/vue/navithing.vue"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
 // assetVueNotifVue reads file data from disk. It returns an error on failure.
 func assetVueNotifVue() (*asset, error) {
 	path := "/opt/cqparts-server/src/server/asset/vue/notif.vue"
@@ -767,6 +786,7 @@ var _bindata = map[string]func() (*asset, error){
 	"asset/js/three.min.js": assetJsThreeMinJs,
 	"asset/js/vue.js": assetJsVueJs,
 	"asset/js/vuex.js": assetJsVuexJs,
+	"asset/vue/navithing.vue": assetVueNavithingVue,
 	"asset/vue/notif.vue": assetVueNotifVue,
 	"asset/vue/old/App.vue": assetVueOldAppVue,
 	"asset/vue/old/card.vue": assetVueOldCardVue,
@@ -854,6 +874,7 @@ var _bintree = &bintree{nil, map[string]*bintree{
 			"vuex.js": &bintree{assetJsVuexJs, map[string]*bintree{}},
 		}},
 		"vue": &bintree{nil, map[string]*bintree{
+			"navithing.vue": &bintree{assetVueNavithingVue, map[string]*bintree{}},
 			"notif.vue": &bintree{assetVueNotifVue, map[string]*bintree{}},
 			"old": &bintree{nil, map[string]*bintree{
 				"App.vue": &bintree{assetVueOldAppVue, map[string]*bintree{}},

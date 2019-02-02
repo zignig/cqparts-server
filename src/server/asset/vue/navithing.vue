@@ -1,23 +1,19 @@
 <template>
         <div class="navbar-menu">
-                <a class="button" @click="prevPage" :disabled="currentPage === 0">
+                <div class="buttons has-addons">
+                <a class="button" @click="prevPage" v-show="pageCount > 1">
                     <span class="icon"><i class="mdi mdi-chevron-double-left"></i></span>
                 </a>
-                <div class="">
-                    <a class="button"
-                        :key="model.name" 
-                        v-for="model in pages"
-                        v-on:click="load(model)">
-                        <span class="icon" @click="pin(model)">
-                            <i v-if="model.pinned" class="mdi mdi-pin"></i>
-                            <i v-else="model.pinned" class="mdi mdi-rotate-45 mdi-pin"></i>
-                        </span>
-                        <span>{{ model.name }}</span>
-                    </a>
+                <a class="button"
+                    :key="model.name" 
+                    v-for="model in pages"
+                    v-on:click="load(model)">
+                    <span>{{ model.name }}</span>
+                </a>
+                <a class="button" @click="nextPage" v-show="pageCount > 1" :is-visible="currentPage >= pageCount -1">
+                    <span class="icon"><i class="mdi mdi-chevron-double-right"></i></span>
+                </a>
                 </div>
-                    <a class="button" @click="nextPage" :is-visible="currentPage >= pageCount -1">
-                        <span class="icon"><i class="mdi mdi-chevron-double-right"></i></span>
-                    </a>
         </div>
 </template>
 
@@ -39,7 +35,7 @@ export default {
         size:{
             type: Number,
             required: false,
-            default: 10,
+            default: 8,
         }
     },
     methods:{
@@ -57,10 +53,14 @@ export default {
             this.visible = !this.visible;
         },
         nextPage: function(){
-            this.page[this.active]++;
+            if ( this.page[this.active] < this.pageCount-1){
+                this.page[this.active]++;
+            }
         },
         prevPage: function(){
-            this.page[this.active]--;
+            if ( this.page[this.active] > 0 ){
+                this.page[this.active]--;
+            }
         },
         isPinned: function(obj){
             if (obj.pinned){
@@ -68,7 +68,7 @@ export default {
             }
         },
         isActive: function(obj){
-            if (this.currenti != null ){
+            if (this.current != null ){
                 if (this.current.name  == obj.name){
                     return "green"
                 }

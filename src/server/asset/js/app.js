@@ -16,8 +16,7 @@ function ActivateAutorotate(){
 }
 
 function finder(list,name){
-    console.log(list);
-    console.log(name);
+    return list
 }
 
 function EventToServer(section,name){
@@ -105,8 +104,9 @@ vm = new Vue({
                 EventBus.$emit('menu item',data);
                 console.log(data);
                 if ((data.Name) != ''){
-                    let b = finder(this.modelList,data)
-                    console.log(b);
+                    this.modelList = this.modelList.filter(function( obj ) {
+                        return obj.name !== data.name;
+                    });
                     this.modelList.unshift(data);
                     clear();
                     load(data.name);

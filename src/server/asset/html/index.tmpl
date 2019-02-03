@@ -11,10 +11,10 @@
         <script src="/static/js/GLTFLoader.js"></script>
         <script src="/static/js/axios.min.js"></script>
     </head>
-    <body>
+    <body class="has-navbar-fixed-top">
         <div class="" id="main">
             <notif :issue-item="issueItem" ></notif>
-            <nav class="navbar">
+            <nav class="navbar is-fixed-top">
                 <navithing :model-list="modelList"></navithing>
                 [[ template "buttons.tmpl"]]
             </nav>

@@ -1,5 +1,5 @@
 <template>
-        <div class="navbar-menu">
+        <div class="navbar-brand">
                 <div class="buttons has-addons">
                 <a class="button" @click="prevPage" v-show="pageCount > 1">
                     <span class="icon"><i class="mdi mdi-chevron-double-left"></i></span>

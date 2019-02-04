@@ -19,11 +19,11 @@
 // asset/js/components.js
 // asset/js/cqpartsViewer.js
 // asset/js/saver.js
-// asset/js/semantic-ui-vue.min.js
 // asset/js/store.js
 // asset/js/three.min.js
 // asset/js/vue.js
 // asset/js/vuex.js
+// asset/vue/navfoot.vue
 // asset/vue/navithing.vue
 // asset/vue/notif.vue
 // asset/vue/old/App.vue
@@ -404,24 +404,6 @@ func assetJsSaverJs() (*asset, error) {
 	return a, err
 }
 
-// assetJsSemanticUiVueMinJs reads file data from disk. It returns an error on failure.
-func assetJsSemanticUiVueMinJs() (*asset, error) {
-	path := "/opt/cqparts-server/src/server/asset/js/semantic-ui-vue.min.js"
-	name := "asset/js/semantic-ui-vue.min.js"
-	bytes, err := bindataRead(path, name)
-	if err != nil {
-		return nil, err
-	}
-
-	fi, err := os.Stat(path)
-	if err != nil {
-		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
-	}
-
-	a := &asset{bytes: bytes, info: fi}
-	return a, err
-}
-
 // assetJsStoreJs reads file data from disk. It returns an error on failure.
 func assetJsStoreJs() (*asset, error) {
 	path := "/opt/cqparts-server/src/server/asset/js/store.js"
@@ -480,6 +462,24 @@ func assetJsVueJs() (*asset, error) {
 func assetJsVuexJs() (*asset, error) {
 	path := "/opt/cqparts-server/src/server/asset/js/vuex.js"
 	name := "asset/js/vuex.js"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// assetVueNavfootVue reads file data from disk. It returns an error on failure.
+func assetVueNavfootVue() (*asset, error) {
+	path := "/opt/cqparts-server/src/server/asset/vue/navfoot.vue"
+	name := "asset/vue/navfoot.vue"
 	bytes, err := bindataRead(path, name)
 	if err != nil {
 		return nil, err
@@ -781,11 +781,11 @@ var _bindata = map[string]func() (*asset, error){
 	"asset/js/components.js": assetJsComponentsJs,
 	"asset/js/cqpartsViewer.js": assetJsCqpartsviewerJs,
 	"asset/js/saver.js": assetJsSaverJs,
-	"asset/js/semantic-ui-vue.min.js": assetJsSemanticUiVueMinJs,
 	"asset/js/store.js": assetJsStoreJs,
 	"asset/js/three.min.js": assetJsThreeMinJs,
 	"asset/js/vue.js": assetJsVueJs,
 	"asset/js/vuex.js": assetJsVuexJs,
+	"asset/vue/navfoot.vue": assetVueNavfootVue,
 	"asset/vue/navithing.vue": assetVueNavithingVue,
 	"asset/vue/notif.vue": assetVueNotifVue,
 	"asset/vue/old/App.vue": assetVueOldAppVue,
@@ -867,13 +867,13 @@ var _bintree = &bintree{nil, map[string]*bintree{
 			"components.js": &bintree{assetJsComponentsJs, map[string]*bintree{}},
 			"cqpartsViewer.js": &bintree{assetJsCqpartsviewerJs, map[string]*bintree{}},
 			"saver.js": &bintree{assetJsSaverJs, map[string]*bintree{}},
-			"semantic-ui-vue.min.js": &bintree{assetJsSemanticUiVueMinJs, map[string]*bintree{}},
 			"store.js": &bintree{assetJsStoreJs, map[string]*bintree{}},
 			"three.min.js": &bintree{assetJsThreeMinJs, map[string]*bintree{}},
 			"vue.js": &bintree{assetJsVueJs, map[string]*bintree{}},
 			"vuex.js": &bintree{assetJsVuexJs, map[string]*bintree{}},
 		}},
 		"vue": &bintree{nil, map[string]*bintree{
+			"navfoot.vue": &bintree{assetVueNavfootVue, map[string]*bintree{}},
 			"navithing.vue": &bintree{assetVueNavithingVue, map[string]*bintree{}},
 			"notif.vue": &bintree{assetVueNotifVue, map[string]*bintree{}},
 			"old": &bintree{nil, map[string]*bintree{

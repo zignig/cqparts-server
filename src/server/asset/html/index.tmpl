@@ -11,16 +11,15 @@
         <script src="/static/js/GLTFLoader.js"></script>
         <script src="/static/js/axios.min.js"></script>
     </head>
-    <body class="has-navbar-fixed-top">
+    <body class="has-navbar-fixed-bottom has-navbar-fixed-top">
         <div class="" id="main">
             <notif :issue-item="issueItem" ></notif>
             <nav class="navbar is-fixed-top">
                 <navithing :model-list="modelList"></navithing>
-                [[ template "buttons.tmpl"]]
             </nav>
             [[ template "viewer.tmpl"]]
+            <navfoot></navfoot>
         </div>
-
 
         [[ template "vuetmpl"]]
         <script src="/static/js/vue.js"></script>
